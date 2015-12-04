@@ -6,9 +6,10 @@ import org.jsfml.window.event.Event.Type;
 
 public class Game {
 
-	public static void main(String args[]){
+	public static void main(String args[]) throws InterruptedException{
 		RenderWindow hauptfenster = new RenderWindow(new VideoMode(1024, 800), "SpaceTraveler");
 		hauptfenster.clear();
+		
 		
 		while(hauptfenster.isOpen()){
 			for(org.jsfml.window.event.Event ev : hauptfenster.pollEvents()){
@@ -16,9 +17,9 @@ public class Game {
         			hauptfenster.close();
         		}
 			}
-			
 
 			hauptfenster.display();
+			Thread.sleep(1000/25);
 		}
 	}
 	
