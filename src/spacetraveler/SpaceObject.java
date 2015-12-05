@@ -13,16 +13,21 @@ public class SpaceObject {
 	public SpaceObjectModel model;
 	
 	
-	public SpaceObject(String texturePath, float m, Vector2f energy) throws IOException
+	public SpaceObject(String texturePath, float m, Vector2f energy, Vector2f pos) throws IOException
 	{
 		texture = new Texture();
 		texture.loadFromFile(Paths.get(texturePath));
 		
 		sprite = new Sprite(texture);
+		sprite.setPosition(pos);
 		
 		model = new SpaceObjectModel(m, energy);
 	}
 	
-
+	
+	
+	public Sprite getSprite(){
+		return this.sprite;
+	}
 	
 }
