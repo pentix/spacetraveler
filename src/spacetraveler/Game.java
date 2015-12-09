@@ -30,6 +30,13 @@ public class Game {
 
 			hauptfenster.clear();
 			
+			
+			
+			// Berechnungen
+			
+			
+			
+			// Rendering
 			// Alle SpaceObjects zeichnen!
 			for(SpaceObject s : spaceObjects){
 				hauptfenster.draw(s.getSprite());

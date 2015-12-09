@@ -3,10 +3,10 @@ package spacetraveler;
 import org.jsfml.system.*;
 
 public class SpaceObjectModel {
-	private Vector2f v;		// Bewegungsrichtung / Geschwindigkeit
-	private Vector2f e;		// Energievektor
-	private double m;		// Masse
-	
+	private Vector2f v;			// Bewegungsrichtung / Geschwindigkeit
+	private Vector2f e;			// Energievektor
+	private double m;			// Masse
+	private boolean gravityOn;	// Wirkt Gravitation auf dieses Objekt? 
 	
 	
 	private void updateVelocity(){		
