@@ -19,11 +19,12 @@ public class Game {
 		hauptfenster.clear();
 		
 		
-		spaceObjects.add(new SpaceObject("rsc/block.png", 5.0f, new Vector2f(50, 0), new Vector2f(100, 100), true));
+		spaceObjects.add(new SpaceObject("rsc/block.png", 5.0f, new Vector2f(0, 0), new Vector2f(100, 100), true));
 		
 		
 		gravityFields.addElement(new Gravity(new Vector2f(400,400), 5));
 		gravityFields.addElement(new Gravity(new Vector2f(1200,400), 10));
+		gravityFields.addElement(new Gravity(new Vector2f(800,800), 10));
 		
 		while(hauptfenster.isOpen()){
 			// Events verarbeiten
