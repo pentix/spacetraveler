@@ -19,7 +19,8 @@ public class Game {
 		hauptfenster.clear();
 		
 		
-		spaceObjects.add(new SpaceObject("rsc/block.png", 5.0f, new Vector2f(100, 100), new Vector2f(100, 100)));
+		spaceObjects.add(new SpaceObject("rsc/block.png", 5.0f, new Vector2f(50, 0), new Vector2f(100, 100)));
+		
 		
 		gravityFields.addElement(new Gravitation(new Vector2f(400,400), 5));
 		
