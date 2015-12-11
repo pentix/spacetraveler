@@ -2,12 +2,12 @@ package spacetraveler;
 
 import org.jsfml.system.*;
 
-public class Gravitation {
+public class GravityModel {
 	public Vector2f center;		// Gravitationszentrum
 	public double m;			// Masse
 	
 	
-	public Gravitation(Vector2f center, double m){
+	public GravityModel(Vector2f center, double m){
 		this.center = center;
 		this.m = m;
 	}

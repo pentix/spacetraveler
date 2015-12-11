@@ -13,16 +13,17 @@ public class Game {
 
 	public static void main(String args[]) throws InterruptedException, IOException{
 		Vector<SpaceObject> spaceObjects = new Vector<>();
-		Vector<Gravitation> gravityFields = new Vector<>();
+		Vector<Gravity> gravityFields = new Vector<>();
 		
-		RenderWindow hauptfenster = new RenderWindow(new VideoMode(1024, 800), "SpaceTraveler");
+		RenderWindow hauptfenster = new RenderWindow(new VideoMode(1924, 1200), "SpaceTraveler");
 		hauptfenster.clear();
 		
 		
-		spaceObjects.add(new SpaceObject("rsc/block.png", 5.0f, new Vector2f(50, 0), new Vector2f(100, 100)));
+		spaceObjects.add(new SpaceObject("rsc/block.png", 5.0f, new Vector2f(50, 0), new Vector2f(100, 100), true));
 		
 		
-		gravityFields.addElement(new Gravitation(new Vector2f(400,400), 5));
+		gravityFields.addElement(new Gravity(new Vector2f(400,400), 5));
+		gravityFields.addElement(new Gravity(new Vector2f(1200,400), 10));
 		
 		while(hauptfenster.isOpen()){
 			// Events verarbeiten
@@ -39,22 +40,31 @@ public class Game {
 			// Berechnungen
 			for(SpaceObject s : spaceObjects){
 				Vector2f gesamtEnergie = new Vector2f(0, 0);
-				for(Gravitation g : gravityFields){
-					gesamtEnergie = Vector2f.add(gesamtEnergie, g.getEnergy(s));
+				
+				if(s.model.isGravityOn()){
+					for(Gravity g : gravityFields){
+						gesamtEnergie = Vector2f.add(gesamtEnergie, g.model.getEnergy(s));
+					}
+				
+					s.model.addEnergy(gesamtEnergie);
 				}
 				
-				s.model.addEnergy(gesamtEnergie);
 				s.move();
 			}
 				
 			
 			// Rendering
-			// Alle SpaceObjects zeichnen!
-			for(SpaceObject s : spaceObjects){
-				
-				hauptfenster.draw(s.getSprite());
-
+			// Alle Gravitys zeichnen
+			for(Gravity g : gravityFields){
+				hauptfenster.draw(g.getSprite());
 			}
+			
+			// Alle SpaceObjects zeichnen!
+			for(SpaceObject s : spaceObjects){	
+				hauptfenster.draw(s.getSprite());
+			}
+			
+
 			
 			hauptfenster.display();
 			Thread.sleep(1000/25);

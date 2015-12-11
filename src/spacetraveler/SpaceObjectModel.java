@@ -32,9 +32,14 @@ public class SpaceObjectModel {
 		return v;
 	}
 	
-	public SpaceObjectModel(double m, Vector2f energy){
+	public boolean isGravityOn(){
+		return gravityOn;
+	}
+	
+	public SpaceObjectModel(double m, Vector2f energy, boolean gravityOn){
 		this.m = m;
 		this.e = energy;
+		this.gravityOn = gravityOn;
 		
 		updateVelocity();
 	}
