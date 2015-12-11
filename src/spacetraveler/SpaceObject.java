@@ -25,6 +25,10 @@ public class SpaceObject {
 	}
 	
 	
+	public void move(){
+		this.sprite.move(model.getVelocity());
+	}
+	
 	
 	public Sprite getSprite(){
 		return this.sprite;

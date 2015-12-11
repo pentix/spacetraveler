@@ -28,6 +28,10 @@ public class SpaceObjectModel {
 		updateVelocity();
 	}
 	
+	public Vector2f getVelocity(){
+		return v;
+	}
+	
 	public SpaceObjectModel(double m, Vector2f energy){
 		this.m = m;
 		this.e = energy;
