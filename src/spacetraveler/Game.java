@@ -18,8 +18,10 @@ public class Game {
 		Vector<SpaceObject> spaceObjects = new Vector<>();
 		Vector<Gravity> gravityFields = new Vector<>();
 		
-		RenderWindow hauptfenster = new RenderWindow(new VideoMode(1000, 600), "SpaceTraveler");
+		RenderWindow hauptfenster = new RenderWindow(new VideoMode(1200, 800), "SpaceTraveler");
 		hauptfenster.clear();
+		
+		hauptfenster.setPosition(new Vector2i(-10,0));
 
 		//Get the window's default view
 		ConstView defaultView = hauptfenster.getView();
@@ -37,8 +39,8 @@ public class Game {
 		//gravityFields.addElement(new Gravity(new Vector2f(1200,400), 10));
 		
 		
-		Vector2f Position1 = new Vector2f(0,0);
-				
+		Vector2f Position1 = new Vector2f(0,0);				
+
 		while(hauptfenster.isOpen()){
 			// Events verarbeiten
 			for(org.jsfml.window.event.Event ev : hauptfenster.pollEvents()){
@@ -54,6 +56,7 @@ public class Game {
         			Vector2f Position2 = new Vector2f(Mouse.getPosition(hauptfenster).x, Mouse.getPosition(hauptfenster).y);
         			
         			spaceObjects.addElement(new SpaceObject("rsc/planet.png",5.0f,Vector2f.sub(Position2, Position1),new Vector2f(Mouse.getPosition(hauptfenster).x, Mouse.getPosition(hauptfenster).y), true));
+
         		}
         		
 			}
