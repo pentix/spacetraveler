@@ -25,18 +25,20 @@ public class Game {
 		ConstView defaultView = hauptfenster.getView();
 
 		//Create a new view by copying the window's default view
-		View view = new View(defaultView.getCenter(), defaultView.getSize());
+		//View view = new View(defaultView.getCenter(), defaultView.getSize());
 		
-		hauptfenster.setView(view);
+		//hauptfenster.setView(view);
 		
-		spaceObjects.add(new SpaceObject("rsc/block.png", 5.0f, new Vector2f(50, 0), new Vector2f(100, 100), true));
+		spaceObjects.add(new SpaceObject("rsc/planet.png", 5.0f, new Vector2f(50, 0), new Vector2f(100, 100), true));
 		
 		
-		gravityFields.addElement(new Gravity(new Vector2f(300,300), 0.0001));
+		gravityFields.addElement(new Gravity(new Vector2f(300,300), 10));
 		//gravityFields.addElement(new Gravity(new Vector2f(500,300), 5));
-
 		//gravityFields.addElement(new Gravity(new Vector2f(1200,400), 10));
 		
+		
+		Vector2f Position1 = new Vector2f(0,0);
+				
 		while(hauptfenster.isOpen()){
 			// Events verarbeiten
 			for(org.jsfml.window.event.Event ev : hauptfenster.pollEvents()){
@@ -45,10 +47,17 @@ public class Game {
         		}
         		
         		if(ev.type == Type.MOUSE_BUTTON_PRESSED){
-        			gravityFields.addElement(new Gravity(new Vector2f(Mouse.getPosition().x+200, Mouse.getPosition().y+100), 5));
+        			Position1 = new Vector2f(Mouse.getPosition(hauptfenster).x, Mouse.getPosition(hauptfenster).y);
+        		}
+        		
+        		if(ev.type == Type.MOUSE_BUTTON_RELEASED){
+        			Vector2f Position2 = new Vector2f(Mouse.getPosition(hauptfenster).x, Mouse.getPosition(hauptfenster).y);
+        			
+        			spaceObjects.addElement(new SpaceObject("rsc/planet.png",5.0f,Vector2f.sub(Position2, Position1),new Vector2f(Mouse.getPosition(hauptfenster).x, Mouse.getPosition(hauptfenster).y), true));
         		}
         		
 			}
+			
 
 			hauptfenster.clear();
 			
@@ -71,8 +80,8 @@ public class Game {
 				
 				s.move();
 				
-				view.setCenter(s.getSprite().getPosition().x,s.getSprite().getPosition().y);
-				hauptfenster.setView(view);
+				//view.setCenter(s.getSprite().getPosition().x,s.getSprite().getPosition().y);
+				//hauptfenster.setView(view);
 			}
 			
 				

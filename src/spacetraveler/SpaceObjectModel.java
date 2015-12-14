@@ -24,7 +24,7 @@ public class SpaceObjectModel {
 	
 	
 	public void addEnergy(Vector2f energy){
-		this.e = Vector2f.add(new Vector2f(this.e.x*0.99f, this.e.y*0.99f), energy);
+		this.e = Vector2f.add(new Vector2f(this.e.x, this.e.y), energy);
 		updateVelocity();
 	}
 	
