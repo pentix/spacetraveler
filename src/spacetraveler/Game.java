@@ -18,7 +18,7 @@ public class Game {
 		Vector<SpaceObject> spaceObjects = new Vector<>();
 		Vector<Gravity> gravityFields = new Vector<>();
 		
-		RenderWindow hauptfenster = new RenderWindow(new VideoMode(1000, 600), "SpaceTraveler");
+		RenderWindow hauptfenster = new RenderWindow(new VideoMode(1200, 800), "SpaceTraveler");
 		hauptfenster.clear();
 		
 		hauptfenster.setPosition(new Vector2i(-10,0));
