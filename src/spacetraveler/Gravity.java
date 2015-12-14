@@ -7,11 +7,22 @@ import org.jsfml.graphics.Sprite;
 import org.jsfml.graphics.Texture;
 import org.jsfml.system.Vector2f;
 
+/**
+ * @brief Gravitationsklasse
+ * 
+ * Diese Klasse vereint unser Model (GravityModel) mit der SFML-Anzeige (Texture, Sprite, etc...)
+ */
 public class Gravity {
-	public Texture texture;
-	public Sprite sprite;
-	public GravityModel model;
+	public Texture texture;		/**< Textur der Klasse */
+	public Sprite sprite;		/**< Sprite der Klasse */
+	public GravityModel model;	/**< Rechnerisches Modell für die Gravitation */
 	
+	/**
+	 * @brief Konstruktor
+	 * @param center Zentrum der Gravitation
+	 * @param m Masse des Punktes (= Proportional zur Anziehungskraft)
+	 * @throws IOException Wenn Textur nicht geladen werden konnte
+	 */
 	public Gravity(Vector2f center, double m) throws IOException
 	{
 		texture = new Texture();
@@ -24,7 +35,10 @@ public class Gravity {
 		model = new GravityModel(center, m);
 	}
 	
-	
+	/**
+	 * @brief getter für Sprite
+	 * @return Sprite der Klasse
+	 */
 	public Sprite getSprite(){
 		return this.sprite;
 	}

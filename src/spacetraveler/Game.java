@@ -9,11 +9,16 @@ import org.jsfml.window.*;
 import org.jsfml.window.event.Event.*;
 
 
+/**
+ * @brief Gameklasse. Enthält die main()-Methode
+ * 
+ */
 public class Game {
 	
-
-
-
+	/**
+	 * @brief Main-Methode des ganzen Spiels
+	 * @param args Konsolenargumente, die dem Programm übergeben werden. (Werden nicht ausgewertet)
+	 */
 	public static void main(String args[]) throws InterruptedException, IOException{
 		Vector<SpaceObject> spaceObjects = new Vector<>();
 		Vector<Gravity> gravityFields = new Vector<>();
