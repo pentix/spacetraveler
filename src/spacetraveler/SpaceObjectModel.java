@@ -10,7 +10,7 @@ public class SpaceObjectModel {
 	
 	
 	private void updateVelocity(){		
-		double v_abs = 2*Math.sqrt(e.x*e.x + e.y*e.y)/m;
+		double v_abs = (2*Math.sqrt(e.x*e.x + e.y*e.y)/m);
 		Vector2f e0 = Vector2f.div(e,(float)(Math.sqrt(e.x*e.x + e.y*e.y)));
 		this.v = Vector2f.mul(e0, (float)v_abs);
 	}
@@ -24,13 +24,32 @@ public class SpaceObjectModel {
 	
 	
 	public void addEnergy(Vector2f energy){
-		this.e = Vector2f.add(this.e, energy);
+		this.e = Vector2f.add(new Vector2f(this.e.x*0.99f, this.e.y*0.99f), energy);
 		updateVelocity();
 	}
 	
-	public SpaceObjectModel(double m, Vector2f energy){
+	    public Vector2f getVelocity(){
+		 
+			return v;
+		 
+		}
+		 
+			
+		 
+		public boolean isGravityOn(){
+		 
+			return gravityOn;
+		 
+		}
+		 
+			
+		 
+		public SpaceObjectModel(double m, Vector2f energy, boolean gravityOn){
+		 
+
 		this.m = m;
 		this.e = energy;
+		this.gravityOn = gravityOn;
 		
 		updateVelocity();
 	}
