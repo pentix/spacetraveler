@@ -20,6 +20,8 @@ public class Game {
 		
 		RenderWindow hauptfenster = new RenderWindow(new VideoMode(1000, 600), "SpaceTraveler");
 		hauptfenster.clear();
+		
+		hauptfenster.setPosition(new Vector2i(-10,0));
 
 		//Get the window's default view
 		ConstView defaultView = hauptfenster.getView();
@@ -37,6 +39,7 @@ public class Game {
 
 		//gravityFields.addElement(new Gravity(new Vector2f(1200,400), 10));
 		
+		
 		while(hauptfenster.isOpen()){
 			// Events verarbeiten
 			for(org.jsfml.window.event.Event ev : hauptfenster.pollEvents()){
@@ -45,7 +48,8 @@ public class Game {
         		}
         		
         		if(ev.type == Type.MOUSE_BUTTON_PRESSED){
-        			gravityFields.addElement(new Gravity(new Vector2f(Mouse.getPosition().x+200, Mouse.getPosition().y+100), 5));
+        			
+        			gravityFields.addElement(new Gravity((hauptfenster.mapPixelToCoords(new Vector2i((int)Mouse.getPosition().x, (int)Mouse.getPosition().y))), 5));
         		}
         		
 			}
