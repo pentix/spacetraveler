@@ -40,7 +40,7 @@ public class Game {
 		
 		
 		gravityFields.addElement(new Gravity(new Vector2f(300,300), 10));
-		//gravityFields.addElement(new Gravity(new Vector2f(500,300), 5));
+		gravityFields.addElement(new Gravity(new Vector2f(500,300), 5));
 		//gravityFields.addElement(new Gravity(new Vector2f(1200,400), 10));
 		
 		

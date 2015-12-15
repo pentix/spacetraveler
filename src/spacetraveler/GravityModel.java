@@ -34,6 +34,10 @@ public class GravityModel {
 		
 		Vector2f gravVector = new Vector2f(dx, dy);
 		
-		return Vector2f.mul(gravVector, (float)(1/abstand * m));
+		// Wenn Abstand->0  : Kraft->Inf.
+		if(abstand*abstand > 1)
+			return Vector2f.mul(gravVector, (float)(m*100/(abstand*abstand)));
+		else
+			return Vector2f.mul(gravVector, (float)(m*100/(1)));
 	}
 }
