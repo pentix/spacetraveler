@@ -22,6 +22,7 @@ public class Game {
 	public static void main(String args[]) throws InterruptedException, IOException{
 		Vector<SpaceObject> spaceObjects = new Vector<>();
 		Vector<Gravity> gravityFields = new Vector<>();
+		Vector<Explosion> explosions = new Vector<>();
 		
 		RenderWindow hauptfenster = new RenderWindow(new VideoMode(1200, 800), "SpaceTraveler", Window.TITLEBAR | Window.CLOSE);
 		hauptfenster.clear();
@@ -36,13 +37,15 @@ public class Game {
 		
 		hauptfenster.setView(view);
 		
-		spaceObjects.add(new SpaceObject("rsc/block.png", 5.0f, new Vector2f(50, 0), new Vector2f(100, 100), true));
+		spaceObjects.add(new SpaceObject("rsc/block.png", 5.0f, new Vector2f(0, 0), new Vector2f(100, 100), true));
 		
 		
-		gravityFields.addElement(new Gravity(new Vector2f(300,300), 0.0001));
+		gravityFields.addElement(new Gravity(new Vector2f(300,300), 1));
 		//gravityFields.addElement(new Gravity(new Vector2f(500,300), 5));
-
 		//gravityFields.addElement(new Gravity(new Vector2f(1200,400), 10));
+		
+		
+		explosions.addElement(new Explosion("explosion", 13, 25, new Vector2f(200, 200)));
 		
 		
 		while(hauptfenster.isOpen()){
@@ -84,7 +87,15 @@ public class Game {
 				hauptfenster.setView(view);
 			}
 			
-				
+			
+			// Animationen
+			// Explosionen
+			for(Explosion e : explosions){
+				e.animationStep();
+			}
+			
+			
+			
 			
 			// Rendering
 			// Alle Gravitys zeichnen
@@ -97,6 +108,10 @@ public class Game {
 				hauptfenster.draw(s.getSprite());
 			}
 			
+			// Alle Explosionen zeichnen
+			for(Explosion e : explosions){
+				hauptfenster.draw(e.getSprite());
+			}
 
 			
 			hauptfenster.display();
