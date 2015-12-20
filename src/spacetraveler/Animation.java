@@ -17,8 +17,12 @@ public class Animation {
 	
 	private Clock clock;
 	private int step;
+	private boolean finished;
+	private boolean loop;
 	
-	public Animation(String name, int steps, float dt, Vector2f pos) throws IOException{
+	public Animation(String name, int steps, float dt, Vector2f pos, boolean loop) throws IOException{
+		this.finished = false;
+		this.loop = loop;
 		this.name = name;
 		this.steps = steps;
 		this.dt = dt;
@@ -40,6 +44,11 @@ public class Animation {
 	
 	public void animationStep(){
 		if(clock.getElapsedTime().asMilliseconds() > dt){
+			if(step+1 == steps && !loop){
+				finished = true;
+				return;
+			}
+			
 			step = (step + 1) % steps;
 			sprite.setTexture(textures.get(step));
 			sprite.setOrigin(textures.get(step).getSize().x/2, textures.get(step).getSize().y/2);
@@ -50,5 +59,9 @@ public class Animation {
 	
 	public Sprite getSprite(){
 		return sprite;
+	}
+	
+	public boolean isFinished(){
+		return finished;
 	}
 }

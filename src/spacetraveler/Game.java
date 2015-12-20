@@ -45,7 +45,7 @@ public class Game {
 		//gravityFields.addElement(new Gravity(new Vector2f(1200,400), 10));
 		
 		
-		explosions.addElement(new Animation("explosion", 13, 25, new Vector2f(200, 200)));
+		explosions.addElement(new Animation("explosion", 13, 25, new Vector2f(200, 200), false));
 		
 		
 		while(hauptfenster.isOpen()){
@@ -91,6 +91,15 @@ public class Game {
 			// Animationen
 			// Explosionen
 			for(Animation e : explosions){
+				// Animationen, die zuletzt noch fertig gerendert wurden
+				// können entfernt werden!
+				if(e.isFinished()){
+					e = null;
+					continue;
+				}
+				
+				
+				// Animationsschritt, wenn Zeit schon vorbei
 				e.animationStep();
 			}
 			
