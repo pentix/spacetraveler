@@ -1,7 +1,6 @@
 package spacetraveler;
 
 import java.io.IOException;
-import java.nio.file.Paths;
 
 import org.jsfml.graphics.*;
 import org.jsfml.system.*;
@@ -33,7 +32,7 @@ public class SpaceObject {
 	public SpaceObject(String texturePath, float m, Vector2f energy, Vector2f pos, boolean gravityOn) throws IOException
 	{
 		texture = new Texture();
-		texture.loadFromFile(Paths.get(texturePath));
+		texture.loadFromStream(Game.class.getResourceAsStream(texturePath));
 		
 		sprite = new Sprite(texture);
 		sprite.setOrigin(texture.getSize().x/2, texture.getSize().y/2);

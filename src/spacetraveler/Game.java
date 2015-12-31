@@ -36,7 +36,7 @@ public class Game {
 		
 		hauptfenster.setView(view);
 		
-		spaceObjects.add(new SpaceObject("rsc/block.png", 5.0f, new Vector2f(50, 0), new Vector2f(100, 100), true));
+		spaceObjects.add(new SpaceObject("/spacetraveler/rsc/block.png", 5.0f, new Vector2f(50, 0), new Vector2f(100, 100), true));
 		
 		
 		gravityFields.addElement(new Gravity(new Vector2f(300,300), 0.0001));
