@@ -4,6 +4,8 @@
     <!--ANT 1.7 is required-->
     <!--define folder properties-->
     <target name="create_run_jar">
+        <delete dir="bin/"/>
+        <mkdir dir="bin/"/>
         <jar destfile="bin/spacetraveler.jar">
             <manifest>
                 <attribute name="Main-Class" value="org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader"/>
