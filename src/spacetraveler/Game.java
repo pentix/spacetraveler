@@ -94,7 +94,7 @@ public class Game {
 				// Animationen, die zuletzt noch fertig gerendert wurden
 				// können entfernt werden!
 				if(e.isFinished()){
-					e = null;
+					explosions.remove(e);
 					continue;
 				}
 				
@@ -119,7 +119,10 @@ public class Game {
 			
 			// Alle Explosionen zeichnen
 			for(Animation e : explosions){
-				hauptfenster.draw(e.getSprite());
+				Sprite s = e.getSprite();
+				
+				if(s != null)
+					hauptfenster.draw(s);
 			}
 
 			
