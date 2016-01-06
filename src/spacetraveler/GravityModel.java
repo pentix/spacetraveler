@@ -20,6 +20,6 @@ public double m;			// Masse
 		
 		Vector2f gravVector = new Vector2f(dx, dy);
 		
-		return Vector2f.mul(gravVector, (float)(1/abstand * m));
+		return Vector2f.mul(gravVector, (float)(1/(abstand*abstand) * m));
 	}
 }
