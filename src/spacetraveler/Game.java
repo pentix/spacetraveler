@@ -94,11 +94,9 @@ public class Game {
 				
 			}
 			
-			if(userGravityId == -1){
-				view.setCenter(spaceObjects.get(0).getSprite().getPosition());
-			} else {
-				view.setCenter(gravityFields.get(userGravityId).getSprite().getPosition());
-			}
+			
+			view.setCenter(spaceObjects.get(0).getSprite().getPosition());
+			
 			
 			backgroundSprite.setPosition(-600, -600);
 			
