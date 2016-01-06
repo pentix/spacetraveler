@@ -47,11 +47,11 @@ public class Game {
 		spaceObjects.get(1).addAngularMomentum(15);
 		
 		
-		gravityFields.addElement(new Gravity(new Vector2f(300,300), 5));
+		//gravityFields.addElement(new Gravity(new Vector2f(300,300), 5));
 		//gravityFields.addElement(new Gravity(new Vector2f(500,300), 5));
-
 		//gravityFields.addElement(new Gravity(new Vector2f(1200,400), 10));
 		
+		int userGravityId = 0;
 		
 		while(hauptfenster.isOpen()){
 			// Events verarbeiten
@@ -61,8 +61,13 @@ public class Game {
         		}
         		
         		if(ev.type == Type.MOUSE_BUTTON_PRESSED){
-        			
         			gravityFields.addElement(new Gravity((hauptfenster.mapPixelToCoords(new Vector2i((int)Mouse.getPosition().x, (int)Mouse.getPosition().y))), 5));
+        			userGravityId = gravityFields.size()-1;
+        		}
+        		
+        		if(ev.type == Type.MOUSE_BUTTON_RELEASED){
+        			gravityFields.remove(userGravityId);
+        			userGravityId = 0;
         		}
         		
 			}
@@ -90,8 +95,14 @@ public class Game {
 				
 			}
 			
-			backgroundSprite.setPosition(spaceObjects.get(0).getSprite().getPosition());
-			view.setCenter(spaceObjects.get(0).getSprite().getPosition());
+			if(userGravityId == 0){
+				backgroundSprite.setPosition(spaceObjects.get(0).getSprite().getPosition());
+				view.setCenter(spaceObjects.get(0).getSprite().getPosition());
+			} else {
+				backgroundSprite.setPosition(gravityFields.get(userGravityId).getSprite().getPosition());
+				view.setCenter(gravityFields.get(userGravityId).getSprite().getPosition());
+			}
+			
 			hauptfenster.setView(view);
 
 			
@@ -103,8 +114,8 @@ public class Game {
 			
 			
 			// Rendering
+			
 			// Background
-		
 			hauptfenster.draw(backgroundSprite);
 			
 			// Alle Gravitys zeichnen
