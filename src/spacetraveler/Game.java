@@ -34,9 +34,16 @@ public class Game {
 		//Create a new view by copying the window's default view
 		View view = new View(defaultView.getCenter(), defaultView.getSize());
 		
+		// Background Image
+		Texture backgroundTexture = new Texture();
+		backgroundTexture.loadFromStream(Game.class.getResourceAsStream("/spacetraveler/rsc/background.png"));
+		Sprite backgroundSprite = new Sprite(backgroundTexture);
+		backgroundSprite.setOrigin(1280/2, 800/2);
+		
 		hauptfenster.setView(view);
 		
 		spaceObjects.add(new SpaceObject("/spacetraveler/rsc/block.png", 5.0f, new Vector2f(50, 0), new Vector2f(100, 100), true));
+		spaceObjects.add(new SpaceObject("/spacetraveler/rsc/asteroid.png", 5.0f, new Vector2f(300, 300), new Vector2f(0, 0), false));
 		
 		
 		gravityFields.addElement(new Gravity(new Vector2f(300,300), 0.0001));
@@ -80,13 +87,19 @@ public class Game {
 				
 				s.move();
 				
-				view.setCenter(s.getSprite().getPosition().x,s.getSprite().getPosition().y);
-				hauptfenster.setView(view);
 			}
 			
-				
+			backgroundSprite.setPosition(spaceObjects.get(0).getSprite().getPosition());
+			view.setCenter(spaceObjects.get(0).getSprite().getPosition());
+			hauptfenster.setView(view);
+
+			
 			
 			// Rendering
+			// Background
+		
+			hauptfenster.draw(backgroundSprite);
+			
 			// Alle Gravitys zeichnen
 			for(Gravity g : gravityFields){
 				hauptfenster.draw(g.getSprite());
