@@ -14,7 +14,7 @@
                 <attribute name="Rsrc-Class-Path" value="./ jsfml.jar"/>
             </manifest>
             <zipfileset src="lib/jar-in-jar-loader.zip"/>
-            <fileset dir="bin/"/>
+            <fileset dir="src/"/>
             <zipfileset dir="lib/" includes="jsfml.jar"/>
         </jar>
     </target>
