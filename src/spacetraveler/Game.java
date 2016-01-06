@@ -38,7 +38,6 @@ public class Game {
 		Texture backgroundTexture = new Texture();
 		backgroundTexture.loadFromStream(Game.class.getResourceAsStream("/spacetraveler/rsc/background.png"));
 		Sprite backgroundSprite = new Sprite(backgroundTexture);
-		backgroundSprite.setOrigin(1280/2, 800/2);
 		
 		hauptfenster.setView(view);
 		
@@ -51,7 +50,7 @@ public class Game {
 		//gravityFields.addElement(new Gravity(new Vector2f(500,300), 5));
 		//gravityFields.addElement(new Gravity(new Vector2f(1200,400), 10));
 		
-		int userGravityId = 0;
+		int userGravityId = -1;
 		
 		while(hauptfenster.isOpen()){
 			// Events verarbeiten
@@ -67,7 +66,7 @@ public class Game {
         		
         		if(ev.type == Type.MOUSE_BUTTON_RELEASED){
         			gravityFields.remove(userGravityId);
-        			userGravityId = 0;
+        			userGravityId = -1;
         		}
         		
 			}
@@ -95,13 +94,13 @@ public class Game {
 				
 			}
 			
-			if(userGravityId == 0){
-				backgroundSprite.setPosition(spaceObjects.get(0).getSprite().getPosition());
+			if(userGravityId == -1){
 				view.setCenter(spaceObjects.get(0).getSprite().getPosition());
 			} else {
-				backgroundSprite.setPosition(gravityFields.get(userGravityId).getSprite().getPosition());
 				view.setCenter(gravityFields.get(userGravityId).getSprite().getPosition());
 			}
+			
+			backgroundSprite.setPosition(-600, -600);
 			
 			hauptfenster.setView(view);
 
