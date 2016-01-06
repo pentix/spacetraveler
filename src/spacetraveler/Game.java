@@ -43,10 +43,11 @@ public class Game {
 		hauptfenster.setView(view);
 		
 		spaceObjects.add(new SpaceObject("/spacetraveler/rsc/block.png", 5.0f, new Vector2f(50, 0), new Vector2f(100, 100), true));
-		spaceObjects.add(new SpaceObject("/spacetraveler/rsc/asteroid.png", 5.0f, new Vector2f(300, 300), new Vector2f(0, 0), false));
+		spaceObjects.add(new SpaceObject("/spacetraveler/rsc/asteroid.png", 5.0f, new Vector2f(50, 0), new Vector2f(200, 200), false));
+		spaceObjects.get(1).addAngularMomentum(15);
 		
 		
-		gravityFields.addElement(new Gravity(new Vector2f(300,300), 0.0001));
+		gravityFields.addElement(new Gravity(new Vector2f(300,300), 5));
 		//gravityFields.addElement(new Gravity(new Vector2f(500,300), 5));
 
 		//gravityFields.addElement(new Gravity(new Vector2f(1200,400), 10));
@@ -93,6 +94,12 @@ public class Game {
 			view.setCenter(spaceObjects.get(0).getSprite().getPosition());
 			hauptfenster.setView(view);
 
+			
+			// Objekte rotieren
+			for(SpaceObject s : spaceObjects){
+				s.getSprite().rotate(s.getAngularMomentum());
+				
+			}
 			
 			
 			// Rendering

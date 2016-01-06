@@ -19,6 +19,7 @@ public class SpaceObject {
 	public Texture texture;			/**< Textur des Spaceobjects */
 	public Sprite sprite;			/**< Sprite des Spaceobjects */
 	public SpaceObjectModel model;	/**< Model (für Berechnungen) des Spaceobjects */
+	private float angularMomentum;	/**< Drehmoment für Rotation */
 	
 	/**
 	 * @brief Konstruktor
@@ -39,6 +40,8 @@ public class SpaceObject {
 		sprite.setPosition(pos);
 		
 		model = new SpaceObjectModel(m, energy, gravityOn);
+		
+		angularMomentum = 0;
 	}
 	
 	/**
@@ -49,6 +52,19 @@ public class SpaceObject {
 		this.sprite.move(model.getVelocity());
 	}
  
+	
+	/**
+	 * @brief Fügt dem Objekt Rotationsenergie hinzu, d.h., beschleunigt das Objekt in der Rotation
+	 * @param am 
+	 */
+	public void addAngularMomentum(float am){
+		this.angularMomentum += am;
+	}
+	
+	public float getAngularMomentum(){
+		return this.angularMomentum;
+	}
+	
 	/**
 	 * @brief getter für verwendetes Sprite
 	 * @return Verwendetes Spriteobjekt

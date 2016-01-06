@@ -66,6 +66,5 @@ public class SpaceObjectModel {
 		updateVelocity();
 	}
 
-
 	
 }
