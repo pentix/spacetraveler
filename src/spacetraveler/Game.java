@@ -60,10 +60,10 @@ public class Game {
 						Vector2f verh3 = Vector2f.sub(P, P2);
 						
 
-						if(((absVec(verh1)/absVec(A.model.getVelocity())/2)
+						if(((absVec(verh2)/absVec(A.model.getVelocity()))
 								<= absVec(verh3)/absVec(B.model.getVelocity())
 								&& absVec(verh3)/absVec(B.model.getVelocity())
-								<= absVec(verh2)/absVec(A.model.getVelocity())+10)){
+								<= absVec(verh1)/absVec(A.model.getVelocity()))){
 						if((R1.contains(P) && R2.contains(P)) || absVec(Vector2f.sub(P1, P2)) <= (A.getSprite().getLocalBounds().width/2+B.getSprite().getLocalBounds().width+2))
 						{
 							hallo = true;
