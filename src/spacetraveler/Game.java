@@ -56,14 +56,19 @@ public class Game {
 						Vector2f F1 = Vector2f.add(P1, A.model.getVelocity());
 						Vector2f F2 = Vector2f.add(P2, B.model.getVelocity());
 						FloatRect R1 = new FloatRect(P1, A.model.getVelocity());
-						FloatRect R2 = new FloatRect(P2, A.model.getVelocity());
+						FloatRect R2 = new FloatRect(P2, B.model.getVelocity());
+						
+						Vector2f v = Vector2f.sub(P, P1);
+						Vector2f verh1 = Vector2f.add(v,Vector2f.mul(Vector2f.div(v,absVec(v)),(float)(A.getSprite().getLocalBounds().width*(Math.sqrt(2)/2))));
+						Vector2f verh2 = Vector2f.sub(v,Vector2f.mul(Vector2f.div(v,absVec(v)),(float)(A.getSprite().getLocalBounds().width*(Math.sqrt(2)/2))));
+						Vector2f verh3 = Vector2f.sub(P, P2);
+						
 
-						/*((absVec(Vector2f.sub(P, P1))/absVec(A.model.getVelocity())/2)
-								<= absVec(Vector2f.sub(P, P2))/absVec(B.model.getVelocity())
-								&& absVec(Vector2f.sub(P, P2))/absVec(B.model.getVelocity())
-								<= absVec(Vector2f.sub(P, P1))/absVec(A.model.getVelocity())*2)*/
-						System.out.println(R1.contains(P) && R2.contains(P));
-						if(R1.contains(P) && R2.contains(P))
+						if(((absVec(verh1)/absVec(A.model.getVelocity())/2)
+								<= absVec(verh3)/absVec(B.model.getVelocity())
+								&& absVec(verh3)/absVec(B.model.getVelocity())
+								<= absVec(verh2)/absVec(A.model.getVelocity())+10)){
+						if((R1.contains(P) && R2.contains(P)) || absVec(Vector2f.sub(P1, P2)) <= (A.getSprite().getLocalBounds().width/2+B.getSprite().getLocalBounds().width+2))
 						{
 							hallo = true;
 							int r = A.texture.getSize().x/2;
@@ -83,14 +88,14 @@ public class Game {
 							A.getSprite().move(v1);
 							B.getSprite().move(v2);
 							
-							Vector2f e = new Vector2f(A.model.getEnergy().x*0.5f, A.model.getEnergy().y*0.5f);
-							Vector2f v = new Vector2f(A.model.getVelocity().x * 0.5f, A.model.getVelocity().y * 0.5f);
+							Vector2f e_1 = new Vector2f(A.model.getEnergy().x*0.5f, A.model.getEnergy().y*0.5f);
+							Vector2f v_1 = new Vector2f(A.model.getVelocity().x * 0.5f, A.model.getVelocity().y * 0.5f);
 							//Vector2f position = A.getSprite().getPosition();
-							Vector2f e2 = new Vector2f(B.model.getEnergy().x*0.5f, B.model.getEnergy().y*0.5f);
+							Vector2f e_2 = new Vector2f(B.model.getEnergy().x*0.5f, B.model.getEnergy().y*0.5f);
 							Vector2f v_2 = new Vector2f(B.model.getVelocity().x * 0.5f, B.model.getVelocity().y * 0.5f);
 							//Vector2f position2 = B.getSprite().getPosition();
-							A.model.Kollision(e2,v_2);
-							B.model.Kollision(e, v);
+							A.model.Kollision(e_2,v_2);
+							B.model.Kollision(e_1, v_1);
 							System.out.println("geht");
 
 							
@@ -127,6 +132,7 @@ public class Game {
 							Winkel*/
 							break;
 						}
+						}
 					}					
 				}
 				
@@ -153,11 +159,13 @@ public class Game {
 		Line2D.Float Linie = new Line2D.Float(5,0,0,5);
 		Line2D.Float Linie2 = new Line2D.Float(2,2,10,10);
 		
+		int x = 100;
+		
 		Linie.intersectsLine(Linie2);
 		
 		//Create a new view by copying6
-		gravityFields.addElement(new Gravity(new Vector2f(300,300), 500));
-		//gravityFields.addElement(new Gravity(new Vector2f(500,300),500));
+		//gravityFields.addElement(new Gravity(new Vector2f(300,300), 500));
+		gravityFields.addElement(new Gravity(new Vector2f(500,300),500));
 		//gravityFields.addElement(new Gravity(new Vector2f(800,600), 500));
 		
 		
@@ -178,6 +186,8 @@ public class Game {
         			Vector2f Position2 = new Vector2f(Mouse.getPosition(hauptfenster).x, Mouse.getPosition(hauptfenster).y);
         			
         			spaceObjects.addElement(new SpaceObject("rsc/planet.png",5.0f,Vector2f.sub(Position2, Position1),new Vector2f(Mouse.getPosition(hauptfenster).x, Mouse.getPosition(hauptfenster).y), true));
+        			spaceObjects.lastElement().getSprite().setColor(new Color(x,150+x/2,200));
+        			x = (x + 100) % 500;
         		}
         		
 			}
