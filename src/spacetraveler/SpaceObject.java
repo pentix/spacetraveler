@@ -1,5 +1,3 @@
-package spacetraveler;
-
 import java.io.IOException;
 
 import org.jsfml.graphics.*;

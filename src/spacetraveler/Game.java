@@ -1,5 +1,3 @@
-package spacetraveler;
-
 import java.io.IOException;
 import java.util.Vector;
 
@@ -37,15 +35,15 @@ public class Game {
 		
 		// Background Image
 		Texture backgroundTexture = new Texture();
-		backgroundTexture.loadFromStream(Game.class.getResourceAsStream("/spacetraveler/rsc/background.png"));
+		backgroundTexture.loadFromStream(Game.class.getResourceAsStream("/rsc/background.png"));
 		Sprite backgroundSprite = new Sprite(backgroundTexture);
 		
 		hauptfenster.setView(view);
 		
 		Vector2f levelStart, levelZiel;
 		
-		spaceObjects.add(new SpaceObject("/spacetraveler/rsc/block.png", 5.0f, new Vector2f(50, 0), new Vector2f(100, 100), true));
-		spaceObjects.add(new SpaceObject("/spacetraveler/rsc/asteroid.png", 5.0f, new Vector2f(50, 0), new Vector2f(200, 200), false));
+		spaceObjects.add(new SpaceObject("/rsc/block.png", 5.0f, new Vector2f(50, 0), new Vector2f(100, 100), true));
+		spaceObjects.add(new SpaceObject("/rsc/asteroid.png", 5.0f, new Vector2f(50, 0), new Vector2f(200, 200), false));
 		spaceObjects.get(1).addAngularMomentum(15);
 		
 		

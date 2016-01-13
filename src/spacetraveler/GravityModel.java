@@ -1,5 +1,3 @@
-package spacetraveler;
-
 import org.jsfml.system.*;
 
 /**

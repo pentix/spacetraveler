@@ -1,5 +1,3 @@
-package spacetraveler;
-
 import java.io.IOException;
 
 import org.jsfml.graphics.Sprite;
@@ -25,7 +23,7 @@ public class Gravity {
 	public Gravity(Vector2f center, double m) throws IOException
 	{
 		texture = new Texture();
-		texture.loadFromStream(Game.class.getResourceAsStream("/spacetraveler/rsc/gravity.png"));
+		texture.loadFromStream(Game.class.getResourceAsStream("/rsc/gravity.png"));
 		
 		sprite = new Sprite(texture);
 		sprite.setOrigin(texture.getSize().x/2, texture.getSize().y/2);
