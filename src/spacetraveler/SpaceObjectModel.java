@@ -32,6 +32,24 @@ public class SpaceObjectModel {
 		updateVelocity();
 	}
 	
+
+	
+	public double getRadius()
+	{
+		return 10+Math.sqrt(v.x*v.x+v.y*v.y);
+	}
+	
+	public void Kollision(Vector2f energy, Vector2f velocity)
+	{
+		this.e = energy;
+		this.v = velocity;
+	}
+    
+    public Vector2f getEnergy()
+    {
+    	return e;
+    }
+	
     /**
      * @brief getter für v
      * @return Geschwindigkeitsvektor v des Objekts
