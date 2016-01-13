@@ -25,6 +25,7 @@ public class Game {
 		
 		RenderWindow hauptfenster = new RenderWindow(new VideoMode(1200, 800), "SpaceTraveler", Window.TITLEBAR | Window.CLOSE);
 		hauptfenster.clear();
+	
 		
 		hauptfenster.setPosition(new Vector2i(-10,0));
 
@@ -40,6 +41,8 @@ public class Game {
 		Sprite backgroundSprite = new Sprite(backgroundTexture);
 		
 		hauptfenster.setView(view);
+		
+		Vector2f levelStart, levelZiel;
 		
 		spaceObjects.add(new SpaceObject("/spacetraveler/rsc/block.png", 5.0f, new Vector2f(50, 0), new Vector2f(100, 100), true));
 		spaceObjects.add(new SpaceObject("/spacetraveler/rsc/asteroid.png", 5.0f, new Vector2f(50, 0), new Vector2f(200, 200), false));
