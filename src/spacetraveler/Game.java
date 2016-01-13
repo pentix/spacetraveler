@@ -140,7 +140,10 @@ public class Game {
 		Vector2f levelStart, levelZiel;
 		
 		spaceObjects.add(new SpaceObject("/spacetraveler/rsc/block.png", 5.0f, new Vector2f(50, 0), new Vector2f(100, 100), true));
-		spaceObjects.add(new SpaceObject("/spacetraveler/rsc/asteroid.png", 5.0f, new Vector2f(50, 0), new Vector2f(200, 200), false));
+		spaceObjects.add(new SpaceObject("/spacetraveler/rsc/asteroid.png", 5.0f, new Vector2f(50, 0), new Vector2f(200, 200), true));
+		spaceObjects.add(new SpaceObject("/spacetraveler/rsc/asteroid.png", 5.0f, new Vector2f(50, 0), new Vector2f(100, 200), true));
+		spaceObjects.add(new SpaceObject("/spacetraveler/rsc/asteroid.png", 5.0f, new Vector2f(50, 0), new Vector2f(250, 200), true));
+
 		spaceObjects.get(1).addAngularMomentum(15);
 		
 		
@@ -187,9 +190,11 @@ public class Game {
 				
 					s.model.addEnergy(gesamtEnergie);
 				}
-				
-				s.move();
-				
+				schneiden(spaceObjects);
+				if(hallo == true){
+					hallo = false;
+				}
+				else{s.move();}	
 			}
 			
 			
