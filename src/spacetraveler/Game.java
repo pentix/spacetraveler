@@ -30,11 +30,7 @@ public class Game {
 	{	
 		float t = 0;	//Gleitpunkt
 		t = (A.getCenter().x - B.getCenter().x)/(B.model.getVelocity().x-A.model.getVelocity().x);	//LGS
-		//System.out.println(t + " t");
-		//System.out.println(A.getCenter().x - B.getCenter().x + " oben");
-		//System.out.println((B.model.getVelocity().x-A.model.getVelocity().x) + " unten");
-		
-		return Vector2f.add(A.getCenter(), Vector2f.mul(A.model.getVelocity(), t));	//Einsetzen in ein Formel
+		return Vector2f.add(A.getCenter(), Vector2f.mul(A.model.getVelocity(), t));	//Einsetzen in die Formel (Inzidenzkriterium)
 	}
 	
 	public static void schneiden(Vector<SpaceObject> spaceObjects)
@@ -71,12 +67,6 @@ public class Game {
 						if((R1.contains(P) && R2.contains(P)) || absVec(Vector2f.sub(P1, P2)) <= (A.getSprite().getLocalBounds().width/2+B.getSprite().getLocalBounds().width+2))
 						{
 							hallo = true;
-							int r = A.texture.getSize().x/2;
-							Vector2f a0 = Vector2f.div(A.model.getVelocity(),absVec(A.model.getVelocity()));
-							Vector2f b0 = Vector2f.div(B.model.getVelocity(), absVec(B.model.getVelocity()));
-							
-							//double alpha = Math.acos(a0.x*b0.x+a0.y*b0.y);
-							//double h = r/Math.cos(alpha);
 							Vector2f v1a = Vector2f.sub(P, P1);
 							Vector2f v1b = Vector2f.sub(F2, P);
 							Vector2f v2a = Vector2f.sub(P, P2);
@@ -90,46 +80,17 @@ public class Game {
 							
 							Vector2f e_1 = new Vector2f(A.model.getEnergy().x*0.5f, A.model.getEnergy().y*0.5f);
 							Vector2f v_1 = new Vector2f(A.model.getVelocity().x * 0.5f, A.model.getVelocity().y * 0.5f);
-							//Vector2f position = A.getSprite().getPosition();
+							
 							Vector2f e_2 = new Vector2f(B.model.getEnergy().x*0.5f, B.model.getEnergy().y*0.5f);
 							Vector2f v_2 = new Vector2f(B.model.getVelocity().x * 0.5f, B.model.getVelocity().y * 0.5f);
-							//Vector2f position2 = B.getSprite().getPosition();
+							
 							A.model.Kollision(e_2,v_2);
 							B.model.Kollision(e_1, v_1);
 							System.out.println("geht");
 
 							
 							
-							/*//verhältnis längen geschwindigkeit
-							float ratio = absVec(v)/absVec(v2);
-							
-							
-							//genaue Kollisionsbewegung
-							float d = absVec(v)*ratio;
-							float m = absVec(v2)*(1/ratio);
-
-							Vector2f Move = Vector2f.add(Vector2f.mul((Vector2f.div(v, absVec(v))),ratio), 
-									Vector2f.mul((Vector2f.div(v2, absVec(v2))),1/ratio));
-							
-							A.getSprite().move(Move);
-							
-							
-							//genaue Kollisionsbewegung
-							float d2 = absVec(v2)*ratio;
-							float m2 = absVec(v)*(1/ratio);
-
-							Vector2f Move2 = Vector2f.add(Vector2f.mul((Vector2f.div(v2, absVec(v2))),1/ratio), 
-									Vector2f.mul((Vector2f.div(v, absVec(v))),ratio));
-							
-							B.getSprite().move(Move2);*/
-							
-							
-							//A.getSprite().setPosition(Vector2f.add(Vector2f.add(position, v),v2));
-							//A.getSprite().setPosition(Vector2f.add(Vector2f.add(position2, v2),v));
-							
-							/*float skalar = A.model.getVelocity().x*B.model.getVelocity().x+A.model.getVelocity().y*B.model.getVelocity().y;
-							double Winkel = Math.atan(skalar/(float)(A.model.absVelocity()*B.model.absVelocity()));
-							Winkel*/
+		
 							break;
 						}
 						}
@@ -204,8 +165,6 @@ public class Game {
 				
 				if(s.model.isGravityOn()){
 					for(Gravity g : gravityFields){
-						/*if(Math.abs(s.getSprite().getGlobalBounds().height - g.getSprite().getGlobalBounds().height) >= 10 &&
-								Math.abs(s.getSprite().getGlobalBounds().left - g.getSprite().getGlobalBounds().height) >= 10)*/
 						{gesamtEnergie = Vector2f.add(gesamtEnergie, g.model.getEnergy(s));}
 						
 					}
@@ -216,9 +175,7 @@ public class Game {
 				if(hallo == true){
 					hallo = false;
 				}
-				else{s.move();}
-				//System.out.println(s.model.getVelocity());
-				
+				else{s.move();}				
 			}
 				
 			
@@ -231,14 +188,6 @@ public class Game {
 			// Alle SpaceObjects zeichnen!
 			for(SpaceObject s : spaceObjects){	
 				hauptfenster.draw(s.getSprite());
-				/*CircleShape Kreis = new CircleShape();
-				Kreis.setRadius((float)Math.sqrt(s.model.getVelocity().x*s.model.getVelocity().x + s.model.getVelocity().y*s.model.getVelocity().y));
-				Kreis.setOrigin(new Vector2f(Kreis.getRadius()/2, Kreis.getRadius()/2));
-
-				Kreis.setPosition(s.getSprite().getPosition());
-
-
-				hauptfenster.draw(Kreis);*/
 			}
 			
 
