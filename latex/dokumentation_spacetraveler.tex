@@ -1,0 +1,56 @@
+\documentclass[12pt,a4paper,twoside]{scrartcl}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{geometry}
+
+\usepackage[hidelinks]{hyperref}
+\usepackage{scrpage2}
+\usepackage{csquotes}
+\usepackage{subcaption}
+
+\usepackage[style=alphabetic-verb,urldate=comp,dateabbrev=false,backend=bibtex,sorting=nty]{biblatex}
+\bibliography{referenzen}
+\defbibheading{bibliography}[\refname]{}
+
+\DeclareUnicodeCharacter{00A0}{ }
+
+\pagestyle{scrheadings}
+
+
+\linespread{1.5}
+\setlength{\parindent}{0cm} % No paragraph indent
+
+
+\newcommand{\q}[1]{``#1''}
+\newcommand{\todo}[1]{\begin{Large}\textcolor{red}{$\Rightarrow ~$#1}\end{Large}}
+
+\newcommand{\ant}[1]{\begin{Large}\textcolor{green}{$\Rightarrow ~$#1}\end{Large}}
+
+
+
+
+
+\begin{document}
+
+\include{titelseite}
+
+\clearpage
+
+\tableofcontents
+
+\clearpage
+
+\todo{INFORMATIONEN BEACHTEN!}
+
+\section{Hintergrund}
+
+
+\section{Implementierung}
+
+\end{document}
+ 
