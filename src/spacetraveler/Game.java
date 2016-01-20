@@ -43,14 +43,26 @@ public class Game {
 				{
 					SpaceObject A = spaceObjects.elementAt(i);
 					SpaceObject B = spaceObjects.elementAt(j);
-					if(A.getCircle().intersects(B.getCircle().getBoundsInParent()) && A.getLine().intersectsLine(B.getLine()))
+					
+					boolean texCol = (Math.abs(A.getCenter().x - B.getCenter().x) 
+							<= A.getSprite().getTexture().getSize().x/2 
+								+ B.getSprite().getTexture().getSize().x/2)
+						  && (Math.abs(A.getCenter().y - B.getCenter().y)
+						  	<= A.getSprite().getTexture().getSize().y/2
+						  		+ B.getSprite().getTexture().getSize().y/2);
+					System.out.println(texCol);
+					
+					if(A.getCircle().intersects(B.getCircle().getBoundsInParent()) && A.getLine().intersectsLine(B.getLine()) || texCol)
 					{
-						System.out.println(1);
+						//System.out.println(1);
 						Vector2f P1 = A.getCenter();	//Zentrum 1
 						Vector2f P2 = B.getCenter();	//Zentrum 2
 						Vector2f P = Schnittpunkt(A, B);
 						Vector2f F1 = Vector2f.add(P1, A.model.getVelocity());
 						Vector2f F2 = Vector2f.add(P2, B.model.getVelocity());
+						 
+						
+						
 						FloatRect R1 = new FloatRect(P1, A.model.getVelocity());
 						FloatRect R2 = new FloatRect(P2, B.model.getVelocity());
 						
@@ -59,12 +71,14 @@ public class Game {
 						Vector2f verh2 = Vector2f.sub(v,Vector2f.mul(Vector2f.div(v,absVec(v)),(float)(A.getSprite().getLocalBounds().width*(Math.sqrt(2)/2))));
 						Vector2f verh3 = Vector2f.sub(P, P2);
 						
+						//System.out.println(A.getSprite().getTextureRect().intersection(B.getSprite().getTextureRect()) != null);
+						
 
 						if(((absVec(verh2)/absVec(A.model.getVelocity()))
 								<= absVec(verh3)/absVec(B.model.getVelocity())
 								&& absVec(verh3)/absVec(B.model.getVelocity())
 								<= absVec(verh1)/absVec(A.model.getVelocity()))){
-						if((R1.contains(P) && R2.contains(P)) || absVec(Vector2f.sub(P1, P2)) <= (A.getSprite().getLocalBounds().width/2+B.getSprite().getLocalBounds().width+2))
+						if((R1.contains(P) && R2.contains(P)) || absVec(Vector2f.sub(P1, P2)) <= (A.getSprite().getLocalBounds().width/2+B.getSprite().getLocalBounds().width+2) || texCol)
 						{
 							hallo = true;
 							Vector2f v1a = Vector2f.sub(P, P1);
@@ -86,7 +100,7 @@ public class Game {
 							
 							A.model.Kollision(e_2,v_2);
 							B.model.Kollision(e_1, v_1);
-							System.out.println("geht");
+							//System.out.println("geht");
 
 							
 							
