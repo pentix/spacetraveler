@@ -40,9 +40,17 @@ public class Game {
 		backgroundTexture.loadFromStream(Game.class.getResourceAsStream("/spacetraveler/rsc/background.png"));
 		Sprite backgroundSprite = new Sprite(backgroundTexture);
 		
+		// Load font
+		Font font = new Font();
+		font.loadFromStream(Game.class.getResourceAsStream("/spacetraveler/rsc/DejaVuSans.ttf"));
+		
 		hauptfenster.setView(view);
 		
 		Vector2f levelStart, levelZiel;
+		
+		Clock levelTimer = new Clock();	/**< Timer, der Zeit seit Beginn hochzählt */
+		float levelTimeAvailable = 120;	/**< Zeit, die für das Level zur Verfügung steht */
+		boolean gameOver = false;		/**< true, wenn der Spieler das Spiel verloren hat */
 		
 		spaceObjects.add(new SpaceObject("/spacetraveler/rsc/block.png", 5.0f, new Vector2f(50, 0), new Vector2f(100, 100), true));
 		spaceObjects.add(new SpaceObject("/spacetraveler/rsc/asteroid.png", 5.0f, new Vector2f(50, 0), new Vector2f(200, 200), false));
@@ -128,6 +136,11 @@ public class Game {
 				hauptfenster.draw(s.getSprite());
 			}
 			
+			
+			// Überprüfen, ob die Zeit abgelaufen ist.
+			if(levelTimer.getElapsedTime().asSeconds() > levelTimeAvailable){
+				gameOver = true;
+			}
 
 			
 			hauptfenster.display();
