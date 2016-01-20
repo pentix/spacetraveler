@@ -14,6 +14,8 @@ import org.jsfml.window.event.Event.*;
  * 
  */
 public class Game {
+	
+	/** @todo Documentation / needed?*/
 	public static boolean hallo = false;
 	
 	public static float absVec(Vector2f v)
