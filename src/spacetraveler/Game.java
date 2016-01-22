@@ -44,6 +44,10 @@ public class Game {
 		Font font = new Font();
 		font.loadFromStream(Game.class.getResourceAsStream("/spacetraveler/rsc/DejaVuSans.ttf"));
 		
+		// Anzeigetext für Zeit erstellen
+		Text timeText = new Text("", font);
+		timeText.setPosition(25, 25);
+		
 		hauptfenster.setView(view);
 		
 		Vector2f levelStart, levelZiel;
@@ -106,11 +110,15 @@ public class Game {
 			}
 			
 			
+			// Überprüfen, ob die Zeit abgelaufen ist.
+			if(levelTimer.getElapsedTime().asSeconds() > levelTimeAvailable){
+				gameOver = true;
+			}
+			
+			
+			// Hintergrund / View gut positionieren!
 			view.setCenter(spaceObjects.get(0).getSprite().getPosition());
-			
-			
 			backgroundSprite.setPosition(-600, -600);
-			
 			hauptfenster.setView(view);
 
 			
@@ -137,10 +145,17 @@ public class Game {
 			}
 			
 			
-			// Überprüfen, ob die Zeit abgelaufen ist.
-			if(levelTimer.getElapsedTime().asSeconds() > levelTimeAvailable){
-				gameOver = true;
-			}
+			// Zeit anzeigen!
+			long timePassed = levelTimer.getElapsedTime().asMilliseconds();
+			int minutesPassed = (int)Math.floor(timePassed/1000/60);
+			int secondsPassed = (int)Math.floor(timePassed/1000 - minutesPassed*60);
+			int millisecondsPassed = (int)((timePassed % 1000)/10);
+			
+			String timeTextString = (minutesPassed<10?"0"+minutesPassed:minutesPassed) + ":" + (secondsPassed<10?"0"+secondsPassed:secondsPassed) + ":" + (millisecondsPassed<10?"0"+millisecondsPassed:millisecondsPassed);
+			timeText.setString(timeTextString);
+			timeText.setPosition(hauptfenster.mapPixelToCoords(new Vector2i(25, 25)));
+
+			hauptfenster.draw(timeText);
 
 			
 			hauptfenster.display();
