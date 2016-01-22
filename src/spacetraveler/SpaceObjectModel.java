@@ -1,5 +1,8 @@
 package spacetraveler;
 
+import java.awt.geom.Ellipse2D;
+
+import org.jsfml.graphics.CircleShape;
 import org.jsfml.system.*;
 
 /**
@@ -11,7 +14,7 @@ public class SpaceObjectModel {
 	private Vector2f e;			/**<Energievektor */
 	private double m;			/**<Masse */
 	private boolean gravityOn;	/**<Wirkt Gravitation auf dieses Objekt? */
-	
+	private int radius;	
 	
 	/**
 	 * @brief Berechnet den Geschwindigkeitsvektor anhand des Energievektors neu.
@@ -32,11 +35,15 @@ public class SpaceObjectModel {
 		updateVelocity();
 	}
 	
+	public void setVelocity(Vector2f Velocity)
+	{
+		this.v = Velocity;
+	}
 
 	
-	public double getRadius()
+	public float getRadius()
 	{
-		return 10+Math.sqrt(v.x*v.x+v.y*v.y);
+		return radius;
 	}
 	
 	public void Kollision(Vector2f energy, Vector2f velocity)
@@ -76,11 +83,11 @@ public class SpaceObjectModel {
 	 * @param energy Anfangsenergievektor des Objekts
 	 * @param gravityOn Gibt an ob das Objekt von Gravitationskräften beeinflusst wird
 	 */
-	public SpaceObjectModel(double m, Vector2f energy, boolean gravityOn){
+	public SpaceObjectModel(double m, Vector2f energy, boolean gravityOn, int Radius){
 		this.m = m;
 		this.e = energy;
 		this.gravityOn = gravityOn;
-		
+		this.radius = Radius/2;
 		updateVelocity();
 	}
 
