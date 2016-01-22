@@ -178,9 +178,21 @@ public class Game {
 		backgroundTexture.loadFromStream(Game.class.getResourceAsStream("/spacetraveler/rsc/background.png"));
 		Sprite backgroundSprite = new Sprite(backgroundTexture);
 		
+		// Load font
+		Font font = new Font();
+		font.loadFromStream(Game.class.getResourceAsStream("/spacetraveler/rsc/DejaVuSans.ttf"));
+		
+		// Anzeigetext für Zeit erstellen
+		Text timeText = new Text("", font);
+		timeText.setPosition(25, 25);
+		
 		hauptfenster.setView(view);
 		
 		Vector2f levelStart, levelZiel;
+		
+		Clock levelTimer = new Clock();	/**< Timer, der Zeit seit Beginn hochzählt */
+		float levelTimeAvailable = 120;	/**< Zeit, die für das Level zur Verfügung steht */
+		boolean gameOver = false;		/**< true, wenn der Spieler das Spiel verloren hat */
 		
 		spaceObjects.add(new SpaceObject("/spacetraveler/rsc/block.png", 5.0f, new Vector2f(50, 0), new Vector2f(100, 100), true));
 		spaceObjects.add(new SpaceObject("/spacetraveler/rsc/asteroid.png", 5.0f, new Vector2f(50, 0), new Vector2f(200, 200), true));
@@ -242,11 +254,16 @@ public class Game {
 			}
 			
 			
+			// Überprüfen, ob die Zeit abgelaufen ist.
+			if(levelTimer.getElapsedTime().asSeconds() > levelTimeAvailable){
+				gameOver = true;
+			}
 			
 			view.setCenter(spaceObjects.get(0).getSprite().getPosition());
 			
+			// Hintergrund / View gut positionieren!
+			view.setCenter(spaceObjects.get(0).getSprite().getPosition());
 			backgroundSprite.setPosition(-600, -600);
-			
 			hauptfenster.setView(view);
 
 			
@@ -272,6 +289,18 @@ public class Game {
 				hauptfenster.draw(s.getSprite());
 			}
 			
+			
+			// Zeit anzeigen!
+			long timePassed = levelTimer.getElapsedTime().asMilliseconds();
+			int minutesPassed = (int)Math.floor(timePassed/1000/60);
+			int secondsPassed = (int)Math.floor(timePassed/1000 - minutesPassed*60);
+			int millisecondsPassed = (int)((timePassed % 1000)/10);
+			
+			String timeTextString = (minutesPassed<10?"0"+minutesPassed:minutesPassed) + ":" + (secondsPassed<10?"0"+secondsPassed:secondsPassed) + ":" + (millisecondsPassed<10?"0"+millisecondsPassed:millisecondsPassed);
+			timeText.setString(timeTextString);
+			timeText.setPosition(hauptfenster.mapPixelToCoords(new Vector2i(25, 25)));
+
+			hauptfenster.draw(timeText);
 
 			
 			hauptfenster.display();
