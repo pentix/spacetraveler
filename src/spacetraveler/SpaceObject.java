@@ -7,7 +7,7 @@ import org.jsfml.system.*;
 
 /**
  * 
- * @brief Superklasse für alle Objekte, die sich auf dem Bildschirm bewegen können.
+ * @brief Superklasse f�r alle Objekte, die sich auf dem Bildschirm bewegen können.
  * 
  * Die Klasse vereint unser Model (SpaceObjectModel) mit den SFML-Darstellungsklassen wie
  * Sprite und Texture. Im Code muss also nur ein SpaceObject erstellt werden, die immer dazugehörigen

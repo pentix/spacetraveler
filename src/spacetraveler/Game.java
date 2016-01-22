@@ -6,6 +6,7 @@ import java.util.Vector;
 import org.jsfml.graphics.*;
 import org.jsfml.system.*;
 import org.jsfml.window.*;
+import org.jsfml.window.event.KeyEvent;
 import org.jsfml.window.event.Event.*;
 
 
@@ -26,6 +27,8 @@ public class Game {
 		RenderWindow hauptfenster = new RenderWindow(new VideoMode(1200, 800), "SpaceTraveler", Window.TITLEBAR | Window.CLOSE);
 		hauptfenster.clear();
 	
+		boolean gravLeft = false;
+		boolean gravRight = false;
 		
 		hauptfenster.setPosition(new Vector2i(-10,0));
 
@@ -62,15 +65,38 @@ public class Game {
         			hauptfenster.close();
         		}
         		
-        		if(ev.type == Type.MOUSE_BUTTON_PRESSED){
+        		if(gravLeft == false && Mouse.isButtonPressed(Mouse.Button.LEFT)){
+        			gravLeft = true;
         			gravityFields.addElement(new Gravity((hauptfenster.mapPixelToCoords(new Vector2i((int)Mouse.getPosition().x, (int)Mouse.getPosition().y))), 5));
         			userGravityId = gravityFields.size()-1;
         		}
         		
-        		if(ev.type == Type.MOUSE_BUTTON_RELEASED){
+        		if(gravLeft == true && !Mouse.isButtonPressed(Mouse.Button.LEFT)){
+        			gravLeft = false;
         			gravityFields.remove(userGravityId);
         			userGravityId = -1;
         		}
+        		
+        		if(gravRight == false && Mouse.isButtonPressed(Mouse.Button.RIGHT)){
+        			gravRight = true;
+        			gravityFields.addElement(new Gravity((hauptfenster.mapPixelToCoords(new Vector2i((int)Mouse.getPosition().x, (int)Mouse.getPosition().y))), -5));
+        			userGravityId = gravityFields.size()-1;
+        		}
+        		
+        		if(gravRight == true && !Mouse.isButtonPressed(Mouse.Button.RIGHT)){
+        			gravRight = false;
+        			gravityFields.remove(userGravityId);
+        			userGravityId = -1;
+        		}
+        		
+        		if(ev.type == Type.KEY_PRESSED){
+		        	KeyEvent keyEvent = ev.asKeyEvent();
+		        	if(keyEvent.key == Keyboard.Key.ESCAPE){
+		        		hauptfenster.close();
+		        	}
+        		}
+        		
+        		
         		
 			}
 
