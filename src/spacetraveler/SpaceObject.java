@@ -6,8 +6,6 @@ import java.io.IOException;
 import org.jsfml.graphics.*;
 import org.jsfml.system.*;
 
-import javafx.scene.shape.Circle;
-
 /**
  * 
  * @brief Superklasse für alle Objekte, die sich auf dem Bildschirm bewegen können.
@@ -22,6 +20,7 @@ public class SpaceObject {
 	public Texture texture;			/**< Textur des Spaceobjects */
 	public Sprite sprite;			/**< Sprite des Spaceobjects */
 	public SpaceObjectModel model;	/**< Model (für Berechnungen) des Spaceobjects */
+	
 	private float angularMomentum;	/**< Drehmoment für Rotation */
 	
 	/**
@@ -42,7 +41,7 @@ public class SpaceObject {
 		sprite.setOrigin(texture.getSize().x/2, texture.getSize().y/2);
 		sprite.setPosition(pos);
 		
-		model = new SpaceObjectModel(m, energy, gravityOn);
+		model = new SpaceObjectModel(m, energy, gravityOn, texture.getSize().x);
 		
 		angularMomentum = 0;
 	}
@@ -56,12 +55,11 @@ public class SpaceObject {
 	}
  
 	
-	public Circle getCircle()
+	public CircleShape getCircle()
 	{
-		Circle Kreis = new Circle();
+		CircleShape Kreis = new CircleShape();
 		Kreis.setRadius(model.getRadius());
-		Kreis.setCenterX(sprite.getPosition().x);
-		Kreis.setCenterY(sprite.getPosition().y);
+		Kreis.setOrigin(sprite.getPosition().x,sprite.getPosition().y);
 		return Kreis;
 	}
 	
