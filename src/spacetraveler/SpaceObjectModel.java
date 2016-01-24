@@ -35,6 +35,11 @@ public class SpaceObjectModel {
 		updateVelocity();
 	}
 	
+	public void setEnergy(Vector2f energy)
+	{
+		this.e = energy;
+	}
+	
 	public void setVelocity(Vector2f Velocity)
 	{
 		this.v = Velocity;

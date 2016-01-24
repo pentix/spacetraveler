@@ -18,7 +18,7 @@ public class Game {
 	
 	public static float absVec(Vector2f v)
 	{
-		return (float)Math.abs(v.x*v.x+v.y*v.y);
+		return (float)Math.abs(Math.sqrt(v.x*v.x+v.y*v.y));
 	}
 	
 	public static float skalar(Vector2f a, Vector2f b)
@@ -35,21 +35,25 @@ public class Game {
 	
 	public static void schneiden(Vector<SpaceObject> spaceObjects)
 	{
-		if(spaceObjects.size() >= 2)
-		{
-			for(int i = 0; i <= spaceObjects.size(); i++)
+		System.out.println(spaceObjects.size());
+
+		if(spaceObjects.size() != 0){
+			for(int i = 0; i+1 <= spaceObjects.size(); i++)
 			{
+				SpaceObject A = spaceObjects.elementAt(i);
+				A.move();
+	
 				for(int j = i+1; j < spaceObjects.size(); j++)
 				{
-					SpaceObject A = spaceObjects.elementAt(i);
+					
 					SpaceObject B = spaceObjects.elementAt(j);
 					Vector2f P1 = A.getCenter();	//Zentrum 1
 					Vector2f P2 = B.getCenter();	//Zentrum 2
 					
-					A.move();
 					B.move();
 					
-					if(absVec(Vector2f.sub(P1,P2)) < (A.model.getRadius()+B.model.getRadius()))
+					System.out.println(1);
+					if(absVec(Vector2f.sub(P1,P2)) <= Math.abs(A.model.getRadius())+Math.abs(B.model.getRadius()))
 					{
 						/*A.getSprite().move(Vector2f.sub(A.model.getVelocity(),Vector2f.mul(A.model.getVelocity(), 2)));
 						B.getSprite().move(Vector2f.sub(B.model.getVelocity(),Vector2f.mul(B.model.getVelocity(), 2)));
@@ -60,17 +64,37 @@ public class Game {
 						Vector2f x0 = Vector2f.div(Vector2f.sub(P1, P2),absVec(Vector2f.sub(P1, P2)));
 						Vector2f y0 = new Vector2f(-x0.y,x0.x);
 						
-						Vector2f Ax = Vector2f.mul(x0,skalar(A.model.getVelocity(),x0));
-						Vector2f Ay = Vector2f.mul(y0,skalar(A.model.getVelocity(),y0));
+						Vector2f Ax = Vector2f.mul(x0,skalar(A.model.getEnergy(),x0));
+						Vector2f Ay = Vector2f.mul(y0,skalar(A.model.getEnergy(),y0));
 						
-						Vector2f Bx = Vector2f.mul(x0,skalar(B.model.getVelocity(),x0));
-						Vector2f By = Vector2f.mul(y0,skalar(B.model.getVelocity(),y0));
+						Vector2f Bx = Vector2f.mul(x0,skalar(B.model.getEnergy(),x0));
+						Vector2f By = Vector2f.mul(y0,skalar(B.model.getEnergy(),y0));
 						
-						A.model.setVelocity(Vector2f.add(Bx,Ay));
-						B.model.setVelocity(Vector2f.add(Ax,By));
+						A.model.setEnergy(Vector2f.add(Bx,Ay));
+						B.model.setEnergy(Vector2f.add(Ax,By));
+						
+						Vector2f Axv = Vector2f.mul(x0,skalar(A.model.getVelocity(),x0));
+						Vector2f Ayv = Vector2f.mul(y0,skalar(A.model.getVelocity(),y0));
+						
+						Vector2f Bxv = Vector2f.mul(x0,skalar(B.model.getVelocity(),x0));
+						Vector2f Byv = Vector2f.mul(y0,skalar(B.model.getVelocity(),y0));
+						
+						A.model.setVelocity(Vector2f.add(Bxv,Ayv));
+						B.model.setVelocity(Vector2f.add(Axv,Byv));
+						
+						System.out.println(2);
+						A.move();
+						B.move();
+						
+						A.collided = 2;
+						B.collided = 2;
 						hallo = true;
-						break;
 					}
+					else
+					{
+						B.sprite.move(Vector2f.mul(B.model.getVelocity(),-1));
+					}
+					
 					
 					
 					/*boolean texCol = (Math.abs(A.getCenter().x - B.getCenter().x) 
@@ -138,10 +162,10 @@ public class Game {
 					}*/					
 				}
 				
-				
+			}
 			}
 		}
-	}
+	
 	
 	
 	
@@ -182,8 +206,8 @@ public class Game {
 		
 		spaceObjects.add(new SpaceObject("/spacetraveler/rsc/block.png", 5.0f, new Vector2f(50, 0), new Vector2f(100, 100), true));
 		spaceObjects.add(new SpaceObject("/spacetraveler/rsc/asteroid.png", 5.0f, new Vector2f(50, 0), new Vector2f(200, 200), true));
-		//spaceObjects.add(new SpaceObject("/spacetraveler/rsc/asteroid.png", 5.0f, new Vector2f(50, 0), new Vector2f(100, 200), true));
-		//spaceObjects.add(new SpaceObject("/spacetraveler/rsc/asteroid.png", 5.0f, new Vector2f(50, 0), new Vector2f(250, 200), true));
+		spaceObjects.add(new SpaceObject("/spacetraveler/rsc/asteroid.png", 5.0f, new Vector2f(50, 0), new Vector2f(100, 200), true));
+		spaceObjects.add(new SpaceObject("/spacetraveler/rsc/asteroid.png", 5.0f, new Vector2f(50, 0), new Vector2f(250, 200), true));
 
 		//spaceObjects.get(1).addAngularMomentum(15);
 		
@@ -230,14 +254,12 @@ public class Game {
 					}
 				
 					s.model.addEnergy(gesamtEnergie);
-					System.out.println(s.model.getVelocity());
 				}
-				schneiden(spaceObjects);
-				if(hallo == true){
-					hallo = false;
-				}
-				else{s.move();}
+			
 			}
+			
+			schneiden(spaceObjects);
+			
 			
 			
 			

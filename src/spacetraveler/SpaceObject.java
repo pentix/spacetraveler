@@ -20,6 +20,7 @@ public class SpaceObject {
 	public Texture texture;			/**< Textur des Spaceobjects */
 	public Sprite sprite;			/**< Sprite des Spaceobjects */
 	public SpaceObjectModel model;	/**< Model (für Berechnungen) des Spaceobjects */
+	public int collided = 2;
 	
 	private float angularMomentum;	/**< Drehmoment für Rotation */
 	
