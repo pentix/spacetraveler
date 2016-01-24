@@ -14,6 +14,8 @@ import org.jsfml.window.event.Event.*;
  * 
  */
 public class Game {
+	
+	/** @todo Documentation / needed?*/
 	public static boolean hallo = false;
 	
 	public static float absVec(Vector2f v)
@@ -200,9 +202,26 @@ public class Game {
 		backgroundTexture.loadFromStream(Game.class.getResourceAsStream("/spacetraveler/rsc/background.png"));
 		Sprite backgroundSprite = new Sprite(backgroundTexture);
 		
+		// Load GameOver Image
+		Texture gameOverTexture = new Texture();
+		gameOverTexture.loadFromStream(Game.class.getResourceAsStream("/spacetraveler/rsc/gameOver.png"));
+		Sprite gameOverSprite = new Sprite(gameOverTexture);
+		
+		// Load font
+		Font font = new Font();
+		font.loadFromStream(Game.class.getResourceAsStream("/spacetraveler/rsc/DejaVuSans.ttf"));
+		
+		// Anzeigetext für Zeit erstellen
+		Text timeText = new Text("", font);
+		timeText.setPosition(25, 25);
+		
 		hauptfenster.setView(view);
 		
 		Vector2f levelStart, levelZiel;
+		
+		Clock levelTimer = new Clock();	/**< Timer, der Zeit seit Beginn hochzählt */
+		float levelTimeAvailable = 30;	/**< Zeit, die für das Level zur Verfügung steht */
+		boolean gameOver = false;		/**< true, wenn der Spieler das Spiel verloren hat */
 		
 		spaceObjects.add(new SpaceObject("/spacetraveler/rsc/block.png", 5.0f, new Vector2f(50, 0), new Vector2f(100, 100), true));
 		spaceObjects.add(new SpaceObject("/spacetraveler/rsc/asteroid.png", 5.0f, new Vector2f(50, 0), new Vector2f(200, 200), true));
@@ -243,16 +262,17 @@ public class Game {
 			//gravityFields.elementAt(1).model.m = Uhr.getElapsedTime().asSeconds() % 20;
 			
 			
-			
-			// Berechnungen
-			for(SpaceObject s : spaceObjects){
-				Vector2f gesamtEnergie = new Vector2f(0, 0);
-				
-				if(s.model.isGravityOn()){
-					for(Gravity g : gravityFields){
-						gesamtEnergie = Vector2f.add(gesamtEnergie, g.model.getEnergy(s));
-					}
-				
+			if(!gameOver){
+				// Berechnungen
+				for(SpaceObject s : spaceObjects){
+					Vector2f gesamtEnergie = new Vector2f(0, 0);
+					
+					if(s.model.isGravityOn()){
+						for(Gravity g : gravityFields){
+							gesamtEnergie = Vector2f.add(gesamtEnergie, g.model.getEnergy(s));
+						}
+					
+
 					s.model.addEnergy(gesamtEnergie);
 				}
 			
@@ -260,40 +280,63 @@ public class Game {
 			
 			schneiden(spaceObjects);
 			
-			
-			
-			
-			view.setCenter(spaceObjects.get(0).getSprite().getPosition());
-			
-			backgroundSprite.setPosition(-600, -600);
-			
-			hauptfenster.setView(view);
-
-			
-			// Objekte rotieren
-			for(SpaceObject s : spaceObjects){
-				s.getSprite().rotate(s.getAngularMomentum());
+				// Überprüfen, ob die Zeit abgelaufen ist.
+				if(levelTimer.getElapsedTime().asSeconds() > levelTimeAvailable){
+					gameOver = true;
+				}
 				
-			}
-			
-			
-			// Rendering
-			
-			// Background
-			hauptfenster.draw(backgroundSprite);
-			
-			// Alle Gravitys zeichnen
-			for(Gravity g : gravityFields){
-				hauptfenster.draw(g.getSprite());
-			}
-		
-			// Alle SpaceObjects zeichnen!
-			for(SpaceObject s : spaceObjects){	
-				hauptfenster.draw(s.getSprite());
-			}
-			
+				view.setCenter(spaceObjects.get(0).getSprite().getPosition());
+				
+				// Hintergrund / View gut positionieren!
+				view.setCenter(spaceObjects.get(0).getSprite().getPosition());
+				backgroundSprite.setPosition(-600, -600);
+				hauptfenster.setView(view);
+	
+				
+				// Objekte rotieren
+				for(SpaceObject s : spaceObjects){
+					s.getSprite().rotate(s.getAngularMomentum());
+					
+				}
 
+				
+				// Rendering
+				
+				// Background
+				hauptfenster.draw(backgroundSprite);
+				
+				// Alle Gravitys zeichnen
+				for(Gravity g : gravityFields){
+					hauptfenster.draw(g.getSprite());
+				}
 			
+				// Alle SpaceObjects zeichnen!
+				for(SpaceObject s : spaceObjects){	
+					hauptfenster.draw(s.getSprite());
+				}
+				
+				
+				// Zeit anzeigen!
+				long timePassed = levelTimer.getElapsedTime().asMilliseconds();
+				int minutesPassed = (int)Math.floor(timePassed/1000/60);
+				int secondsPassed = (int)Math.floor(timePassed/1000 - minutesPassed*60);
+				int millisecondsPassed = (int)((timePassed % 1000)/10);
+				
+				String timeTextString = (minutesPassed<10?"0"+minutesPassed:minutesPassed) + ":" + (secondsPassed<10?"0"+secondsPassed:secondsPassed) + ":" + (millisecondsPassed<10?"0"+millisecondsPassed:millisecondsPassed);
+				timeText.setString(timeTextString);
+				timeText.setPosition(hauptfenster.mapPixelToCoords(new Vector2i(25, 25)));
+	
+				hauptfenster.draw(timeText);
+				
+			} else {
+				// Wenn Spieler gameOver ist, Spiel anhalten, GameOver anzeigen!
+				gameOverSprite.setOrigin(gameOverTexture.getSize().x/2, gameOverTexture.getSize().y/2);
+				gameOverSprite.setPosition(hauptfenster.mapPixelToCoords(new Vector2i(hauptfenster.getSize().x/2, hauptfenster.getSize().y/2)));
+
+				hauptfenster.draw(gameOverSprite);
+			
+			}
+				
 			hauptfenster.display();
 			Thread.sleep(1000/25);
 		}
