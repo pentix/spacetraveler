@@ -219,7 +219,7 @@ public class Game {
 		
 		
 		// Level erstellen
-		Level l = new Level();
+		Level l = new Level("/spacetraveler/rsc/level/level1");
 		
 		
 		while(hauptfenster.isOpen()){

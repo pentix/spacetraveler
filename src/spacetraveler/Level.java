@@ -1,6 +1,9 @@
 package spacetraveler;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.Scanner;
 import java.util.Vector;
 
 import org.jsfml.system.Clock;
@@ -8,7 +11,27 @@ import org.jsfml.system.Vector2f;
 
 /**
  * @brief Enthält alle für ein Level notwendige Objekte (Gravitationspunkte, etc...)
- * @throws IOException Wenn Dateien nicht geladen werden können
+ *
+ * 
+ * 
+ * Allgemeine Struktur einer Leveldatei:
+ * 
+ * int anzahlSpaceObjects
+ * 		string 		texturePfad
+ * 		float 		m
+ * 		float 		EX, EY
+ * 		float		posX, posY
+ * 		boolean		gravityOn
+ * 		float		drehGeschwindigkeit
+ * 
+ * int anzahlGravityFields
+ * 		float		posX, posX
+ * 		float		m
+ * 
+ * int timeAvailable
+ * float startPosX, startPosY
+ * float zielPosX, zielPosY 
+ * 
  * */
 public class Level {
 	
@@ -22,34 +45,50 @@ public class Level {
 	 
 	
 	
+	/** @brief Erstellt ein Level von einer Datei
+	 *  @throws IOException Wenn Dateien nicht geladen werden können
+	 */
+	public Level(String filename) throws IOException{
 	
-	public Level() throws IOException{
+		// Leveldatei einlesen
+		InputStream levelDatei = Game.class.getResourceAsStream(filename);
+		Scanner parser = new Scanner(levelDatei);
 	
-		// Class Member initialisieren
-		spaceObjects = new Vector<>();
-		gravityFields = new Vector<>();
 		
-		levelTimer = new Clock();
-		levelTimeAvailable = 30;
+		// SpaceObjects initialisieren
+		int anzahlSpaceObjects = parser.nextInt();
+		spaceObjects = new Vector<>(anzahlSpaceObjects+1);
 		
-		levelStart = new Vector2f(100, 100);
-		levelZiel = new Vector2f(600, 600);
-		
-		
+
+		// spaceObjects einlesen
 		// Spieler erstellen    (Spieler == 1. Spaceobject)
 		spaceObjects.add(new SpaceObject("/spacetraveler/rsc/spieler.png", 5.0f, new Vector2f(50, 0), levelStart, true));
-				
-		// Beispieldaten spaceObjects
-		spaceObjects.add(new SpaceObject("/spacetraveler/rsc/asteroid.png", 5.0f, new Vector2f(50, 0), new Vector2f(200, 200), true));
-		spaceObjects.add(new SpaceObject("/spacetraveler/rsc/asteroid.png", 5.0f, new Vector2f(50, 0), new Vector2f(100, 200), true));
-		spaceObjects.add(new SpaceObject("/spacetraveler/rsc/asteroid.png", 5.0f, new Vector2f(50, 0), new Vector2f(250, 200), true));
-		spaceObjects.get(1).addAngularMomentum(15);
 
 		
-		// Beispieldaten gravityFields
-		//gravityFields.addElement(new Gravity(new Vector2f(300,300), 5));
-		//gravityFields.addElement(new Gravity(new Vector2f(500,300), 5));
-		//gravityFields.addElement(new Gravity(new Vector2f(1200,400), 10));
+		for(int n=0; n<anzahlSpaceObjects; n++){
+			spaceObjects.add(new SpaceObject(parser.nextLine(), parser.nextFloat(), new Vector2f(parser.nextFloat(), parser.nextFloat()), new Vector2f(parser.nextFloat(), parser.nextFloat()), parser.nextBoolean()));
+			spaceObjects.get(1+n).addAngularMomentum(parser.nextFloat());
+		}
+		
+		// gravityFields einlesen
+		int anzahlGravityFields = parser.nextInt();
+		gravityFields = new Vector<>(anzahlGravityFields);
+
+		
+		for(int n=0; n<anzahlGravityFields; n++){
+			gravityFields.addElement(new Gravity(new Vector2f(parser.nextFloat(), parser.nextFloat()), parser.nextFloat()));
+		}
+			
+		
+		// Levelinformationen einlesen
+		levelTimeAvailable = parser.nextInt();
+		
+		levelStart = new Vector2f(parser.nextFloat(), parser.nextFloat());
+		levelZiel = new Vector2f(parser.nextFloat(), parser.nextFloat());
+		
+		
+		// Zeitmessung starten!
+		levelTimer = new Clock();
 
 	}
 	
