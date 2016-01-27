@@ -201,6 +201,8 @@ public class Game {
 		Texture backgroundTexture = new Texture();
 		backgroundTexture.loadFromStream(Game.class.getResourceAsStream("/spacetraveler/rsc/background.png"));
 		Sprite backgroundSprite = new Sprite(backgroundTexture);
+		backgroundSprite.setPosition(-600, -600);
+
 		
 		// Load GameOver Image
 		Texture gameOverTexture = new Texture();
@@ -224,9 +226,9 @@ public class Game {
 		boolean gameOver = false;		/**< true, wenn der Spieler das Spiel verloren hat */
 		
 		spaceObjects.add(new SpaceObject("/spacetraveler/rsc/block.png", 5.0f, new Vector2f(50, 0), new Vector2f(100, 100), true));
-		spaceObjects.add(new SpaceObject("/spacetraveler/rsc/asteroid.png", 5.0f, new Vector2f(50, 0), new Vector2f(200, 200), true));
-		spaceObjects.add(new SpaceObject("/spacetraveler/rsc/asteroid.png", 5.0f, new Vector2f(50, 0), new Vector2f(100, 200), true));
-		spaceObjects.add(new SpaceObject("/spacetraveler/rsc/asteroid.png", 5.0f, new Vector2f(50, 0), new Vector2f(250, 200), true));
+		//spaceObjects.add(new SpaceObject("/spacetraveler/rsc/asteroid.png", 5.0f, new Vector2f(50, 0), new Vector2f(200, 200), true));
+		spaceObjects.add(new SpaceObject("/spacetraveler/rsc/asteroid.png", 5.0f, new Vector2f(1, 0), new Vector2f(100, 200), false));
+		//spaceObjects.add(new SpaceObject("/spacetraveler/rsc/asteroid.png", 5.0f, new Vector2f(50, 0), new Vector2f(250, 200), true));
 
 		//spaceObjects.get(1).addAngularMomentum(15);
 		
@@ -289,7 +291,7 @@ public class Game {
 				
 				// Hintergrund / View gut positionieren!
 				view.setCenter(spaceObjects.get(0).getSprite().getPosition());
-				backgroundSprite.setPosition(-600, -600);
+				backgroundSprite.move(Vector2f.div(spaceObjects.elementAt(0).model.getVelocity(),2));
 				hauptfenster.setView(view);
 	
 				
