@@ -182,13 +182,8 @@ public class Game {
 	 * @param args Konsolenargumente, die dem Programm übergeben werden. (Werden nicht ausgewertet)
 	 */
 	public static void main(String args[]) throws InterruptedException, IOException{
-		Vector<SpaceObject> spaceObjects = new Vector<>();
-		Vector<Gravity> gravityFields = new Vector<>();
-		
 		RenderWindow hauptfenster = new RenderWindow(new VideoMode(1200, 800), "SpaceTraveler", Window.TITLEBAR | Window.CLOSE);
 		hauptfenster.clear();
-	
-		
 		hauptfenster.setPosition(new Vector2i(-10,0));
 
 		//Get the window's default view
@@ -216,26 +211,16 @@ public class Game {
 		timeText.setPosition(25, 25);
 		
 		hauptfenster.setView(view);
+	
+	
 		
-		Vector2f levelStart, levelZiel;
-		
-		Clock levelTimer = new Clock();	/**< Timer, der Zeit seit Beginn hochzählt */
-		float levelTimeAvailable = 30;	/**< Zeit, die für das Level zur Verfügung steht */
 		boolean gameOver = false;		/**< true, wenn der Spieler das Spiel verloren hat */
-		
-		spaceObjects.add(new SpaceObject("/spacetraveler/rsc/block.png", 5.0f, new Vector2f(50, 0), new Vector2f(100, 100), true));
-		spaceObjects.add(new SpaceObject("/spacetraveler/rsc/asteroid.png", 5.0f, new Vector2f(50, 0), new Vector2f(200, 200), true));
-		spaceObjects.add(new SpaceObject("/spacetraveler/rsc/asteroid.png", 5.0f, new Vector2f(50, 0), new Vector2f(100, 200), true));
-		spaceObjects.add(new SpaceObject("/spacetraveler/rsc/asteroid.png", 5.0f, new Vector2f(50, 0), new Vector2f(250, 200), true));
-
-		//spaceObjects.get(1).addAngularMomentum(15);
-		
-		
-		//gravityFields.addElement(new Gravity(new Vector2f(300,300), 5));
-		//gravityFields.addElement(new Gravity(new Vector2f(500,300), 5));
-		//gravityFields.addElement(new Gravity(new Vector2f(1200,400), 10));
-		
 		int userGravityId = -1;
+		
+		
+		// Level erstellen
+		Level l = new Level();
+		
 		
 		while(hauptfenster.isOpen()){
 			// Events verarbeiten
@@ -245,30 +230,27 @@ public class Game {
         		}
         		
         		if(ev.type == Type.MOUSE_BUTTON_PRESSED){
-        			gravityFields.addElement(new Gravity((hauptfenster.mapPixelToCoords(new Vector2i((int)Mouse.getPosition().x, (int)Mouse.getPosition().y))), 5));
-        			userGravityId = gravityFields.size()-1;
+        			l.gravityFields.addElement(new Gravity((hauptfenster.mapPixelToCoords(new Vector2i((int)Mouse.getPosition().x, (int)Mouse.getPosition().y))), 5));
+        			userGravityId = l.gravityFields.size()-1;
         		}
         		
         		if(ev.type == Type.MOUSE_BUTTON_RELEASED){
-        			gravityFields.remove(userGravityId);
+        			l.gravityFields.remove(userGravityId);
         			userGravityId = -1;
         		}
         		
 			}
 
 			hauptfenster.clear();
-			
-			//gravityFields.elementAt(0).model.m = Uhr.getElapsedTime().asSeconds() % 10;
-			//gravityFields.elementAt(1).model.m = Uhr.getElapsedTime().asSeconds() % 20;
-			
+					
 			
 			if(!gameOver){
 				// Berechnungen
-				for(SpaceObject s : spaceObjects){
+				for(SpaceObject s : l.spaceObjects){
 					Vector2f gesamtEnergie = new Vector2f(0, 0);
 					
 					if(s.model.isGravityOn()){
-						for(Gravity g : gravityFields){
+						for(Gravity g : l.gravityFields){
 							gesamtEnergie = Vector2f.add(gesamtEnergie, g.model.getEnergy(s));
 						}
 					
@@ -278,23 +260,23 @@ public class Game {
 			
 			}
 			
-			schneiden(spaceObjects);
+				schneiden(l.spaceObjects);
 			
 				// Überprüfen, ob die Zeit abgelaufen ist.
-				if(levelTimer.getElapsedTime().asSeconds() > levelTimeAvailable){
+				if(l.levelTimer.getElapsedTime().asSeconds() > l.levelTimeAvailable){
 					gameOver = true;
 				}
 				
-				view.setCenter(spaceObjects.get(0).getSprite().getPosition());
+				view.setCenter(l.spaceObjects.get(0).getSprite().getPosition());
 				
 				// Hintergrund / View gut positionieren!
-				view.setCenter(spaceObjects.get(0).getSprite().getPosition());
+				view.setCenter(l.spaceObjects.get(0).getSprite().getPosition());
 				backgroundSprite.setPosition(-600, -600);
 				hauptfenster.setView(view);
 	
 				
 				// Objekte rotieren
-				for(SpaceObject s : spaceObjects){
+				for(SpaceObject s : l.spaceObjects){
 					s.getSprite().rotate(s.getAngularMomentum());
 					
 				}
@@ -306,18 +288,18 @@ public class Game {
 				hauptfenster.draw(backgroundSprite);
 				
 				// Alle Gravitys zeichnen
-				for(Gravity g : gravityFields){
+				for(Gravity g : l.gravityFields){
 					hauptfenster.draw(g.getSprite());
 				}
 			
 				// Alle SpaceObjects zeichnen!
-				for(SpaceObject s : spaceObjects){	
+				for(SpaceObject s : l.spaceObjects){	
 					hauptfenster.draw(s.getSprite());
 				}
 				
 				
 				// Zeit anzeigen!
-				long timePassed = levelTimer.getElapsedTime().asMilliseconds();
+				long timePassed = l.levelTimer.getElapsedTime().asMilliseconds();
 				int minutesPassed = (int)Math.floor(timePassed/1000/60);
 				int secondsPassed = (int)Math.floor(timePassed/1000 - minutesPassed*60);
 				int millisecondsPassed = (int)((timePassed % 1000)/10);
