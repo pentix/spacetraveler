@@ -16,6 +16,10 @@ import org.jsfml.system.Vector2f;
  * 
  * Allgemeine Struktur einer Leveldatei:
  * 
+ * int timeAvailable
+ * float startPosX, startPosY
+ * float zielPosX, zielPosY 
+ * 
  * int anzahlSpaceObjects
  * 		string 		texturePfad
  * 		float 		m
@@ -27,10 +31,6 @@ import org.jsfml.system.Vector2f;
  * int anzahlGravityFields
  * 		float		posX, posX
  * 		float		m
- * 
- * int timeAvailable
- * float startPosX, startPosY
- * float zielPosX, zielPosY 
  * 
  * */
 public class Level {
@@ -55,6 +55,15 @@ public class Level {
 		Scanner parser = new Scanner(levelDatei);
 	
 		
+		// Levelinformationen einlesen
+		levelTimeAvailable = parser.nextInt();
+		System.out.println("levelTimeAvailable: " + levelTimeAvailable);
+		
+		levelStart = new Vector2f(parser.nextFloat(), parser.nextFloat());
+		levelZiel = new Vector2f(parser.nextFloat(), parser.nextFloat());
+		
+		
+		
 		// SpaceObjects initialisieren
 		int anzahlSpaceObjects = parser.nextInt();
 		spaceObjects = new Vector<>(anzahlSpaceObjects+1);
@@ -66,7 +75,11 @@ public class Level {
 
 		
 		for(int n=0; n<anzahlSpaceObjects; n++){
-			spaceObjects.add(new SpaceObject(parser.nextLine(), parser.nextFloat(), new Vector2f(parser.nextFloat(), parser.nextFloat()), new Vector2f(parser.nextFloat(), parser.nextFloat()), parser.nextBoolean()));
+			String sString = parser.nextLine();
+			
+			System.out.println("sString: " + sString);
+			
+			spaceObjects.add(new SpaceObject(sString, parser.nextFloat(), new Vector2f(parser.nextFloat(), parser.nextFloat()), new Vector2f(parser.nextFloat(), parser.nextFloat()), parser.nextBoolean()));
 			spaceObjects.get(1+n).addAngularMomentum(parser.nextFloat());
 		}
 		
@@ -78,13 +91,6 @@ public class Level {
 		for(int n=0; n<anzahlGravityFields; n++){
 			gravityFields.addElement(new Gravity(new Vector2f(parser.nextFloat(), parser.nextFloat()), parser.nextFloat()));
 		}
-			
-		
-		// Levelinformationen einlesen
-		levelTimeAvailable = parser.nextInt();
-		
-		levelStart = new Vector2f(parser.nextFloat(), parser.nextFloat());
-		levelZiel = new Vector2f(parser.nextFloat(), parser.nextFloat());
 		
 		
 		// Zeitmessung starten!
