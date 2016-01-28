@@ -21,31 +21,60 @@ public class Level {
 	public float levelTimeAvailable;			/**< Zeit, die für das Level zur Verfügung steht */
 	
 	public Vector2f levelStart, levelZiel; 		/**< Level Start- und Zielpunkt */
+	public int levelWidth, levelHeight;			/**< Breite und Höhe des Levels */
 	 
 	
 	
-	
-	public Level() throws IOException{
+	/**
+	 * @brief Liest ein Level aus der Datei ein und erstellt die dazugehörigen Objekte
+	 * @param levelId Name des Levels ( = Name der Datei in /spacetraveler/rsc/levels/)
+	 * @throws IOException Wenn Leveldatei nicht geöffnet werden kann
+	 * 
+	 * Struktur der Leveldatei:
+	 * 
+	 * int levelTimeAvailable
+	 * floats startX, startY
+	 * flaots zielX, zielY
+	 * ints width, height
+	 * 		ints id1,1 id2,1 id3,1 id4,1
+	 * 		ints id2,1 id2,2 id3,2 id4,2
+	 * 		...
+	 * 
+	 */
+	public Level(String levelId) throws IOException{
 	
 		// Class Members initialisieren
 		tiles = new Vector<>();
 		spaceObjects = new Vector<>();
 		gravityFields = new Vector<>();
+	
+		// Leveldatei öffnen
+		Scanner parser = new Scanner(Game.class.getResourceAsStream("/spacetraveler/rsc/levels/" + levelId));
 		
-		levelTimer = new Clock();
-		levelTimeAvailable = 30;
+		// Levelinformationen laden
+		levelTimeAvailable = parser.nextInt();									parser.nextLine();
+		levelStart = new Vector2f(parser.nextFloat(), parser.nextFloat());		parser.nextLine();
+		levelZiel = new Vector2f(parser.nextFloat(), parser.nextFloat());		parser.nextLine();
 		
-		levelStart = new Vector2f(100, 100);
-		levelZiel = new Vector2f(600, 600);
-		
+		levelWidth = parser.nextInt();
+		levelHeight = parser.nextInt();
 		
 		// Spieler erstellen    (Spieler = 1. spaceObject)
 		spaceObjects.add(new SpaceObject("/spacetraveler/rsc/spieler.png", 5.0f, new Vector2f(50, 0), levelStart, true));
+		
+		
+		// Tiles laden und erstellen
+		for(int h=0; h<levelHeight; h++){
+			for(int w=0; w<levelWidth; w++){
+				loadTile(new Vector2f(256*w, 256*h), parser.nextInt());
+			}
+			
+			parser.nextLine();
+		}
 				
-		// Beispiel Tile laden!
-		// (Tilenummer 1)
-		loadTile(new Vector2f(0,0), 1);
-
+		
+		// Zeitmessung starten!
+		levelTimer = new Clock();
 	}
 	
 	
