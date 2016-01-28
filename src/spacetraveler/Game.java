@@ -37,7 +37,7 @@ public class Game {
 	
 	public static void schneiden(Vector<SpaceObject> spaceObjects)
 	{
-		System.out.println(spaceObjects.size());
+		//System.out.println(spaceObjects.size());
 
 		if(spaceObjects.size() != 0){
 			for(int i = 0; i+1 <= spaceObjects.size(); i++)
@@ -54,7 +54,7 @@ public class Game {
 					
 					B.move();
 					
-					System.out.println(1);
+					//System.out.println(1);
 					if(absVec(Vector2f.sub(P1,P2)) <= Math.abs(A.model.getRadius())+Math.abs(B.model.getRadius()))
 					{
 						/*A.getSprite().move(Vector2f.sub(A.model.getVelocity(),Vector2f.mul(A.model.getVelocity(), 2)));
@@ -84,7 +84,7 @@ public class Game {
 						A.model.setVelocity(Vector2f.add(Bxv,Ayv));
 						B.model.setVelocity(Vector2f.add(Axv,Byv));
 						
-						System.out.println(2);
+						//System.out.println(2);
 						A.move();
 						B.move();
 						
