@@ -1,21 +1,35 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project default="create_run_jar" name="Spacetraveler">
-    <!--this file was created by Eclipse Runnable JAR file Export Wizard-->
-    <!--ANT 1.7 is required-->
+<project default="create_run_jar" name="Create Runnable Jar for spacetraveler">
+    <!--this file was created by Eclipse Runnable JAR Export Wizard-->
+    <!--ANT 1.7 is required                                        -->
     <!--define folder properties-->
+    <property name="dir.buildfile" value="."/>
+    <property name="dir.jarfile" value="${dir.buildfile}/bin"/>
+    
     <target name="create_run_jar">
-        <delete dir="bin/"/>
-        <mkdir dir="bin/"/>
-        <jar destfile="bin/spacetraveler.jar">
+        <delete dir="bin" />
+        <mkdir dir="bin" />
+
+    	<javac srcdir="src"
+	         destdir="bin/"
+	         classpath="${dir.buildfile}/lib/jsfml.jar"
+	         debug="off"
+		/>
+    	
+        <jar destfile="${dir.jarfile}/spacetraveler.jar" filesetmanifest="mergewithoutmain">
             <manifest>
-                <attribute name="Main-Class" value="org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader"/>
-                <attribute name="Rsrc-Main-Class" value="spacetraveler.Game"/>
+                <attribute name="Main-Class" value="spacetraveler.Game"/>
                 <attribute name="Class-Path" value="."/>
-                <attribute name="Rsrc-Class-Path" value="./ jsfml.jar"/>
             </manifest>
-            <zipfileset src="lib/jar-in-jar-loader.zip"/>
-            <fileset dir="src/"/>
-            <zipfileset dir="lib/" includes="jsfml.jar"/>
+        	
+            <fileset dir="${dir.jarfile}"/>
+        	<fileset dir="src/spacetraveler/">
+        		<exclude name="**/*.java"/>
+        	</fileset>
+        	
+        	
+        	
+            <zipfileset excludes="META-INF/*.SF" src="${dir.buildfile}/lib/jsfml.jar"/>
         </jar>
     </target>
 </project>
