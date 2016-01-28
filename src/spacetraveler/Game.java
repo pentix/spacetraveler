@@ -192,13 +192,6 @@ public class Game {
 		//Create a new view by copying the window's default view
 		View view = new View(defaultView.getCenter(), defaultView.getSize());
 		
-		// Background Image
-		Texture backgroundTexture = new Texture();
-		backgroundTexture.loadFromStream(Game.class.getResourceAsStream("/spacetraveler/rsc/background.png"));
-		Sprite backgroundSprite = new Sprite(backgroundTexture);
-		backgroundSprite.setPosition(-600, -600);
-
-		
 		// Load GameOver Image
 		Texture gameOverTexture = new Texture();
 		gameOverTexture.loadFromStream(Game.class.getResourceAsStream("/spacetraveler/rsc/gameOver.png"));
@@ -275,7 +268,6 @@ public class Game {
 				// Hintergrund / View gut positionieren!
 
 				view.setCenter(l.spaceObjects.get(0).getSprite().getPosition());
-				backgroundSprite.setPosition(-600, -600);
 
 				hauptfenster.setView(view);
 	
@@ -287,10 +279,13 @@ public class Game {
 				}
 
 				
+				
 				// Rendering
 				
-				// Background
-				hauptfenster.draw(backgroundSprite);
+				// Alle Background Tiles zeichnen
+				for(Tile t : l.tiles){
+					hauptfenster.draw(t.sprite);
+				}
 				
 				// Alle Gravitys zeichnen
 				for(Gravity g : l.gravityFields){

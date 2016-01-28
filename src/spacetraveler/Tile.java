@@ -6,6 +6,17 @@ import org.jsfml.graphics.Sprite;
 import org.jsfml.graphics.Texture;
 import org.jsfml.system.Vector2f;
 
+
+/**
+ * 
+ * @brief Darstellung der Tiles
+ * 
+ * Diese Klasse dient dazu eine Sprite-Instanz, als auch die dazugehörige Texture
+ * zu bündeln, um sie nicht einzeln verwalten zu müssen. Diese Klasse beeinhaltet keine
+ * Methoden, sondern lediglich öffentlich zugängliche Attribute. Der Konstruktor
+ * dient dazu, die für die Darstellung nötigen Daten einzulesen und zu laden.
+ *
+ */
 public class Tile {
 	
 	public Sprite sprite;
@@ -17,7 +28,7 @@ public class Tile {
 	{
 		texture = new Texture();
 		
-		texture.loadFromStream(Game.class.getResourceAsStream("/spacetraveler/rsc/tile.jpg"));
+		texture.loadFromStream(Game.class.getResourceAsStream("/spacetraveler/rsc/tiles/tile" + index + ".jpg"));
 		sprite = new Sprite(texture);
 		sprite.setScale(0.5f,0.5f);
 		

@@ -1,6 +1,7 @@
 package spacetraveler;
 
 import java.io.IOException;
+import java.util.Scanner;
 import java.util.Vector;
 
 import org.jsfml.system.Clock;
@@ -11,6 +12,7 @@ import org.jsfml.system.Vector2f;
  * @throws IOException Wenn Dateien nicht geladen werden können
  * */
 public class Level {
+	public Vector<Tile> tiles;					/**< Hintergrund Tiles */
 	
 	public Vector<SpaceObject> spaceObjects;	/**< SpaceObjects im Level */
 	public Vector<Gravity> gravityFields;		/**< GravityFields im Level */
@@ -25,7 +27,8 @@ public class Level {
 	
 	public Level() throws IOException{
 	
-		// Class Member initialisieren
+		// Class Members initialisieren
+		tiles = new Vector<>();
 		spaceObjects = new Vector<>();
 		gravityFields = new Vector<>();
 		
@@ -36,7 +39,7 @@ public class Level {
 		levelZiel = new Vector2f(600, 600);
 		
 		
-		// Spieler erstellen    (Spieler == 1. Spaceobject)
+		// Spieler erstellen    (Spieler = 1. spaceObject)
 		spaceObjects.add(new SpaceObject("/spacetraveler/rsc/spieler.png", 5.0f, new Vector2f(50, 0), levelStart, true));
 				
 		// Beispieldaten spaceObjects
@@ -53,5 +56,15 @@ public class Level {
 
 	}
 	
+	
+	public void loadTile(Vector2f pos, int id){
+		/* 
+		 * Einlesen der TileType-Datei
+		 * Erstellen der Objekte und deren Speicherung in den Vektoren
+		 */
+		
+		Scanner parser = new Scanner(Game.class.getResourceAsStream("/spacetraveler/rsc/tiles/tile" + id));
+		
+	}
 	
 }
