@@ -196,6 +196,8 @@ public class Game {
 		Texture backgroundTexture = new Texture();
 		backgroundTexture.loadFromStream(Game.class.getResourceAsStream("/spacetraveler/rsc/background.png"));
 		Sprite backgroundSprite = new Sprite(backgroundTexture);
+		backgroundSprite.setPosition(-600, -600);
+
 		
 		// Load GameOver Image
 		Texture gameOverTexture = new Texture();
@@ -216,6 +218,7 @@ public class Game {
 		
 		boolean gameOver = false;		/**< true, wenn der Spieler das Spiel verloren hat */
 		int userGravityId = -1;
+
 		
 		
 		// Level erstellen
@@ -270,8 +273,10 @@ public class Game {
 				view.setCenter(l.spaceObjects.get(0).getSprite().getPosition());
 				
 				// Hintergrund / View gut positionieren!
+
 				view.setCenter(l.spaceObjects.get(0).getSprite().getPosition());
 				backgroundSprite.setPosition(-600, -600);
+
 				hauptfenster.setView(view);
 	
 				
