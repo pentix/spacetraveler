@@ -42,17 +42,9 @@ public class Level {
 		// Spieler erstellen    (Spieler = 1. spaceObject)
 		spaceObjects.add(new SpaceObject("/spacetraveler/rsc/spieler.png", 5.0f, new Vector2f(50, 0), levelStart, true));
 				
-		// Beispieldaten spaceObjects
-		spaceObjects.add(new SpaceObject("/spacetraveler/rsc/asteroid.png", 5.0f, new Vector2f(50, 0), new Vector2f(200, 200), true));
-		spaceObjects.add(new SpaceObject("/spacetraveler/rsc/asteroid.png", 5.0f, new Vector2f(50, 0), new Vector2f(100, 200), true));
-		spaceObjects.add(new SpaceObject("/spacetraveler/rsc/asteroid.png", 5.0f, new Vector2f(50, 0), new Vector2f(250, 200), true));
-		spaceObjects.get(1).addAngularMomentum(15);
-
-		
-		// Beispieldaten gravityFields
-		//gravityFields.addElement(new Gravity(new Vector2f(300,300), 5));
-		//gravityFields.addElement(new Gravity(new Vector2f(500,300), 5));
-		//gravityFields.addElement(new Gravity(new Vector2f(1200,400), 10));
+		// Beispiel Tile laden!
+		// (Tilenummer 1)
+		loadTile(new Vector2f(0,0), 1);
 
 	}
 	

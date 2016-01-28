@@ -28,14 +28,10 @@ public class Tile {
 	{
 		texture = new Texture();
 		
-		texture.loadFromStream(Game.class.getResourceAsStream("/spacetraveler/rsc/tiles/tile_bg" + index + ".jpg"));
+		texture.loadFromStream(Game.class.getResourceAsStream("/spacetraveler/rsc/tiles/tile_bg" + index + ".png"));
 		sprite = new Sprite(texture);
 		
-		// Warum das? 
-		sprite.setScale(0.5f,0.5f);
-		
-		this.position = Vector2f.mul(p, texture.getSize().x/2);
-		sprite.setPosition(position);
+		sprite.setPosition(p);
 		
 	}
 
