@@ -13,7 +13,7 @@ public class Tile {
 	public int size;
 	public Vector2f position;
 	
-	public Tile(Vector2f p, int index) throws IOException
+	public Tile(Vector2f p, int index) throws IOException 
 	{
 		texture = new Texture();
 		
