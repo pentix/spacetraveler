@@ -22,7 +22,7 @@ public class SpaceObject {
 	public SpaceObjectModel model;	/**< Model (für Berechnungen) des Spaceobjects */
 	public int collided = 2;
 	
-	private float angularMomentum;	/**< Drehmoment für Rotation */
+	private float angularMomentum;	/**< Rotationsgeschwindigkeit */
 	
 	/**
 	 * @brief Konstruktor

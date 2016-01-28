@@ -57,14 +57,67 @@ public class Level {
 	}
 	
 	
-	public void loadTile(Vector2f pos, int id){
+	/**
+	 * @brief Lädt das Hintergrundbild eines Tiles und fügt die Objekte des Tiles dem aktuellen Level hinzu
+	 * @param pos Position des Tiles (in absoluten Bildschirmkoordinaten)
+	 * @param tileType Gibt den Typ/die Art des Tiles an
+	 * @throws IOException Dateizugriffsfehler
+	 */
+	public void loadTile(Vector2f pos, int tileType) throws IOException{
 		/* 
 		 * Einlesen der TileType-Datei
 		 * Erstellen der Objekte und deren Speicherung in den Vektoren
+		 * 
+		 * Struktur einer Tile-Datei (Ohne Leerzeilen):
+		 * 
+		 * int hintergrundId
+		 * 
+		 * int anzahlSpaceObjects
+		 * 		string 		texturePfad
+		 * 		float 		m
+		 * 		floats 		EX, EY
+		 * 		floats		posX, posY
+		 * 		boolean		gravityOn
+		 * 
+		 * int anzahlGravityFields
+		 * 		floats		posX, posX
+		 * 		float		m
+		 * 
 		 */
 		
-		Scanner parser = new Scanner(Game.class.getResourceAsStream("/spacetraveler/rsc/tiles/tile" + id));
+		Scanner parser = new Scanner(Game.class.getResourceAsStream("/spacetraveler/rsc/tiles/tile" + tileType));
 		
+		// hintergrundId
+		int hintergrundId = parser.nextInt(); 				parser.nextLine();
+		
+		// Tile laden!
+		tiles.addElement(new Tile(pos, hintergrundId));
+		
+		// anzahlSpaceObjects
+		int anzahlSpaceObjects = parser.nextInt();			parser.nextLine();
+		
+		// spaceObjects
+		for(int n=0; n<anzahlSpaceObjects; n++){
+			String texturePath = parser.nextLine();
+			float m = parser.nextFloat();											parser.nextLine();
+			Vector2f E = new Vector2f(parser.nextFloat(), parser.nextFloat());		parser.nextLine();
+			Vector2f P = new Vector2f(parser.nextFloat(), parser.nextFloat());		parser.nextLine();
+			boolean gravityOn = parser.nextBoolean();								parser.nextLine();
+			
+			spaceObjects.addElement(new SpaceObject(texturePath, m, E, P, gravityOn));
+		}
+		
+		// anzahlGravityFields
+		int anzahlGravityFields = parser.nextInt();			parser.nextLine();
+		
+		// gravityFields
+		for(int n=0; n<anzahlGravityFields; n++){
+			Vector2f P = new Vector2f(parser.nextFloat(), parser.nextFloat());		parser.nextLine();
+			
+			float m = parser.nextFloat();											parser.nextLine();					
+			
+			gravityFields.addElement(new Gravity(P, m));
+		}
 	}
 	
 }
