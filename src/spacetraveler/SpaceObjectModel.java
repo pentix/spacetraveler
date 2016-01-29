@@ -35,28 +35,41 @@ public class SpaceObjectModel {
 		updateVelocity();
 	}
 	
+	/**
+	 * Setzt die Energie des Objektes fest
+	 * @param energy Neue Energie des Objektes
+	 */
 	public void setEnergy(Vector2f energy)
 	{
 		this.e = energy;
 	}
-	
-	public void setVelocity(Vector2f Velocity)
+
+	/**
+	 * Setzt die neue Geschwindigkeit des Objektes fest
+	 * @param velocity Neue Geschwindigkeit des Objektes
+	 */
+	public void setVelocity(Vector2f velocity)
 	{
-		this.v = Velocity;
+		this.v = velocity;
 	}
 
-	
+	/** @todo getRadius dokumentieren! */
 	public float getRadius()
 	{
 		return radius;
 	}
 	
+	/** @todo Kollision dokumentieren! */
 	public void Kollision(Vector2f energy, Vector2f velocity)
 	{
 		this.e = energy;
 		this.v = velocity;
 	}
     
+	/**
+	 * getter für Energy
+	 * @return Energie des Objektes
+	 */
     public Vector2f getEnergy()
     {
     	return e;

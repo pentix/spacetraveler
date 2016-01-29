@@ -17,12 +17,12 @@ import org.jsfml.system.*;
  */
 public class SpaceObject {
 
-	public Texture texture;			/**< Textur des Spaceobjects */
-	public Sprite sprite;			/**< Sprite des Spaceobjects */
-	public SpaceObjectModel model;	/**< Model (für Berechnungen) des Spaceobjects */
-	public int collided = 2;
+	public Texture texture;			/**< @brief Textur des Spaceobjects */
+	public Sprite sprite;			/**< @brief Sprite des Spaceobjects */
+	public SpaceObjectModel model;	/**< @brief Model (für Berechnungen) des Spaceobjects */
+	public int collided = 2;		/**< @todo collided dokumentieren */
 	
-	private float angularMomentum;	/**< Rotationsgeschwindigkeit */
+	private float angularMomentum;	/**< @brief Rotationsgeschwindigkeit */
 	
 	/**
 	 * @brief Konstruktor
@@ -56,6 +56,7 @@ public class SpaceObject {
 	}
  
 	
+	/** @todo getCircle dokumentieren! */
 	public CircleShape getCircle()
 	{
 		CircleShape Kreis = new CircleShape();
@@ -64,11 +65,13 @@ public class SpaceObject {
 		return Kreis;
 	}
 	
+	/** @todo getCenter dokumentieren! */
 	public Vector2f getCenter()
 	{
 		return Vector2f.add(sprite.getPosition(), new Vector2f(texture.getSize().x/2,texture.getSize().y/2));
 	}
 	
+	/** @todo getLine dokumentieren! */
 	public Line2D getLine()
 	{
 		Line2D.Float linie = new Line2D.Float(getCenter().x, getCenter().y, model.getVelocity().x, model.getVelocity().y);
@@ -76,13 +79,17 @@ public class SpaceObject {
 	}
 	
 	/**
-	 * @brief Fügt dem Objekt Rotationsenergie hinzu, d.h., beschleunigt das Objekt in der Rotation
-	 * @param am 
+	 * @brief Fügt dem Objekt an Rotationsgeschwindigkeit hinzu, d.h., beschleunigt das Objekt in der Rotation
+	 * @param am Zusätzliche Rotationsgeschwindigkeit [Grad/s]
 	 */
 	public void addAngularMomentum(float am){
 		this.angularMomentum += am;
 	}
 	
+	/**
+	 * getter für angularMomentum
+	 * @return Rotationsgeschwindigkeit [Grad/s]
+	 */
 	public float getAngularMomentum(){
 		return this.angularMomentum;
 	}

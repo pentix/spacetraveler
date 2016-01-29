@@ -32,13 +32,15 @@ public class Level {
 	 * 
 	 * Struktur der Leveldatei:
 	 * 
-	 * int levelTimeAvailable
-	 * floats startX, startY
-	 * flaots zielX, zielY
-	 * ints width, height
-	 * 		ints id1,1 id2,1 id3,1 id4,1
-	 * 		ints id2,1 id2,2 id3,2 id4,2
-	 * 		...
+	 * Datentyp|Inhalt
+	 * --------|------
+	 * int | levelTimeAvailable
+	 * floats | startX, startY
+	 * flaots | zielX, zielY
+	 * ints | width, height
+	 * 		ints | id1,1 id2,1 id3,1 id4,1
+	 * 		ints | id2,1 id2,2 id3,2 id4,2
+	 * 		... | ...
 	 * 
 	 */
 	public Level(String levelId) throws IOException{
@@ -83,28 +85,30 @@ public class Level {
 	 * @param pos Position des Tiles (in absoluten Bildschirmkoordinaten)
 	 * @param tileType Gibt den Typ/die Art des Tiles an
 	 * @throws IOException Dateizugriffsfehler
+	 * 
+	 * 
+	 * 		 
+	 * Einlesen der TileType-Datei
+	 * Erstellen der Objekte und deren Speicherung in den Vektoren
+	 * 
+	 * Struktur einer Tile-Datei (Ohne Leerzeilen):
+	 * 
+	 * Datentyp | Inhalt
+	 * ---------|--------
+	 * int | hintergrundId
+	 * int |anzahlSpaceObjects
+	 * 	string 	| texturePfad
+	 * 	float 	| m
+	 * 	floats 	| EX, EY
+	 * 	floats	| posX, posY
+	 * 	boolean	| gravityOn
+	 * int | anzahlGravityFields
+	 * 	floats	| posX, posX
+	 * 	float	| m
+	 *
+	 *
 	 */
 	public void loadTile(Vector2f pos, int tileType) throws IOException{
-		/* 
-		 * Einlesen der TileType-Datei
-		 * Erstellen der Objekte und deren Speicherung in den Vektoren
-		 * 
-		 * Struktur einer Tile-Datei (Ohne Leerzeilen):
-		 * 
-		 * int hintergrundId
-		 * 
-		 * int anzahlSpaceObjects
-		 * 		string 		texturePfad
-		 * 		float 		m
-		 * 		floats 		EX, EY
-		 * 		floats		posX, posY
-		 * 		boolean		gravityOn
-		 * 
-		 * int anzahlGravityFields
-		 * 		floats		posX, posX
-		 * 		float		m
-		 * 
-		 */
 		
 		Scanner parser = new Scanner(Game.class.getResourceAsStream("/spacetraveler/rsc/tiles/tile" + tileType));
 		
