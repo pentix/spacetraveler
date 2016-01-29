@@ -6,7 +6,6 @@ import org.jsfml.graphics.CircleShape;
 import org.jsfml.system.*;
 
 /**
- * 
  * @brief Rechnerisches Modell für SpaceObjects
  */
 public class SpaceObjectModel {
@@ -19,7 +18,8 @@ public class SpaceObjectModel {
 	/**
 	 * @brief Berechnet den Geschwindigkeitsvektor anhand des Energievektors neu.
 	 */
-	private void updateVelocity(){		
+	private void updateVelocity()
+	{		
 		double v_abs = (2*Math.sqrt(e.x*e.x + e.y*e.y)/m);
 		Vector2f e0 = Vector2f.div(e,(float)(Math.sqrt(e.x*e.x + e.y*e.y)));
 		this.v = Vector2f.mul(e0, (float)v_abs);
@@ -36,7 +36,7 @@ public class SpaceObjectModel {
 	}
 	
 	/**
-	 * Setzt die Energie des Objektes fest
+	 * @brief Setzt die Energie des Objektes fest
 	 * @param energy Neue Energie des Objektes
 	 */
 	public void setEnergy(Vector2f energy)
@@ -53,17 +53,13 @@ public class SpaceObjectModel {
 		this.v = velocity;
 	}
 
-	/** @todo getRadius dokumentieren! */
+	/**
+	 * @brief getter des Radius
+	 * @return radius des Objekts
+	 */
 	public float getRadius()
 	{
 		return radius;
-	}
-	
-	/** @todo Kollision dokumentieren! */
-	public void Kollision(Vector2f energy, Vector2f velocity)
-	{
-		this.e = energy;
-		this.v = velocity;
 	}
     
 	/**
@@ -79,7 +75,8 @@ public class SpaceObjectModel {
      * @brief getter für v
      * @return Geschwindigkeitsvektor v des Objekts
      */
-	public Vector2f getVelocity(){
+	public Vector2f getVelocity()
+	{
 		return v;
 	}
 	 
@@ -88,10 +85,9 @@ public class SpaceObjectModel {
 	 * @brief getter für gravityOn
 	 * @return Gravitation für dieses Objekt eingeschaltet?
 	 */
-	public boolean isGravityOn(){
-	 
+	public boolean isGravityOn()
+	{
 		return gravityOn;
-	 
 	}
 	 
 		
