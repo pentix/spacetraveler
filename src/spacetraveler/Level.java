@@ -12,16 +12,16 @@ import org.jsfml.system.Vector2f;
  * @throws IOException Wenn Dateien nicht geladen werden können
  * */
 public class Level {
-	public Vector<Tile> tiles;					/**< Hintergrund Tiles */
+	public Vector<Tile> tiles;					/**< @brief Hintergrund Tiles */
 	
-	public Vector<SpaceObject> spaceObjects;	/**< SpaceObjects im Level */
-	public Vector<Gravity> gravityFields;		/**< GravityFields im Level */
+	public Vector<SpaceObject> spaceObjects;	/**< @brief SpaceObjects im Level */
+	public Vector<Gravity> gravityFields;		/**< @brief GravityFields im Level */
 	
-	public Clock levelTimer;					/**< Timer, der Zeit seit Beginn hochzählt */
-	public float levelTimeAvailable;			/**< Zeit, die für das Level zur Verfügung steht */
+	public Clock levelTimer;					/**< @brief Timer, der Zeit seit Beginn hochzählt */
+	public float levelTimeAvailable;			/**< @brief Zeit, die für das Level zur Verfügung steht */
 	
-	public Vector2f levelStart, levelZiel; 		/**< Level Start- und Zielpunkt */
-	public int levelWidth, levelHeight;			/**< Breite und Höhe des Levels */
+	public Vector2f levelStart, levelZiel; 		/**< @brief Level Start- und Zielpunkt */
+	public int levelWidth, levelHeight;			/**< @brief Breite und Höhe des Levels */
 	 
 	
 	

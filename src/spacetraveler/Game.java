@@ -35,6 +35,11 @@ public class Game {
 		return Vector2f.add(A.getCenter(), Vector2f.mul(A.model.getVelocity(), t));	//Einsetzen in die Formel (Inzidenzkriterium)
 	}
 	
+	
+	/**
+	 * 
+	 * @todo schneiden dokumentieren!
+	 */
 	public static void schneiden(Vector<SpaceObject> spaceObjects)
 	{
 		//System.out.println(spaceObjects.size());
@@ -209,7 +214,7 @@ public class Game {
 	
 	
 		
-		boolean gameOver = false;		/**< true, wenn der Spieler das Spiel verloren hat */
+		boolean gameOver = false;		/**< @brief true, wenn der Spieler das Spiel verloren hat */
 		int userGravityId = -1;
 
 		

@@ -19,11 +19,16 @@ import org.jsfml.system.Vector2f;
  */
 public class Tile {
 	
-	public Sprite sprite;
-	public Texture texture;
-	public int size;
-	public Vector2f position;
+	public Sprite sprite;		/**< @brief Sprite des Tiles */
+	public Texture texture;		/**< @brief Texture des Tiles */
+	public Vector2f position;	/**< @brief Position des Tiles */
 	
+	/**
+	 * @brief Konstruktor des Tiles: Lädt Texturdaten und erstellt das Sprite
+	 * @param p Position des Tiles (in absoluten Bildschirmkoordinaten)
+	 * @param index Hintergrundbild des Tiles ( = Dateiname /spacetraveler/rsc/tiles/tile_bg***.png)
+	 * @throws IOException Dateizugriffsfehler
+	 */
 	public Tile(Vector2f p, int index) throws IOException 
 	{
 		texture = new Texture();

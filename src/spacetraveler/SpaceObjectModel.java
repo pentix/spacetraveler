@@ -10,10 +10,10 @@ import org.jsfml.system.*;
  * @brief Rechnerisches Modell für SpaceObjects
  */
 public class SpaceObjectModel {
-	private Vector2f v;			/**<Bewegungsrichtung / Geschwindigkeit */
-	private Vector2f e;			/**<Energievektor */
-	private double m;			/**<Masse */
-	private boolean gravityOn;	/**<Wirkt Gravitation auf dieses Objekt? */
+	private Vector2f v;			/**< @brief Bewegungsrichtung / Geschwindigkeit */
+	private Vector2f e;			/**< @brief Energievektor */
+	private double m;			/**< @brief Masse */
+	private boolean gravityOn;	/**< @brief Wirkt Gravitation auf dieses Objekt? */
 	private int radius;	
 	
 	/**
