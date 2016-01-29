@@ -16,13 +16,13 @@ import org.jsfml.window.event.Event.*;
  */
 public class Game {
 	
-	private static boolean gravLeft = false; 		/**< @brief Wird linke Maustaste gedrückt?*/
-	private static boolean gravRight = false; 		/**< @brief Wird rechte Maustaste gedrückt?*/
+	private static boolean gravLeft = false; 		/**< @brief Wird linke Maustaste gedrÃ¼ckt?*/
+	private static boolean gravRight = false; 		/**< @brief Wird rechte Maustaste gedrÃ¼ckt?*/
 	
 	/**
-	 * @brief Hilfsfunktion zum Berechnen der Länge des Vectors
+	 * @brief Hilfsfunktion zum Berechnen der LÃ¤nge des Vectors
 	 * @param v ein Vektor
-	 * @return Länge des Vektors
+	 * @return LÃ¤nge des Vektors
 	 */
 	public static float absVec(Vector2f v)
 	{
@@ -42,7 +42,7 @@ public class Game {
 	
 	
 	/**
-	 * @brief Kollisionsüberprüfung und elastischer Stoss
+	 * @brief KollisionsÃ¼berprÃ¼fung und elastischer Stoss
 	 * @param spaceObjects 
 	 */
 	public static void schneiden(Vector<SpaceObject> spaceObjects)
@@ -105,7 +105,7 @@ public class Game {
 					}
 					else
 					{
-						//Falls keine Kollision stattgefunden hat, B zurückpositionieren
+						//Falls keine Kollision stattgefunden hat, B zurï¿½ckpositionieren
 						B.sprite.move(Vector2f.mul(B.model.getVelocity(),-1)); 
 					}
 				}
