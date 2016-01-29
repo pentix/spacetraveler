@@ -76,7 +76,8 @@ public class Level {
 			
 			parser.nextLine();
 		}
-				
+		
+		parser.close();
 		
 		// Zeitmessung starten!
 		levelTimer = new Clock();
@@ -146,6 +147,8 @@ public class Level {
 			
 			gravityFields.addElement(new Gravity(P, m));
 		}
+		
+		parser.close();
 	}
 	
 }
