@@ -10,6 +10,7 @@ import org.jsfml.system.Vector2f;
 /**
  * @brief Enthält alle für ein Level notwendige Objekte (Gravitationspunkte, etc...)
  * @throws IOException Wenn Dateien nicht geladen werden können
+ *
  * */
 public class Level {
 	public Vector<Tile> tiles;					/**< @brief Hintergrund Tiles */
@@ -20,9 +21,11 @@ public class Level {
 	public Clock levelTimer;					/**< @brief Timer, der Zeit seit Beginn hochzählt */
 	public float levelTimeAvailable;			/**< @brief Zeit, die für das Level zur Verfügung steht */
 	
-	public Vector2f levelStart, levelZiel; 		/**< @brief Level Start- und Zielpunkt */
-	public int levelWidth, levelHeight;			/**< @brief Breite und Höhe des Levels */
-	 
+	public Vector2f levelStart; 				/**< @brief Level Startpunkt */
+	public Vector2f levelZiel;					/**< @brief Level Zielpunkt */
+	
+	public int levelWidth;						/**< @brief Breite des Levels */
+	public int levelHeight;						/**< @brief Höhe des Levels */
 	
 	
 	/**
