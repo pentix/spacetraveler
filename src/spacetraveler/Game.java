@@ -15,34 +15,34 @@ import org.jsfml.window.event.Event.*;
  */
 public class Game {
 	
-	/** @todo Documentation / needed?*/
-	public static boolean hallo = false;
-	
+	/**
+	 * @brief Hilfsfunktion zum Berechnen der Länge des Vectors
+	 * @param v ein Vektor
+	 * @return Länge des Vektors
+	 */
 	public static float absVec(Vector2f v)
 	{
 		return (float)Math.abs(Math.sqrt(v.x*v.x+v.y*v.y));
 	}
 	
+	/** 
+	 * @brief Hilfsfunktion zum berechnen des Skalarproduktes
+	 * @param a erster Vektor
+	 * @param b zweiter Vektor
+	 * @return Skalarprodukt der Beiden Vektoren
+	 */
 	public static float skalar(Vector2f a, Vector2f b)
 	{
 		return a.x*b.x+a.y*b.y;
 	}
 	
-	public static Vector2f Schnittpunkt(SpaceObject A, SpaceObject B)
-	{	
-		float t = 0;	//Gleitpunkt
-		t = (A.getCenter().x - B.getCenter().x)/(B.model.getVelocity().x-A.model.getVelocity().x);	//LGS
-		return Vector2f.add(A.getCenter(), Vector2f.mul(A.model.getVelocity(), t));	//Einsetzen in die Formel (Inzidenzkriterium)
-	}
-	
 	
 	/**
-	 * 
-	 * @todo schneiden dokumentieren!
+	 * @brief Kollisionsüberprüfung und elastischer Stoss
+	 * @param spaceObjects 
 	 */
 	public static void schneiden(Vector<SpaceObject> spaceObjects)
 	{
-		//System.out.println(spaceObjects.size());
 
 		if(spaceObjects.size() != 0){
 			for(int i = 0; i+1 <= spaceObjects.size(); i++)
@@ -50,16 +50,16 @@ public class Game {
 				SpaceObject A = spaceObjects.elementAt(i);
 				A.move();
 	
-				for(int j = i+1; j < spaceObjects.size(); j++)
+				for(int j = i+1; j < spaceObjects.size(); j++) // nur wenn ein zweites Objekt vorhanden ist
 				{
 					
 					SpaceObject B = spaceObjects.elementAt(j);
 					Vector2f P1 = A.getCenter();	//Zentrum 1
 					Vector2f P2 = B.getCenter();	//Zentrum 2
 					
-					B.move();
+					B.move(); 
 					
-					//System.out.println(1);
+					// Ist der Abstand der beiden Zentren kleiner als die Summe der Radien? 
 					if(absVec(Vector2f.sub(P1,P2)) <= Math.abs(A.model.getRadius())+Math.abs(B.model.getRadius()))
 					{
 						/*A.getSprite().move(Vector2f.sub(A.model.getVelocity(),Vector2f.mul(A.model.getVelocity(), 2)));
@@ -68,110 +68,46 @@ public class Game {
 						float cosPhi = skalar(A.model.getVelocity(),B.model.getVelocity())/(absVec(A.model.getVelocity())+absVec(B.model.getVelocity()));
 						float strecke1a = Abstand * cosPhi;
 						*/
-						Vector2f x0 = Vector2f.div(Vector2f.sub(P1, P2),absVec(Vector2f.sub(P1, P2)));
-						Vector2f y0 = new Vector2f(-x0.y,x0.x);
+						Vector2f x0 = Vector2f.div(Vector2f.sub(P1, P2),absVec(Vector2f.sub(P1, P2))); //Nullvektor rechtwinklig zur Schnittachse
+						Vector2f y0 = new Vector2f(-x0.y,x0.x); // Nullvektor parallel zu Schnittachse
 						
-						Vector2f Ax = Vector2f.mul(x0,skalar(A.model.getEnergy(),x0));
-						Vector2f Ay = Vector2f.mul(y0,skalar(A.model.getEnergy(),y0));
+						//Berechnung der Energievektorkomponenten
+						Vector2f Ax = Vector2f.mul(x0,skalar(A.model.getEnergy(),x0)); //Vektor A auf x0 projiziert
+						Vector2f Ay = Vector2f.mul(y0,skalar(A.model.getEnergy(),y0)); //Vector A auf y0 projiziert
 						
-						Vector2f Bx = Vector2f.mul(x0,skalar(B.model.getEnergy(),x0));
-						Vector2f By = Vector2f.mul(y0,skalar(B.model.getEnergy(),y0));
+						Vector2f Bx = Vector2f.mul(x0,skalar(B.model.getEnergy(),x0)); //Vektor B auf x0 porjiziert
+						Vector2f By = Vector2f.mul(y0,skalar(B.model.getEnergy(),y0)); //Vektor B auf y0 projiziert
 						
-						A.model.setEnergy(Vector2f.add(Bx,Ay));
+						//Addieren der Energievektorkomponeneten
+						A.model.setEnergy(Vector2f.add(Bx,Ay)); 
 						B.model.setEnergy(Vector2f.add(Ax,By));
 						
+						//Berechnung der Geschwindigkeitsvektorkomponeneten
 						Vector2f Axv = Vector2f.mul(x0,skalar(A.model.getVelocity(),x0));
 						Vector2f Ayv = Vector2f.mul(y0,skalar(A.model.getVelocity(),y0));
 						
 						Vector2f Bxv = Vector2f.mul(x0,skalar(B.model.getVelocity(),x0));
 						Vector2f Byv = Vector2f.mul(y0,skalar(B.model.getVelocity(),y0));
 						
+						//Addieren der Geschwindigkeitsvektoren
 						A.model.setVelocity(Vector2f.add(Bxv,Ayv));
 						B.model.setVelocity(Vector2f.add(Axv,Byv));
 						
-						//System.out.println(2);
 						A.move();
 						B.move();
 						
-						A.collided = 2;
-						B.collided = 2;
-						hallo = true;
+						//A.collided = 2;
+						//B.collided = 2;
 					}
 					else
 					{
-						B.sprite.move(Vector2f.mul(B.model.getVelocity(),-1));
+						//Falls keine Kollision stattgefunden hat, B zurückpositionieren
+						B.sprite.move(Vector2f.mul(B.model.getVelocity(),-1)); 
 					}
-					
-					
-					
-					/*boolean texCol = (Math.abs(A.getCenter().x - B.getCenter().x) 
-							<= A.getSprite().getTexture().getSize().x/2 
-								+ B.getSprite().getTexture().getSize().x/2)
-						  && (Math.abs(A.getCenter().y - B.getCenter().y)
-						  	<= A.getSprite().getTexture().getSize().y/2
-						  		+ B.getSprite().getTexture().getSize().y/2);
-					
-					
-					if(A.getCircle(). && A.getLine().intersectsLine(B.getLine()) || texCol)
-					{
-						//System.out.println(1);
-						Vector2f P1 = A.getCenter();	//Zentrum 1
-						Vector2f P2 = B.getCenter();	//Zentrum 2
-						Vector2f P = Schnittpunkt(A, B);
-						Vector2f F1 = Vector2f.add(P1, A.model.getVelocity());
-						Vector2f F2 = Vector2f.add(P2, B.model.getVelocity());
-						 
-						
-						
-						FloatRect R1 = new FloatRect(P1, A.model.getVelocity());
-						FloatRect R2 = new FloatRect(P2, B.model.getVelocity());
-						
-						Vector2f v = Vector2f.sub(P, P1);
-						Vector2f verh1 = Vector2f.add(v,Vector2f.mul(Vector2f.div(v,absVec(v)),(float)(A.getSprite().getLocalBounds().width*(Math.sqrt(2)/2))));
-						Vector2f verh2 = Vector2f.sub(v,Vector2f.mul(Vector2f.div(v,absVec(v)),(float)(A.getSprite().getLocalBounds().width*(Math.sqrt(2)/2))));
-						Vector2f verh3 = Vector2f.sub(P, P2);
-												
-
-						if(((absVec(verh2)/absVec(A.model.getVelocity()))
-								<= absVec(verh3)/absVec(B.model.getVelocity())
-								&& absVec(verh3)/absVec(B.model.getVelocity())
-								<= absVec(verh1)/absVec(A.model.getVelocity()))){
-						if((R1.contains(P) && R2.contains(P)) || absVec(Vector2f.sub(P1, P2)) <= (A.getSprite().getLocalBounds().width/2+B.getSprite().getLocalBounds().width+2) || texCol)
-						{
-							hallo = true;
-							Vector2f v1a = Vector2f.sub(P, P1);
-							Vector2f v1b = Vector2f.sub(F2, P);
-							Vector2f v2a = Vector2f.sub(P, P2);
-							Vector2f v2b = Vector2f.sub(F1, P);
-							
-							Vector2f v1 = Vector2f.add(v1a, v1b);
-							Vector2f v2 = Vector2f.add(v2a, v2b);
-							
-							A.getSprite().move(v1);
-							B.getSprite().move(v2);
-							
-							Vector2f e_1 = new Vector2f(A.model.getEnergy().x*0.5f, A.model.getEnergy().y*0.5f);
-							Vector2f v_1 = new Vector2f(A.model.getVelocity().x * 0.5f, A.model.getVelocity().y * 0.5f);
-							
-							Vector2f e_2 = new Vector2f(B.model.getEnergy().x*0.5f, B.model.getEnergy().y*0.5f);
-							Vector2f v_2 = new Vector2f(B.model.getVelocity().x * 0.5f, B.model.getVelocity().y * 0.5f);
-							
-							A.model.Kollision(e_2,v_2);
-							B.model.Kollision(e_1, v_1);
-							//System.out.println("geht");
-
-							
-							
-		
-							break;
-						}
-						}
-					}*/					
 				}
-				
-			}
 			}
 		}
+	}
 	
 	
 	

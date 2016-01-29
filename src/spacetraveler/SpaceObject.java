@@ -56,26 +56,13 @@ public class SpaceObject {
 	}
  
 	
-	/** @todo getCircle dokumentieren! */
-	public CircleShape getCircle()
-	{
-		CircleShape Kreis = new CircleShape();
-		Kreis.setRadius(model.getRadius());
-		Kreis.setOrigin(sprite.getPosition().x,sprite.getPosition().y);
-		return Kreis;
-	}
-	
-	/** @todo getCenter dokumentieren! */
+
+	/**
+	 * @return Globale Koordinaten der Mitte des SpaceObjects
+	 */
 	public Vector2f getCenter()
 	{
 		return Vector2f.add(sprite.getPosition(), new Vector2f(texture.getSize().x/2,texture.getSize().y/2));
-	}
-	
-	/** @todo getLine dokumentieren! */
-	public Line2D getLine()
-	{
-		Line2D.Float linie = new Line2D.Float(getCenter().x, getCenter().y, model.getVelocity().x, model.getVelocity().y);
-		return linie;
 	}
 	
 	/**
@@ -87,7 +74,7 @@ public class SpaceObject {
 	}
 	
 	/**
-	 * getter für angularMomentum
+	 * @brief getter für angularMomentum
 	 * @return Rotationsgeschwindigkeit [Grad/s]
 	 */
 	public float getAngularMomentum(){
