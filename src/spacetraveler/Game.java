@@ -19,6 +19,9 @@ public class Game {
 	/** @todo Documentation / needed?*/
 	public static boolean hallo = false;
 	
+	private static boolean gravLeft = false; 		/**< @brief Wird linke Maustaste gedrückt?*/
+	private static boolean gravRight = false; 		/**< @brief Wird rechte Maustaste gedrückt?*/
+	
 	public static float absVec(Vector2f v)
 	{
 		return (float)Math.abs(Math.sqrt(v.x*v.x+v.y*v.y));
@@ -231,12 +234,26 @@ public class Game {
         			hauptfenster.close();
         		}
         		
-        		if(ev.type == Type.MOUSE_BUTTON_PRESSED){
+        		if(gravLeft == false && Mouse.isButtonPressed(Mouse.Button.LEFT)){
+        			gravLeft = true;
         			l.gravityFields.addElement(new Gravity((hauptfenster.mapPixelToCoords(new Vector2i((int)Mouse.getPosition().x, (int)Mouse.getPosition().y))), 5));
         			userGravityId = l.gravityFields.size()-1;
         		}
         		
-        		if(ev.type == Type.MOUSE_BUTTON_RELEASED){
+        		if(gravLeft == true && !Mouse.isButtonPressed(Mouse.Button.LEFT)){
+        			gravLeft = false;
+        			l.gravityFields.remove(userGravityId);
+        			userGravityId = -1;
+        		}
+        		
+        		if(gravRight == false && Mouse.isButtonPressed(Mouse.Button.RIGHT)){
+        			gravRight = true;
+        			l.gravityFields.addElement(new Gravity((hauptfenster.mapPixelToCoords(new Vector2i((int)Mouse.getPosition().x, (int)Mouse.getPosition().y))), -5));
+        			userGravityId = l.gravityFields.size()-1;
+        		}
+        		
+        		if(gravRight == true && !Mouse.isButtonPressed(Mouse.Button.RIGHT)){
+        			gravRight = false;
         			l.gravityFields.remove(userGravityId);
         			userGravityId = -1;
         		}
