@@ -6,6 +6,7 @@ import java.util.Vector;
 import org.jsfml.graphics.*;
 import org.jsfml.system.*;
 import org.jsfml.window.*;
+import org.jsfml.window.Keyboard.Key;
 import org.jsfml.window.event.Event.*;
 
 
@@ -226,7 +227,7 @@ public class Game {
 		while(hauptfenster.isOpen()){
 			// Events verarbeiten
 			for(org.jsfml.window.event.Event ev : hauptfenster.pollEvents()){
-        		if(ev.type == Type.CLOSED){
+        		if(ev.type == Type.CLOSED || ev.type == Type.KEY_PRESSED && ev.asKeyEvent().key == Key.ESCAPE){
         			hauptfenster.close();
         		}
         		
