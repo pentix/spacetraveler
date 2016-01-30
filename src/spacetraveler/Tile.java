@@ -22,6 +22,8 @@ public class Tile {
 	public Sprite sprite;		/**< @brief Sprite des Tiles */
 	public Texture texture;		/**< @brief Texture des Tiles */
 	public Vector2f position;	/**< @brief Position des Tiles */
+	public boolean solid;
+	public int index;
 	
 	/**
 	 * @brief Konstruktor des Tiles: Lädt Texturdaten und erstellt das Sprite
@@ -31,12 +33,21 @@ public class Tile {
 	 */
 	public Tile(Vector2f p, int index) throws IOException 
 	{
-		texture = new Texture();
+		this.index = index;
 		
+		texture = new Texture();
 		texture.loadFromStream(Game.class.getResourceAsStream("/spacetraveler/rsc/tiles/tile_bg" + index + ".png"));
 		sprite = new Sprite(texture);
-		
 		sprite.setPosition(p);
+		
+		if(index == 1)
+		{
+			solid = true;
+		}
+		else
+		{
+			solid = false;
+		}
 		
 	}
 

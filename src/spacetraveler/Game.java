@@ -53,6 +53,7 @@ public class Game {
 			{
 				SpaceObject A = spaceObjects.elementAt(i);
 				A.move();
+				
 	
 				for(int j = i+1; j < spaceObjects.size(); j++) // nur wenn ein zweites Objekt vorhanden ist
 				{
@@ -160,7 +161,7 @@ public class Game {
 		
 		
 		// Level erstellen
-		Level l = new Level("level1");
+		Level l = new Level("level2");
 		
 		
 		while(hauptfenster.isOpen()){
@@ -170,29 +171,33 @@ public class Game {
         			hauptfenster.close();
         		}
         		
-        		if(gravLeft == false && Mouse.isButtonPressed(Mouse.Button.LEFT)){
+        		if(Mouse.isButtonPressed(Mouse.Button.LEFT)){
+        		if(gravLeft == false){
         			gravLeft = true;
         			l.gravityFields.addElement(new Gravity((hauptfenster.mapPixelToCoords(new Vector2i((int)Mouse.getPosition().x, (int)Mouse.getPosition().y))), 5));
         			userGravityId = l.gravityFields.size()-1;
+        			break;
         		}
         		
-        		if(gravLeft == true && !Mouse.isButtonPressed(Mouse.Button.LEFT)){
+        		if(gravLeft == true ){
         			gravLeft = false;
         			l.gravityFields.remove(userGravityId);
         			userGravityId = -1;
-        		}
+        			break;
+        		}}
         		
-        		if(gravRight == false && Mouse.isButtonPressed(Mouse.Button.RIGHT)){
+        		if(Mouse.isButtonPressed(Mouse.Button.RIGHT)){
+        		if(gravRight == false){
         			gravRight = true;
         			l.gravityFields.addElement(new Gravity((hauptfenster.mapPixelToCoords(new Vector2i((int)Mouse.getPosition().x, (int)Mouse.getPosition().y))), -5));
         			userGravityId = l.gravityFields.size()-1;
         		}
         		
-        		if(gravRight == true && !Mouse.isButtonPressed(Mouse.Button.RIGHT)){
+        		if(gravRight == true){
         			gravRight = false;
         			l.gravityFields.remove(userGravityId);
         			userGravityId = -1;
-        		}
+        		}}
         		
 			}
 
@@ -269,13 +274,13 @@ public class Game {
 	
 				hauptfenster.draw(timeText);
 				
-			} else {
+			} 
+			else {
 				// Wenn Spieler gameOver ist, Spiel anhalten, GameOver anzeigen!
 				gameOverSprite.setOrigin(gameOverTexture.getSize().x/2, gameOverTexture.getSize().y/2);
 				gameOverSprite.setPosition(hauptfenster.mapPixelToCoords(new Vector2i(hauptfenster.getSize().x/2, hauptfenster.getSize().y/2)));
 
 				hauptfenster.draw(gameOverSprite);
-			
 			}
 				
 			hauptfenster.display();

@@ -71,7 +71,7 @@ public class Level {
 		// Tiles laden und erstellen
 		for(int h=0; h<levelHeight; h++){
 			for(int w=0; w<levelWidth; w++){
-				loadTile(new Vector2f(256*w, 256*h), parser.nextInt());
+				loadTile(new Vector2f(1024*w, 1024*h), parser.nextInt());
 			}
 			
 			parser.nextLine();
