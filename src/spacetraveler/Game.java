@@ -172,32 +172,34 @@ public class Game {
         		}
         		
         		if(Mouse.isButtonPressed(Mouse.Button.LEFT)){
-        		if(gravLeft == false){
-        			gravLeft = true;
-        			l.gravityFields.addElement(new Gravity((hauptfenster.mapPixelToCoords(Vector2i.sub(new Vector2i((int)Mouse.getPosition().x, (int)Mouse.getPosition().y), hauptfenster.getPosition()))), 5));
-        			userGravityId = l.gravityFields.size()-1;
-        			break;
+	        		if(gravLeft == false){
+	        			gravLeft = true;
+	        			l.gravityFields.addElement(new Gravity((hauptfenster.mapPixelToCoords(Vector2i.sub(new Vector2i((int)Mouse.getPosition().x, (int)Mouse.getPosition().y), hauptfenster.getPosition()))), 5));
+	        			userGravityId = l.gravityFields.size()-1;
+	        			break;
+	        		}
+	        		
+	        		if(gravLeft == true ){
+	        			gravLeft = false;
+	        			l.gravityFields.remove(userGravityId);
+	        			userGravityId = -1;
+	        			break;
+	        		}
         		}
-        		
-        		if(gravLeft == true ){
-        			gravLeft = false;
-        			l.gravityFields.remove(userGravityId);
-        			userGravityId = -1;
-        			break;
-        		}}
         		
         		if(Mouse.isButtonPressed(Mouse.Button.RIGHT)){
-        		if(gravRight == false){
-        			gravRight = true;
-        			l.gravityFields.addElement(new Gravity((hauptfenster.mapPixelToCoords(Vector2i.sub(new Vector2i((int)Mouse.getPosition().x, (int)Mouse.getPosition().y), hauptfenster.getPosition()))), -5));
-        			userGravityId = l.gravityFields.size()-1;
+	        		if(gravRight == false){
+	        			gravRight = true;
+	        			l.gravityFields.addElement(new Gravity((hauptfenster.mapPixelToCoords(Vector2i.sub(new Vector2i((int)Mouse.getPosition().x, (int)Mouse.getPosition().y), hauptfenster.getPosition()))), -5));
+	        			userGravityId = l.gravityFields.size()-1;
+	        		}
+	        		
+	        		if(gravRight == true){
+	        			gravRight = false;
+	        			l.gravityFields.remove(userGravityId);
+	        			userGravityId = -1;
+	        		}
         		}
-        		
-        		if(gravRight == true){
-        			gravRight = false;
-        			l.gravityFields.remove(userGravityId);
-        			userGravityId = -1;
-        		}}
         		
 			}
 
