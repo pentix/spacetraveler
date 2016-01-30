@@ -174,7 +174,7 @@ public class Game {
         		if(Mouse.isButtonPressed(Mouse.Button.LEFT)){
         		if(gravLeft == false){
         			gravLeft = true;
-        			l.gravityFields.addElement(new Gravity((hauptfenster.mapPixelToCoords(new Vector2i((int)Mouse.getPosition().x, (int)Mouse.getPosition().y))), 5));
+        			l.gravityFields.addElement(new Gravity((hauptfenster.mapPixelToCoords(Vector2i.sub(new Vector2i((int)Mouse.getPosition().x, (int)Mouse.getPosition().y), hauptfenster.getPosition()))), 5));
         			userGravityId = l.gravityFields.size()-1;
         			break;
         		}
@@ -189,7 +189,7 @@ public class Game {
         		if(Mouse.isButtonPressed(Mouse.Button.RIGHT)){
         		if(gravRight == false){
         			gravRight = true;
-        			l.gravityFields.addElement(new Gravity((hauptfenster.mapPixelToCoords(new Vector2i((int)Mouse.getPosition().x, (int)Mouse.getPosition().y))), -5));
+        			l.gravityFields.addElement(new Gravity((hauptfenster.mapPixelToCoords(Vector2i.sub(new Vector2i((int)Mouse.getPosition().x, (int)Mouse.getPosition().y), hauptfenster.getPosition()))), -5));
         			userGravityId = l.gravityFields.size()-1;
         		}
         		

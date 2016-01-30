@@ -39,7 +39,7 @@ public class Level {
 	 * --------|------
 	 * int | levelTimeAvailable
 	 * floats | startX, startY
-	 * flaots | zielX, zielY
+	 * floats | zielX, zielY
 	 * ints | width, height
 	 * 		ints | id1,1 id2,1 id3,1 id4,1
 	 * 		ints | id2,1 id2,2 id3,2 id4,2
@@ -76,7 +76,8 @@ public class Level {
 			
 			parser.nextLine();
 		}
-				
+		
+		parser.close();
 		
 		// Zeitmessung starten!
 		levelTimer = new Clock();
@@ -132,7 +133,7 @@ public class Level {
 			Vector2f P = new Vector2f(parser.nextFloat(), parser.nextFloat());		parser.nextLine();
 			boolean gravityOn = parser.nextBoolean();								parser.nextLine();
 			
-			spaceObjects.addElement(new SpaceObject(texturePath, m, E, P, gravityOn));
+			spaceObjects.addElement(new SpaceObject(texturePath, m, E, Vector2f.add(pos, P), gravityOn));
 		}
 		
 		// anzahlGravityFields
@@ -144,8 +145,10 @@ public class Level {
 			
 			float m = parser.nextFloat();											parser.nextLine();					
 			
-			gravityFields.addElement(new Gravity(P, m));
+			gravityFields.addElement(new Gravity(Vector2f.add(pos, P), m));
 		}
+		
+		parser.close();
 	}
 	
 }
