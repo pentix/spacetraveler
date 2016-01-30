@@ -39,7 +39,7 @@ public class Level {
 	 * --------|------
 	 * int | levelTimeAvailable
 	 * floats | startX, startY
-	 * flaots | zielX, zielY
+	 * floats | zielX, zielY
 	 * ints | width, height
 	 * 		ints | id1,1 id2,1 id3,1 id4,1
 	 * 		ints | id2,1 id2,2 id3,2 id4,2
@@ -71,7 +71,7 @@ public class Level {
 		// Tiles laden und erstellen
 		for(int h=0; h<levelHeight; h++){
 			for(int w=0; w<levelWidth; w++){
-				loadTile(new Vector2f(256*w, 256*h), parser.nextInt());
+				loadTile(new Vector2f(512*w, 512*h), parser.nextInt());
 			}
 			
 			parser.nextLine();
