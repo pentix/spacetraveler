@@ -133,7 +133,7 @@ public class Level {
 			Vector2f P = new Vector2f(parser.nextFloat(), parser.nextFloat());		parser.nextLine();
 			boolean gravityOn = parser.nextBoolean();								parser.nextLine();
 			
-			spaceObjects.addElement(new SpaceObject(texturePath, m, E, P, gravityOn));
+			spaceObjects.addElement(new SpaceObject(texturePath, m, E, Vector2f.add(pos, P), gravityOn));
 		}
 		
 		// anzahlGravityFields
@@ -145,7 +145,7 @@ public class Level {
 			
 			float m = parser.nextFloat();											parser.nextLine();					
 			
-			gravityFields.addElement(new Gravity(P, m));
+			gravityFields.addElement(new Gravity(Vector2f.add(pos, P), m));
 		}
 		
 		parser.close();
