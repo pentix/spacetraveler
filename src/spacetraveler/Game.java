@@ -138,10 +138,23 @@ public class Game {
 		//Create a new view by copying the window's default view
 		View view = new View(defaultView.getCenter(), defaultView.getSize());
 		
+		// Menu aktiv?
+		boolean menuAktiv = true;
+		Texture menuTexture = new Texture();
+		menuTexture.loadFromStream(Game.class.getResourceAsStream("/spacetraveler/rsc/menu.png"));
+		Sprite menuSprite = new Sprite(menuTexture);
+		menuSprite.setOrigin(new Vector2f(menuTexture.getSize().x/2, menuTexture.getSize().y/2));
+		menuSprite.setPosition(hauptfenster.mapPixelToCoords(new Vector2i(hauptfenster.getSize().x/2, hauptfenster.getSize().y/2)));
+		
+		// Menu Buttons definieren
+		IntRect spielStartenButton = new IntRect(72, 244, 223, 44);
+		IntRect spielBeendenButton = new IntRect(72, 328, 247, 44); 
+		
 		// Load GameOver Image
 		Texture gameOverTexture = new Texture();
 		gameOverTexture.loadFromStream(Game.class.getResourceAsStream("/spacetraveler/rsc/gameOver.png"));
 		Sprite gameOverSprite = new Sprite(gameOverTexture);
+		gameOverSprite.setOrigin(gameOverTexture.getSize().x/2, gameOverTexture.getSize().y/2);
 		
 		// Load font
 		Font font = new Font();
@@ -159,31 +172,60 @@ public class Game {
 		int userGravityId = -1;
 
 		
-		
-		// Level erstellen
+		// Level erstellen (Laden, um l zu initialisieren!)
 		Level l = new Level("level2");
 		
 		
 		while(hauptfenster.isOpen()){
 			// Events verarbeiten
 			for(org.jsfml.window.event.Event ev : hauptfenster.pollEvents()){
-        		if(ev.type == Type.CLOSED || ev.type == Type.KEY_PRESSED && ev.asKeyEvent().key == Key.ESCAPE){
+				
+				// Event beim Anklicken von [x], bzw. [Alt]+[F4], etc...
+        		if(ev.type == Type.CLOSED){
         			hauptfenster.close();
+        			
+        			continue;
         		}
+        		
+        		// Escape um zum Menü zu gelangen
+        		if(ev.type == Type.KEY_PRESSED && ev.asKeyEvent().key == Key.ESCAPE){
+        			menuAktiv = true;
+        			
+        			continue;
+        		}
+        		
+        		// Menü Klick abfangen
+        		if(menuAktiv && ev.type == Type.MOUSE_BUTTON_RELEASED){
+        			System.out.println(ev.asMouseButtonEvent().position);
+        			
+        			Vector2i mousePos = ev.asMouseButtonEvent().position;
+        			if(spielStartenButton.contains(mousePos)){
+        				// Level1 laden und Menu deaktivieren
+        				l = new Level("level1");
+        				menuAktiv = false;
+        			} else if(spielBeendenButton.contains(mousePos)){
+        				hauptfenster.close();
+        			}
+        			
+        			continue;
+        		}
+        	
         		
         		if(Mouse.isButtonPressed(Mouse.Button.LEFT)){
 	        		if(gravLeft == false){
 	        			gravLeft = true;
 	        			l.gravityFields.addElement(new Gravity((hauptfenster.mapPixelToCoords(Vector2i.sub(new Vector2i((int)Mouse.getPosition().x, (int)Mouse.getPosition().y), hauptfenster.getPosition()))), 5));
 	        			userGravityId = l.gravityFields.size()-1;
-	        			break;
+	        			
+	        			continue;
 	        		}
 	        		
 	        		if(gravLeft == true ){
 	        			gravLeft = false;
 	        			l.gravityFields.remove(userGravityId);
 	        			userGravityId = -1;
-	        			break;
+	        			
+	        			continue;
 	        		}
         		}
         		
@@ -192,21 +234,25 @@ public class Game {
 	        			gravRight = true;
 	        			l.gravityFields.addElement(new Gravity((hauptfenster.mapPixelToCoords(Vector2i.sub(new Vector2i((int)Mouse.getPosition().x, (int)Mouse.getPosition().y), hauptfenster.getPosition()))), -5));
 	        			userGravityId = l.gravityFields.size()-1;
+	        			
+	        			continue;
 	        		}
 	        		
 	        		if(gravRight == true){
 	        			gravRight = false;
 	        			l.gravityFields.remove(userGravityId);
 	        			userGravityId = -1;
+	        			
+	        			continue;
 	        		}
         		}
         		
 			}
 
-			hauptfenster.clear();
-					
 			
-			if(!gameOver){
+			hauptfenster.clear();
+			
+			if(!gameOver && !menuAktiv){
 				// Berechnungen
 				for(SpaceObject s : l.spaceObjects){
 					Vector2f gesamtEnergie = new Vector2f(0, 0);
@@ -217,13 +263,22 @@ public class Game {
 						}
 					
 
-					s.model.addEnergy(gesamtEnergie);
+						s.model.addEnergy(gesamtEnergie);
+					}
+			
 				}
+				
+				// Objekte rotieren
+				for(SpaceObject s : l.spaceObjects){
+					s.getSprite().rotate(s.getAngularMomentum());
+					
+				}
+				
 			
-			}
-			
+				/** @todo Was bewirkt das? ^^ */
 				schneiden(l.spaceObjects);
 			
+				
 				// Überprüfen, ob die Zeit abgelaufen ist.
 				if(l.levelTimer.getElapsedTime().asSeconds() > l.levelTimeAvailable){
 					gameOver = true;
@@ -232,19 +287,10 @@ public class Game {
 				view.setCenter(l.spaceObjects.get(0).getSprite().getPosition());
 				
 				// Hintergrund / View gut positionieren!
-
 				view.setCenter(l.spaceObjects.get(0).getSprite().getPosition());
-
 				hauptfenster.setView(view);
 	
-				
-				// Objekte rotieren
-				for(SpaceObject s : l.spaceObjects){
-					s.getSprite().rotate(s.getAngularMomentum());
-					
-				}
 
-				
 				
 				// Rendering
 				
@@ -276,15 +322,22 @@ public class Game {
 	
 				hauptfenster.draw(timeText);
 				
-			} 
-			else {
+			} else {
 				// Wenn Spieler gameOver ist, Spiel anhalten, GameOver anzeigen!
-				gameOverSprite.setOrigin(gameOverTexture.getSize().x/2, gameOverTexture.getSize().y/2);
-				gameOverSprite.setPosition(hauptfenster.mapPixelToCoords(new Vector2i(hauptfenster.getSize().x/2, hauptfenster.getSize().y/2)));
-
-				hauptfenster.draw(gameOverSprite);
-			}
+				if(gameOver){
+					gameOverSprite.setPosition(hauptfenster.mapPixelToCoords(new Vector2i(hauptfenster.getSize().x/2, hauptfenster.getSize().y/2)));
+					hauptfenster.draw(gameOverSprite);
+				}
 				
+				// Wenn Menü aktiviert wurde, Menü anzeigen
+				if(menuAktiv){
+					hauptfenster.clear(new Color(155, 150, 150));
+					menuSprite.setPosition(hauptfenster.mapPixelToCoords(new Vector2i(hauptfenster.getSize().x/2, hauptfenster.getSize().y/2)));
+					hauptfenster.draw(menuSprite);
+				}
+			}
+
+			
 			hauptfenster.display();
 			Thread.sleep(1000/25);
 		}
