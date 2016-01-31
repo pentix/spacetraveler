@@ -196,8 +196,6 @@ public class Game {
         		
         		// Menü Klick abfangen
         		if(menuAktiv && ev.type == Type.MOUSE_BUTTON_RELEASED){
-        			System.out.println(ev.asMouseButtonEvent().position);
-        			
         			Vector2i mousePos = ev.asMouseButtonEvent().position;
         			if(spielStartenButton.contains(mousePos)){
         				// Level1 laden und Menu deaktivieren
