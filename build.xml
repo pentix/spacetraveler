@@ -23,8 +23,7 @@
             </manifest>
         	
             <fileset dir="${dir.jarfile}"/>
-        	<fileset dir="src/spacetraveler/">
-        		<exclude name="**/*.java"/>
+        	<fileset dir="src/" includes="spacetraveler/**">
         	</fileset>
         	
         	
