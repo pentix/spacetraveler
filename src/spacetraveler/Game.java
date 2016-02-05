@@ -69,19 +69,8 @@ public class Game {
 		Vector2f a_LU = Vector2f.add(a_LO, new Vector2f(0, a.height));
 		Vector2f a_RO = Vector2f.add(a_LO, new Vector2f(a.width, 0));
 		Vector2f a_RU = Vector2f.add(a_LO, new Vector2f(a.width, a.height));
-		//System.out.println(a_LO + " LO");
-		//System.out.println(a_RU + " RU");
-		
-		/*System.out.println(contains(b,a_LO) + " LO");
-		System.out.println(contains(b,a_LU) + " LU");
-		System.out.println(contains(b,a_RO) + " RO");
-		System.out.println(contains(b,a_RU) + " RU");*/
+
 		if(contains(b,a_LO)||contains(b,a_LU)||contains(b,a_RO)||contains(b, a_RU))
-		{
-			System.out.println(contains(b,a_LO) + " LO");
-			System.out.println(contains(b,a_LU) + " LU");
-			System.out.println(contains(b,a_RO) + " RO");
-			System.out.println(contains(b,a_RU) + " RU");
 			return true;
 		else
 			return false;
@@ -348,14 +337,12 @@ public class Game {
 										s.model.setVelocity(new Vector2f(-a,b));
 										s.model.setEnergy(new Vector2f(-c,d));
 										s.collided = true;
-										System.out.println("happened");
 									}
 									if(f == 2 || f == 4)
 									{
 										s.model.setEnergy(new Vector2f(c,-d));
 										s.model.setVelocity(new Vector2f(a,-b));
 										s.collided = true;
-										System.out.println("happened");
 									}
 									
 									
