@@ -388,16 +388,15 @@ public class Game {
 				schneiden(l.spaceObjects);
 				
 				for(SpaceObject s : l.spaceObjects){
-				for(int f = 0; f < s.Bereich.length; f++)
-				{
-					FloatRect FR = l.Feld[(int)s.Bereich[f].x][(int)s.Bereich[f].y].sprite.getGlobalBounds();
-					if(contains(FR, s.getCenter()))
+					for(int f = 0; f < s.Bereich.length; f++)
 					{
-						s.bereichVerschieben(s.Bereich[f]);
-						break;
-						
+						FloatRect FR = l.Feld[(int)s.Bereich[f].x][(int)s.Bereich[f].y].sprite.getGlobalBounds();
+						if(contains(FR, s.getCenter()) && l.Feld[(int)s.Bereich[f].x][(int)s.Bereich[f].y].index != 1)
+						{
+							s.bereichVerschieben(s.Bereich[f]);
+							break;
+						}
 					}
-				}
 				}
 			
 				
