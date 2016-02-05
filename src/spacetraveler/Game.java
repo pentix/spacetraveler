@@ -49,14 +49,18 @@ public class Game {
 		/*System.out.println(LO + " LO");
 		System.out.println(RU + " RU");
 		System.out.println(P + " P");*/
-		boolean contains = false;
+		boolean contains;
 		
 		if(LO.x <= P.x && LO.y <= P.y && P.x <= RU.x && P.y <= RU.y)
 		{
 			contains = true;
-			System.out.println(contains);
+			/*System.out.println(contains);
+			System.out.println(f);
+			System.out.println(P);*/
 		}
-		
+		else{
+			contains = false;
+		}
 		return contains;
 	}
 	
@@ -66,11 +70,19 @@ public class Game {
 		Vector2f a_LU = Vector2f.add(a_LO, new Vector2f(0, a.height));
 		Vector2f a_RO = Vector2f.add(a_LO, new Vector2f(a.width, 0));
 		Vector2f a_RU = Vector2f.add(a_LO, new Vector2f(a.width, a.height));
+		//System.out.println(a_LO + " LO");
+		//System.out.println(a_RU + " RU");
 		
+		/*System.out.println(contains(b,a_LO) + " LO");
+		System.out.println(contains(b,a_LU) + " LU");
+		System.out.println(contains(b,a_RO) + " RO");
+		System.out.println(contains(b,a_RU) + " RU");*/
 		if(contains(b,a_LO)||contains(b,a_LU)||contains(b,a_RO)||contains(b, a_RU))
 		{
-			System.out.println(contains(b,a_LO));
-			System.out.println(contains(b,a_LU));
+			System.out.println(contains(b,a_LO) + " LO");
+			System.out.println(contains(b,a_LU) + " LU");
+			System.out.println(contains(b,a_RO) + " RO");
+			System.out.println(contains(b,a_RU) + " RU");
 			return true;
 		}
 		
@@ -316,16 +328,18 @@ public class Game {
 				if(l.spaceObjects.size()!= 0){
 					for(SpaceObject s : l.spaceObjects)
 					{
-						for(int f = 0; f < s.Bereich.length; f++)
+						for(int f = 1; f < s.Bereich.length; f++)
 						{
-							System.out.println(s.Bereich[f]);
+							//System.out.println(s.Bereich[f]);
 							Tile tile = l.Feld[(int)s.Bereich[f].x][(int)s.Bereich[f].y];
+							//System.out.println(f + " f");
+							//System.out.println(tile.index);
 							FloatRect FR = tile.sprite.getGlobalBounds();
 							if(tile.index == 1 && s.collided==false){
 								//System.out.println(s.Bereich[0]);
-								System.out.println(tile.sprite.getGlobalBounds());
+								//System.out.println(tile.sprite.getGlobalBounds());
 
-								if(intersection(FR,s.sprite.getGlobalBounds()))
+								if(intersection(s.sprite.getGlobalBounds(), FR))
 								{
 									//System.out.println(tile.position);
 									float a = s.model.getVelocity().x;
@@ -374,7 +388,7 @@ public class Game {
 				schneiden(l.spaceObjects);
 				
 				for(SpaceObject s : l.spaceObjects){
-				for(int f = 0; f <= s.Bereich.length; f++)
+				for(int f = 0; f < s.Bereich.length; f++)
 				{
 					FloatRect FR = l.Feld[(int)s.Bereich[f].x][(int)s.Bereich[f].y].sprite.getGlobalBounds();
 					if(contains(FR, s.getCenter()))
