@@ -61,22 +61,20 @@ public class Game {
 	
 	public static boolean intersection(FloatRect a, FloatRect b)
 	{
-		Vector2f a_LO = new Vector2f(a.left, a.top);
-		Vector2f a_LU = Vector2f.add(a_LO, new Vector2f(0, a.height));
-		Vector2f a_RO = Vector2f.add(a_LO, new Vector2f(a.width, 0));
-		Vector2f a_RU = Vector2f.add(a_LO, new Vector2f(a.width, a.height));
+		float ALeft = a.left;
+		float ARight = a.left + a.width;
+		float ATop = a.top;
+		float ABottom = a.top+a.height; 
+	
+		float BLeft = b.left;
+		float BRight = BLeft + b.width;
+		float BTop = b.top;
+		float BBottom = b.top+b.height; 
 		
-		if(contains(b,a_LO)||contains(b,a_LU)||contains(b,a_RO)||contains(b, a_RU))
-		{
-			System.out.println(contains(b,a_LO));
-			System.out.println(contains(b,a_LU));
+		if(ALeft < BRight && ARight > BLeft && ATop > BBottom && ABottom < BTop)
 			return true;
-		}
-		
 		else
-		{
 			return false;
-		}
 	}
 	
 	
