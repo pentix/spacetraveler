@@ -1,6 +1,5 @@
 package spacetraveler;
 
-import java.awt.Color;
 import java.io.IOException;
 import java.util.Vector;
 
@@ -9,7 +8,7 @@ import org.jsfml.system.*;
 import org.jsfml.window.*;
 import org.jsfml.window.Keyboard.Key;
 import org.jsfml.window.event.Event.*;
-import com.sun.prism.Graphics;
+
 
 
 /**
@@ -368,7 +367,7 @@ public class Game {
 				}
 				
 				/**
-				 * Überprüfen der Kollision unter den Objekten
+				 * ï¿½berprï¿½fen der Kollision unter den Objekten
 				 * Bewegen aller Objekte
 				 */
 				schneiden(l.spaceObjects);
