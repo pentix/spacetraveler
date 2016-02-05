@@ -225,7 +225,7 @@ public class Game {
 
 		
 		// Level erstellen (Laden, um l zu initialisieren!)
-		Level l = new Level("level3");
+		Level l = new Level("level2");
 		
 		
 		while(hauptfenster.isOpen()){
