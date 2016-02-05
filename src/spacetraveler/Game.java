@@ -1,5 +1,6 @@
 package spacetraveler;
 
+import java.awt.Color;
 import java.io.IOException;
 import java.util.Vector;
 
@@ -8,6 +9,7 @@ import org.jsfml.system.*;
 import org.jsfml.window.*;
 import org.jsfml.window.Keyboard.Key;
 import org.jsfml.window.event.Event.*;
+import com.sun.prism.Graphics;
 
 
 /**
@@ -39,6 +41,45 @@ public class Game {
 	{
 		return a.x*b.x+a.y*b.y;
 	}
+	
+	public static boolean contains(FloatRect f, Vector2f P)
+	{
+		Vector2f LO = new Vector2f(f.left, f.top);
+		Vector2f RU = Vector2f.add(LO, new Vector2f(f.width, f.height));
+		/*System.out.println(LO + " LO");
+		System.out.println(RU + " RU");
+		System.out.println(P + " P");*/
+		boolean contains = false;
+		
+		if(LO.x <= P.x && LO.y <= P.y && P.x <= RU.x && P.y <= RU.y)
+		{
+			contains = true;
+			System.out.println(contains);
+		}
+		
+		return contains;
+	}
+	
+	public static boolean intersection(FloatRect a, FloatRect b)
+	{
+		Vector2f a_LO = new Vector2f(a.left, a.top);
+		Vector2f a_LU = Vector2f.add(a_LO, new Vector2f(0, a.height));
+		Vector2f a_RO = Vector2f.add(a_LO, new Vector2f(a.width, 0));
+		Vector2f a_RU = Vector2f.add(a_LO, new Vector2f(a.width, a.height));
+		
+		if(contains(b,a_LO)||contains(b,a_LU)||contains(b,a_RO)||contains(b, a_RU))
+		{
+			System.out.println(contains(b,a_LO));
+			System.out.println(contains(b,a_LU));
+			return true;
+		}
+		
+		else
+		{
+			return false;
+		}
+	}
+	
 	
 	
 	/**
@@ -122,7 +163,6 @@ public class Game {
 	
 	
 	
-	
 	/**
 	 * @brief Main-Methode des ganzen Spiels
 	 * @param args Konsolenargumente, die dem Programm übergeben werden. (Werden nicht ausgewertet)
@@ -138,7 +178,7 @@ public class Game {
 		//Create a new view by copying the window's default view
 		View view = new View(defaultView.getCenter(), defaultView.getSize());
 		
-		// Menu aktiv?
+		/*// Menu aktiv?
 		boolean menuAktiv = true;
 		Texture menuTexture = new Texture();
 		menuTexture.loadFromStream(Game.class.getResourceAsStream("/spacetraveler/rsc/menu.png"));
@@ -149,7 +189,7 @@ public class Game {
 		// Menu Buttons definieren
 		IntRect spielStartenButton = new IntRect(72, 244, 223, 44);
 		IntRect spielBeendenButton = new IntRect(72, 328, 247, 44); 
-		
+		*/
 		// Load GameOver Image
 		Texture gameOverTexture = new Texture();
 		gameOverTexture.loadFromStream(Game.class.getResourceAsStream("/spacetraveler/rsc/gameOver.png"));
@@ -173,7 +213,7 @@ public class Game {
 
 		
 		// Level erstellen (Laden, um l zu initialisieren!)
-		Level l = new Level("level2");
+		Level l = new Level("level3");
 		
 		
 		while(hauptfenster.isOpen()){
@@ -186,7 +226,7 @@ public class Game {
         			
         			continue;
         		}
-        		
+        		/*
         		// Escape um zum Menü zu gelangen
         		if(ev.type == Type.KEY_PRESSED && ev.asKeyEvent().key == Key.ESCAPE){
         			menuAktiv = true;
@@ -207,6 +247,7 @@ public class Game {
         			
         			continue;
         		}
+        		*/
         	
         		
         		if(Mouse.isButtonPressed(Mouse.Button.LEFT)){
@@ -250,7 +291,7 @@ public class Game {
 			
 			hauptfenster.clear();
 			
-			if(!gameOver && !menuAktiv){
+			if(!gameOver){
 				// Berechnungen
 				for(SpaceObject s : l.spaceObjects){
 					Vector2f gesamtEnergie = new Vector2f(0, 0);
@@ -272,9 +313,78 @@ public class Game {
 					
 				}
 				
-			
-				/** @todo Was bewirkt das? ^^ */
+				if(l.spaceObjects.size()!= 0){
+					for(SpaceObject s : l.spaceObjects)
+					{
+						for(int f = 0; f < s.Bereich.length; f++)
+						{
+							System.out.println(s.Bereich[f]);
+							Tile tile = l.Feld[(int)s.Bereich[f].x][(int)s.Bereich[f].y];
+							FloatRect FR = tile.sprite.getGlobalBounds();
+							if(tile.index == 1 && s.collided==false){
+								//System.out.println(s.Bereich[0]);
+								System.out.println(tile.sprite.getGlobalBounds());
+
+								if(intersection(FR,s.sprite.getGlobalBounds()))
+								{
+									//System.out.println(tile.position);
+									float a = s.model.getVelocity().x;
+									float b = s.model.getVelocity().y;
+									
+									float c = s.model.getEnergy().x;
+									float d = s.model.getEnergy().y;
+									
+									if(f == 1 || f == 3)
+									{
+										s.model.setVelocity(new Vector2f(-a,b));
+										s.model.setEnergy(new Vector2f(-c,d));
+										s.collided = true;
+										System.out.println("happened");
+									}
+									if(f == 2 || f == 4)
+									{
+										s.model.setEnergy(new Vector2f(c,-d));
+										s.model.setVelocity(new Vector2f(a,-b));
+										s.collided = true;
+										System.out.println("happened");
+									}
+									
+									
+									
+								}
+								else
+								{
+									
+									s.collided = false;
+								}
+							}
+							else
+							{
+								s.collided = false;
+							}
+						}
+						
+					}
+				}
+				
+				/**
+				 * �berpr�fen der Kollision unter den Objekten
+				 * Bewegen aller Objekte
+				 */
 				schneiden(l.spaceObjects);
+				
+				for(SpaceObject s : l.spaceObjects){
+				for(int f = 0; f <= s.Bereich.length; f++)
+				{
+					FloatRect FR = l.Feld[(int)s.Bereich[f].x][(int)s.Bereich[f].y].sprite.getGlobalBounds();
+					if(contains(FR, s.getCenter()))
+					{
+						s.bereichVerschieben(s.Bereich[f]);
+						break;
+						
+					}
+				}
+				}
 			
 				
 				// Überprüfen, ob die Zeit abgelaufen ist.
@@ -293,9 +403,18 @@ public class Game {
 				// Rendering
 				
 				// Alle Background Tiles zeichnen
-				for(Tile t : l.tiles){
-					hauptfenster.draw(t.sprite);
+				for(int x = 0; x < l.Feld.length; x++)
+				{
+					for(int y = 0; y < l.Feld[0].length; y++)
+					{
+						hauptfenster.draw(l.Feld[x][y].sprite);
+
+					}
 				}
+				
+				/*for(Tile t : l.tiles){
+					hauptfenster.draw(t.sprite);
+				}*/
 				
 				// Alle Gravitys zeichnen
 				for(Gravity g : l.gravityFields){
@@ -307,6 +426,13 @@ public class Game {
 					hauptfenster.draw(s.getSprite());
 				}
 				
+				if(!l.sprites.isEmpty())
+				{
+					for(Sprite sp: l.sprites)
+					{
+						hauptfenster.draw(sp);
+					}
+				}
 				
 				// Zeit anzeigen!
 				long timePassed = l.levelTimer.getElapsedTime().asMilliseconds();
@@ -328,11 +454,11 @@ public class Game {
 				}
 				
 				// Wenn Menü aktiviert wurde, Menü anzeigen
-				if(menuAktiv){
+				/*if(menuAktiv){
 					hauptfenster.clear(new Color(155, 150, 150));
 					menuSprite.setPosition(hauptfenster.mapPixelToCoords(new Vector2i(hauptfenster.getSize().x/2, hauptfenster.getSize().y/2)));
 					hauptfenster.draw(menuSprite);
-				}
+				}*/
 			}
 
 			

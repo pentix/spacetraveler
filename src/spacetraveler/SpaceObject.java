@@ -1,6 +1,5 @@
 package spacetraveler;
 
-import java.awt.geom.Line2D;
 import java.io.IOException;
 
 import org.jsfml.graphics.*;
@@ -20,9 +19,11 @@ public class SpaceObject {
 	public Texture texture;			/**< @brief Textur des Spaceobjects */
 	public Sprite sprite;			/**< @brief Sprite des Spaceobjects */
 	public SpaceObjectModel model;	/**< @brief Model (für Berechnungen) des Spaceobjects */
-	public int collided = 2;		/**< @todo collided dokumentieren */
+	public boolean collided = false;		/**< @todo collided dokumentieren */
 	
 	private float angularMomentum;	/**< @brief Rotationsgeschwindigkeit */
+	
+	public Vector2f[] Bereich;
 	
 	/**
 	 * @brief Konstruktor
@@ -33,7 +34,7 @@ public class SpaceObject {
 	 * @param gravityOn true, wenn das Objekt von der Gravitation beeinflusst wird
 	 * @throws IOException Wenn die angegebene Textur nicht gefunden werden konnte
 	 */
-	public SpaceObject(String texturePath, float m, Vector2f energy, Vector2f pos, boolean gravityOn) throws IOException
+	public SpaceObject(String texturePath, float m, Vector2f energy, Vector2f coord, Vector2f pos, boolean gravityOn) throws IOException
 	{
 		texture = new Texture();
 		texture.loadFromStream(Game.class.getResourceAsStream(texturePath));
@@ -45,6 +46,18 @@ public class SpaceObject {
 		model = new SpaceObjectModel(m, energy, gravityOn, texture.getSize().x);
 		
 		angularMomentum = 0;
+		Bereich = new Vector2f[5];
+		bereichVerschieben(coord);
+
+	}
+	
+	public void bereichVerschieben(Vector2f center)
+	{
+		Bereich[0] = center;
+		Bereich[1] = new Vector2f(center.x-1,center.y); //links
+		Bereich[2] = new Vector2f(center.x,center.y-1); //oben
+		Bereich[3] = new Vector2f(center.x+1,center.y); //rechts
+		Bereich[4] = new Vector2f(center.x,center.y+1); //unten
 	}
 	
 	/**

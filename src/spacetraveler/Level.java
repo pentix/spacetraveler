@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.util.Vector;
 
+import org.jsfml.graphics.Sprite;
+import org.jsfml.graphics.Texture;
 import org.jsfml.system.Clock;
 import org.jsfml.system.Vector2f;
 
@@ -13,10 +15,12 @@ import org.jsfml.system.Vector2f;
  *
  * */
 public class Level {
-	public Vector<Tile> tiles;					/**< @brief Hintergrund Tiles */
+	//public Vector<Tile> tiles;					/**< @brief Hintergrund Tiles */
+	public Tile[][] Feld;
 	
 	public Vector<SpaceObject> spaceObjects;	/**< @brief SpaceObjects im Level */
 	public Vector<Gravity> gravityFields;		/**< @brief GravityFields im Level */
+	public Vector<Sprite> sprites;
 	
 	public Clock levelTimer;					/**< @brief Timer, der Zeit seit Beginn hochzählt */
 	public float levelTimeAvailable;			/**< @brief Zeit, die für das Level zur Verfügung steht */
@@ -49,9 +53,10 @@ public class Level {
 	public Level(String levelId) throws IOException{
 	
 		// Class Members initialisieren
-		tiles = new Vector<>();
+		//tiles = new Vector<>();
 		spaceObjects = new Vector<>();
 		gravityFields = new Vector<>();
+		sprites = new Vector<>();
 	
 		// Leveldatei öffnen
 		Scanner parser = new Scanner(Game.class.getResourceAsStream("/spacetraveler/rsc/levels/" + levelId));
@@ -65,13 +70,15 @@ public class Level {
 		levelHeight = parser.nextInt();
 		
 		// Spieler erstellen    (Spieler = 1. spaceObject)
-		spaceObjects.add(new SpaceObject("/spacetraveler/rsc/spieler.png", 5.0f, new Vector2f(50, 0), levelStart, true));
+		
+		Feld = new Tile[levelHeight][levelWidth];
 		
 		
 		// Tiles laden und erstellen
 		for(int h=0; h<levelHeight; h++){
 			for(int w=0; w<levelWidth; w++){
-				loadTile(new Vector2f(1024*w, 1024*h), parser.nextInt());
+				loadTile(new Vector2f(w, h), parser.nextInt());
+				
 			}
 			
 			parser.nextLine();
@@ -120,7 +127,11 @@ public class Level {
 		int hintergrundId = parser.nextInt(); 				parser.nextLine();
 		
 		// Tile laden!
-		tiles.addElement(new Tile(pos, hintergrundId));
+		Feld[(int)(pos.x)][(int)(pos.y)] = new Tile(pos, hintergrundId);
+		//tiles.addElement(new Tile(pos, hintergrundId));
+		
+		Vector2f coord = pos;
+		pos = Vector2f.mul(pos, 1024);
 		
 		// anzahlSpaceObjects
 		int anzahlSpaceObjects = parser.nextInt();			parser.nextLine();
@@ -133,7 +144,7 @@ public class Level {
 			Vector2f P = new Vector2f(parser.nextFloat(), parser.nextFloat());		parser.nextLine();
 			boolean gravityOn = parser.nextBoolean();								parser.nextLine();
 			
-			spaceObjects.addElement(new SpaceObject(texturePath, m, E, Vector2f.add(pos, P), gravityOn));
+			spaceObjects.addElement(new SpaceObject(texturePath, m, E, coord, Vector2f.add(pos, P), gravityOn));
 		}
 		
 		// anzahlGravityFields
@@ -149,6 +160,21 @@ public class Level {
 		}
 		
 		parser.close();
+		
+		if(tileType == 4)
+		{
+			Vector2f mitte = new Vector2f(pos.x+1024/2, pos.y+1024/2);
+
+			Texture startTex = new Texture();
+			startTex.loadFromStream(Game.class.getResourceAsStream("/spacetraveler/rsc/goal.png"));
+			Sprite start = new Sprite(startTex);
+			start.setPosition(mitte);
+			sprites.add(start);
+			
+			spaceObjects.add(0,new SpaceObject("/spacetraveler/rsc/spieler.png", 5.0f, new Vector2f(50, 0), coord, mitte, true));
+
+			
+		}
 	}
 	
 }
