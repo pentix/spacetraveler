@@ -131,7 +131,7 @@ public class Level {
 		//tiles.addElement(new Tile(pos, hintergrundId));
 		
 		Vector2f coord = pos;
-		pos = Vector2f.mul(pos, 1024);
+		pos = Vector2f.mul(pos, 512);
 		
 		// anzahlSpaceObjects
 		int anzahlSpaceObjects = parser.nextInt();			parser.nextLine();
@@ -163,7 +163,7 @@ public class Level {
 		
 		if(tileType == 4)
 		{
-			Vector2f mitte = new Vector2f(pos.x+1024/2, pos.y+1024/2);
+			Vector2f mitte = new Vector2f(pos.x+512/2, pos.y+512/2);
 
 			Texture startTex = new Texture();
 			startTex.loadFromStream(Game.class.getResourceAsStream("/spacetraveler/rsc/goal.png"));
