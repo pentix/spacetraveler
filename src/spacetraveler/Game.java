@@ -174,7 +174,7 @@ public class Game {
 		//Create a new view by copying the window's default view
 		View view = new View(defaultView.getCenter(), defaultView.getSize());
 		
-		/*// Menu aktiv?
+		// Menu aktiv?
 		boolean menuAktiv = true;
 		Texture menuTexture = new Texture();
 		menuTexture.loadFromStream(Game.class.getResourceAsStream("/spacetraveler/rsc/menu.png"));
@@ -185,7 +185,7 @@ public class Game {
 		// Menu Buttons definieren
 		IntRect spielStartenButton = new IntRect(72, 244, 223, 44);
 		IntRect spielBeendenButton = new IntRect(72, 328, 247, 44); 
-		*/
+		
 		// Load GameOver Image
 		Texture gameOverTexture = new Texture();
 		gameOverTexture.loadFromStream(Game.class.getResourceAsStream("/spacetraveler/rsc/gameOver.png"));
@@ -209,7 +209,7 @@ public class Game {
 
 		
 		// Level erstellen (Laden, um l zu initialisieren!)
-		Level l = new Level("level2");
+		Level l = new Level("level0");
 		
 		
 		while(hauptfenster.isOpen()){
@@ -222,7 +222,7 @@ public class Game {
         			
         			continue;
         		}
-        		/*
+        		
         		// Escape um zum Menü zu gelangen
         		if(ev.type == Type.KEY_PRESSED && ev.asKeyEvent().key == Key.ESCAPE){
         			menuAktiv = true;
@@ -243,7 +243,7 @@ public class Game {
         			
         			continue;
         		}
-        		*/
+        		
         	
         		
         		if(Mouse.isButtonPressed(Mouse.Button.LEFT)){
@@ -449,11 +449,11 @@ public class Game {
 				}
 				
 				// Wenn Menü aktiviert wurde, Menü anzeigen
-				/*if(menuAktiv){
+				if(menuAktiv){
 					hauptfenster.clear(new Color(155, 150, 150));
 					menuSprite.setPosition(hauptfenster.mapPixelToCoords(new Vector2i(hauptfenster.getSize().x/2, hauptfenster.getSize().y/2)));
 					hauptfenster.draw(menuSprite);
-				}*/
+				}
 			}
 
 			
