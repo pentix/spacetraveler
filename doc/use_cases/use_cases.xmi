@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<XMI timestamp="2016-02-06T18:10:04" xmlns:UML="http://schema.omg.org/spec/UML/1.3" xmi.version="1.2" verified="false">
+<XMI timestamp="2016-02-06T18:17:34" xmlns:UML="http://schema.omg.org/spec/UML/1.3" xmi.version="1.2" verified="false">
  <XMI.header>
   <XMI.documentation>
    <XMI.exporter>umbrello uml modeller http://umbrello.kde.org</XMI.exporter>
@@ -35,7 +35,7 @@
     <UML:Model isLeaf="false" isAbstract="false" name="Use Case View" xmi.id="Use Case View" visibility="public" namespace="m1" isSpecification="false" isRoot="false">
      <UML:Namespace.ownedElement>
       <UML:Actor isLeaf="false" isAbstract="false" name="Gravitationspunkt" xmi.id="v2lLcWuN0jYs" visibility="public" namespace="Use Case View" isSpecification="false" isRoot="false"/>
-      <UML:UseCase isLeaf="false" isAbstract="false" name="Spieler Anziehen" xmi.id="s1H9NrGTOqjn" visibility="public" namespace="Use Case View" isSpecification="false" isRoot="false"/>
+      <UML:UseCase isLeaf="false" isAbstract="false" name="Angezogen werden" xmi.id="s1H9NrGTOqjn" visibility="public" namespace="Use Case View" isSpecification="false" isRoot="false"/>
       <UML:Association name="" xmi.id="WXbl3UwuTB1q" visibility="public" namespace="Use Case View" isSpecification="false">
        <UML:Association.connection>
         <UML:AssociationEnd isNavigable="false" name="" xmi.id="3HJP50Cn4XzX" type="s1H9NrGTOqjn" visibility="public" changeability="changeable" isSpecification="false" aggregation="none"/>
@@ -51,15 +51,18 @@
        </UML:Association.connection>
       </UML:Association>
       <UML:Dependency name="" xmi.id="ckFNIN4wJFro" visibility="public" supplier="s1H9NrGTOqjn" namespace="Use Case View" client="v2lLcWuN0jYs" isSpecification="false"/>
+      <UML:Dependency name="" xmi.id="idmSFJ9MkstL" visibility="public" supplier="s1H9NrGTOqjn" namespace="Use Case View" client="v2lLcWuN0jYs" isSpecification="false"/>
+      <UML:UseCase isLeaf="false" isAbstract="false" name="Herumfliegen" xmi.id="grHOjAht80xF" visibility="public" namespace="Use Case View" isSpecification="false" isRoot="false"/>
      </UML:Namespace.ownedElement>
      <XMI.extension xmi.extender="umbrello">
       <diagrams>
-       <diagram textcolor="#000000" font="Oxygen-Sans,10,-1,0,75,0,0,0,0,0" fillcolor="#ffff00" zoom="100" canvasheight="580" canvaswidth="1301" xmi.id="USo21Q1EAJPk" snapgrid="0" type="2" showstereotype="1" usefillcolor="1" isopen="1" showgrid="0" showatts="1" backgroundcolor="#ffffff" documentation="" snapcsgrid="0" snapx="25" showpubliconly="0" showopsig="1" griddotcolor="#d3d3d3" linewidth="0" localid="-1" showpackage="1" snapy="25" name="gravitationspunkt" showscope="1" linecolor="#ff0000" showattsig="1" showattribassocs="1" showops="1">
+       <diagram textcolor="#000000" font="Oxygen-Sans,10,-1,0,75,0,0,0,0,0" fillcolor="#ffff00" zoom="100" canvasheight="580" canvaswidth="1301" xmi.id="USo21Q1EAJPk" snapgrid="0" type="2" showstereotype="1" usefillcolor="1" isopen="1" showgrid="0" showatts="1" backgroundcolor="#ffffff" documentation="" snapcsgrid="0" snapx="25" showpubliconly="0" showopsig="1" griddotcolor="#d3d3d3" linewidth="0" localid="-1" showpackage="1" snapy="25" name="spieler" showscope="1" linecolor="#ff0000" showattsig="1" showattribassocs="1" showops="1">
         <widgets>
-         <boxwidget height="189" xmi.id="9GbNqBLId9If" showstereotype="1" localid="lc7AYCRuLErm" linecolor="#000000" usesdiagramusefillcolor="0" width="308" usefillcolor="1" fillcolor="#ffff00" isinstance="0" linewidth="0" usesdiagramfillcolor="0" font="Oxygen-Sans,10,-1,0,50,0,0,0,0,0" textcolor="#000000" y="-276" x="-450"/>
+         <boxwidget height="228" xmi.id="9GbNqBLId9If" showstereotype="1" localid="lc7AYCRuLErm" linecolor="#000000" usesdiagramusefillcolor="0" width="314" usefillcolor="1" fillcolor="#ffff00" isinstance="0" linewidth="0" usesdiagramfillcolor="0" font="Oxygen-Sans,10,-1,0,50,0,0,0,0,0" textcolor="#000000" y="-276" x="-450"/>
          <floatingtext textcolor="#000000" width="68" font="Oxygen-Sans,14,-1,0,50,0,0,0,0,0" fillcolor="#ffff00" x="-431" xmi.id="fvK0ABmHRMcG" showstereotype="1" usesdiagramfillcolor="0" height="32" usefillcolor="1" isinstance="0" pretext="" usesdiagramusefillcolor="0" linewidth="0" localid="XJthdJPMtUWS" role="700" y="-261" text="Spieler" linecolor="none" posttext=""/>
          <actorwidget height="114" xmi.id="v2lLcWuN0jYs" showstereotype="1" localid="9wGXpmwV7vG9" linecolor="none" usesdiagramusefillcolor="0" width="114" usefillcolor="1" fillcolor="#ffff00" isinstance="0" linewidth="0" usesdiagramfillcolor="0" font="Oxygen-Sans,10,-1,5,50,0,0,0,0,0" textcolor="#000000" y="-243" x="-668"/>
-         <usecasewidget height="54" xmi.id="s1H9NrGTOqjn" showstereotype="1" localid="i3METxrlZWux" linecolor="none" usesdiagramusefillcolor="0" width="122" usefillcolor="1" fillcolor="#ffff00" isinstance="0" linewidth="0" usesdiagramfillcolor="0" font="Oxygen-Sans,10,-1,5,50,0,0,0,0,0" textcolor="#000000" y="-211" x="-415"/>
+         <usecasewidget height="54" xmi.id="s1H9NrGTOqjn" showstereotype="1" localid="i3METxrlZWux" linecolor="none" usesdiagramusefillcolor="0" width="136" usefillcolor="1" fillcolor="#ffff00" isinstance="0" linewidth="0" usesdiagramfillcolor="0" font="Oxygen-Sans,10,-1,5,50,0,0,0,0,0" textcolor="#000000" y="-211" x="-415"/>
+         <usecasewidget height="54" xmi.id="grHOjAht80xF" showstereotype="1" localid="cUxiUsxlPOeU" linecolor="none" usesdiagramusefillcolor="0" width="100" usefillcolor="1" fillcolor="#ffff00" isinstance="0" linewidth="0" usesdiagramfillcolor="0" font="Oxygen-Sans,10,-1,5,50,0,0,0,0,0" textcolor="#000000" y="-142" x="-413"/>
         </widgets>
         <messages/>
         <associations>
@@ -67,6 +70,24 @@
           <linepath layout="Polyline">
            <startpoint starty="-186" startx="-554"/>
            <endpoint endx="-415" endy="-186"/>
+          </linepath>
+         </assocwidget>
+        </associations>
+       </diagram>
+       <diagram textcolor="#000000" font="Oxygen-Sans,10,-1,0,75,0,0,0,0,0" fillcolor="#ffff00" zoom="100" canvasheight="599" canvaswidth="790" xmi.id="5L3OVoNMqgeN" snapgrid="0" type="2" showstereotype="1" usefillcolor="1" isopen="1" showgrid="0" showatts="1" backgroundcolor="#ffffff" documentation="" snapcsgrid="0" snapx="25" showpubliconly="0" showopsig="1" griddotcolor="#d3d3d3" linewidth="0" localid="-1" showpackage="1" snapy="25" name="spaceObject" showscope="1" linecolor="#ff0000" showattsig="1" showattribassocs="1" showops="1">
+        <widgets>
+         <boxwidget height="241" xmi.id="9GbNqBLId9If" showstereotype="1" localid="lc7AYCRuLErm" linecolor="#000000" usesdiagramusefillcolor="0" width="367" usefillcolor="1" fillcolor="#ffff00" isinstance="0" linewidth="0" usesdiagramfillcolor="0" font="Oxygen-Sans,10,-1,0,50,0,0,0,0,0" textcolor="#000000" y="-281" x="-453"/>
+         <floatingtext textcolor="#000000" width="116" font="Oxygen-Sans,14,-1,0,50,0,0,0,0,0" fillcolor="#ffff00" x="-431" xmi.id="fvK0ABmHRMcG" showstereotype="1" usesdiagramfillcolor="0" height="32" usefillcolor="1" isinstance="0" pretext="" usesdiagramusefillcolor="0" linewidth="0" localid="XJthdJPMtUWS" role="700" y="-261" text="SpaceObject" linecolor="none" posttext=""/>
+         <actorwidget height="119" xmi.id="v2lLcWuN0jYs" showstereotype="1" localid="9wGXpmwV7vG9" linecolor="none" usesdiagramusefillcolor="0" width="119" usefillcolor="1" fillcolor="#ffff00" isinstance="0" linewidth="0" usesdiagramfillcolor="0" font="Oxygen-Sans,10,-1,0,50,0,0,0,0,0" textcolor="#000000" y="-202" x="-699"/>
+         <usecasewidget height="54" xmi.id="s1H9NrGTOqjn" showstereotype="1" localid="i3METxrlZWux" linecolor="none" usesdiagramusefillcolor="0" width="136" usefillcolor="1" fillcolor="#ffff00" isinstance="0" linewidth="0" usesdiagramfillcolor="0" font="Oxygen-Sans,10,-1,5,50,0,0,0,0,0" textcolor="#000000" y="-211" x="-436"/>
+         <usecasewidget height="54" xmi.id="grHOjAht80xF" showstereotype="1" localid="HWRv710XwUmX" linecolor="none" usesdiagramusefillcolor="0" width="100" usefillcolor="1" fillcolor="#ffff00" isinstance="0" linewidth="0" usesdiagramfillcolor="0" font="Oxygen-Sans,10,-1,5,50,0,0,0,0,0" textcolor="#000000" y="-144" x="-417"/>
+        </widgets>
+        <messages/>
+        <associations>
+         <assocwidget xmi.id="idmSFJ9MkstL" type="502" widgetaid="v2lLcWuN0jYs" indexb="1" totalcountb="2" widgetbid="s1H9NrGTOqjn" linecolor="none" usesdiagramusefillcolor="145" indexa="1" usefillcolor="1" fillcolor="#ffff00" totalcounta="2" linewidth="none" usesdiagramfillcolor="0" seqnum="" font="Oxygen-Sans,10,-1,0,75,0,0,0,0,0" textcolor="none">
+          <linepath layout="Polyline">
+           <startpoint starty="-189" startx="-580"/>
+           <endpoint endx="-436" endy="-189"/>
           </linepath>
          </assocwidget>
         </associations>
@@ -87,7 +108,7 @@
   </UML:Model>
  </XMI.content>
  <XMI.extensions xmi.extender="umbrello">
-  <docsettings uniqueid="0NqFiiGKQWii" documentation="" viewid="USo21Q1EAJPk"/>
+  <docsettings uniqueid="cUxiUsxlPOeU" documentation="" viewid="USo21Q1EAJPk"/>
   <listview>
    <listitem type="800" id="Views" open="1">
     <listitem type="821" id="Component View" open="1"/>
@@ -109,9 +130,11 @@
      </listitem>
     </listitem>
     <listitem type="802" id="Use Case View" open="1">
-     <listitem type="805" id="USo21Q1EAJPk" open="0" label="gravitationspunkt"/>
-     <listitem type="811" id="v2lLcWuN0jYs" open="1"/>
      <listitem type="812" id="s1H9NrGTOqjn" open="1"/>
+     <listitem type="811" id="v2lLcWuN0jYs" open="1"/>
+     <listitem type="812" id="grHOjAht80xF" open="1"/>
+     <listitem type="805" id="5L3OVoNMqgeN" open="0" label="spaceObject"/>
+     <listitem type="805" id="USo21Q1EAJPk" open="0" label="spieler"/>
     </listitem>
    </listitem>
   </listview>
