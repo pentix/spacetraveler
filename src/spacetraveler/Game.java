@@ -42,7 +42,7 @@ public class Game {
 	}
 	
 	/**
-	 * @brief Funktion zum Überprüfen ob ein Punkt in einem Floatrect ist
+	 * @brief Funktion zum ï¿½berprï¿½fen ob ein Punkt in einem Floatrect ist
 	 * @param f das Floatrect
 	 * @param P der Punkt
 	 * @return true wenn der Punkt enthalten ist, ansonsten false
@@ -63,16 +63,16 @@ public class Game {
 	}
 	
 	/**
-	 * @brief Funktion die die Überschneidung zweier Floatrects überpüft
+	 * @brief Funktion die die ï¿½berschneidung zweier Floatrects ï¿½berpï¿½ft
 	 * @param a FloatRect a muss erheblich kleiner als b sein
-	 * @param b Das grössere Floatrect
-	 * @return true wenn sie sich überschneiden, ansonnsten false
+	 * @param b Das grï¿½ssere Floatrect
+	 * @return true wenn sie sich ï¿½berschneiden, ansonnsten false
 	 */
 	public static boolean intersection(FloatRect a, FloatRect b)
 	{
-		// ansatz: b ist erheblich grösser als a
-		// dadurch muss bei einer überschneidung immer min. ein Eckpunkt im anderen Rechteck liegen
-		// überprüfen ob Ecken von a in b:
+		// ansatz: b ist erheblich grï¿½sser als a
+		// dadurch muss bei einer ï¿½berschneidung immer min. ein Eckpunkt im anderen Rechteck liegen
+		// ï¿½berprï¿½fen ob Ecken von a in b:
 		Vector2f a_LO = new Vector2f(a.left, a.top);
 		Vector2f a_LU = Vector2f.add(a_LO, new Vector2f(0, a.height));
 		Vector2f a_RO = Vector2f.add(a_LO, new Vector2f(a.width, 0));
@@ -92,7 +92,7 @@ public class Game {
 	
 	/**
 	 * @brief KollisionsÃ¼berprÃ¼fung und elastischer Stoss
-	 * @param spaceObjects liste der Spaceobjects, um alle überprüfen zu können
+	 * @param spaceObjects liste der Spaceobjects, um alle ï¿½berprï¿½fen zu kï¿½nnen
 	 */
 	public static void schneiden(Vector<SpaceObject> spaceObjects)
 	{
@@ -224,7 +224,7 @@ public class Game {
 
 		
 		// Level erstellen (Laden, um l zu initialisieren!)
-		Level l = new Level("level0");
+		Level l = new Level("level3");
 		
 		
 		while(hauptfenster.isOpen()){
@@ -333,7 +333,7 @@ public class Game {
 							FloatRect FR = tile.sprite.getGlobalBounds();
 							if(tile.index == 1 && s.collided==false)
 							{
-								if(intersection(s.sprite.getGlobalBounds(), FR)) //kollisionsüberprüfung
+								if(intersection(s.sprite.getGlobalBounds(), FR)) //kollisionsï¿½berprï¿½fung
 								{
 									
 									// umdrehen der einen komponente der Geschwindigkeits- und Energievektoren
