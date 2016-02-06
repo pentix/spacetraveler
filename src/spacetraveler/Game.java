@@ -89,6 +89,26 @@ public class Game {
 		}
 	}
 	
+	public static boolean containsFloat(FloatRect a, FloatRect b)
+	{
+		// ansatz: b ist erheblich gr�sser als a
+		// dadurch muss bei einer �berschneidung immer min. ein Eckpunkt im anderen Rechteck liegen
+		// �berpr�fen ob Ecken von a in b:
+		Vector2f a_LO = new Vector2f(a.left, a.top);
+		Vector2f a_LU = Vector2f.add(a_LO, new Vector2f(0, a.height));
+		Vector2f a_RO = Vector2f.add(a_LO, new Vector2f(a.width, 0));
+		Vector2f a_RU = Vector2f.add(a_LO, new Vector2f(a.width, a.height));
+
+		if(contains(b,a_LO) && contains(b,a_LU) && contains(b,a_RO) && contains(b, a_RU))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	
 	
 	
 	/**
@@ -325,51 +345,57 @@ public class Game {
 					
 				}
 				
-				if(l.spaceObjects.size()!= 0){ 				// es muss mindestens ein objekt haben
+				if(l.spaceObjects.size()!= 0){				// es muss mindestens ein objekt haben
 					for(SpaceObject s : l.spaceObjects)		
 					{
-						for(int f = 1; f < s.Bereich.length; f++)
-						{
-							Tile tile = l.Feld[(int)s.Bereich[f].x][(int)s.Bereich[f].y];
-							FloatRect FR = tile.sprite.getGlobalBounds();
-							if(tile.index == 1 && s.collided==false)
+						s.sprite.move(s.model.getVelocity());;
+
+						
+							for(int f = 1; f < s.Bereich.length; f++)
 							{
-								if(intersection(s.sprite.getGlobalBounds(), FR)) //kollisions�berpr�fung
+								Tile tile = l.Feld[(int)s.Bereich[f].x][(int)s.Bereich[f].y];
+								FloatRect FR = tile.sprite.getGlobalBounds();
+								if(tile.index == 1)
 								{
-									
-									// umdrehen der einen komponente der Geschwindigkeits- und Energievektoren
-									float a = s.model.getVelocity().x;
-									float b = s.model.getVelocity().y;
-									
-									float c = s.model.getEnergy().x;
-									float d = s.model.getEnergy().y;
-									
-									if(f == 1 || f == 3)
-									{
-										s.model.setVelocity(new Vector2f(-a,b)); 
-										s.model.setEnergy(new Vector2f(-c,d));
-										s.collided = true;
+									if(intersection(s.sprite.getGlobalBounds(), FR)) //kollisions�berpr�fung
+									{										
+										// umdrehen der einen komponente der Geschwindigkeits- und Energievektoren
+										float a = s.model.getVelocity().x;
+										float b = s.model.getVelocity().y;
+										
+										float c = s.model.getEnergy().x;
+										float d = s.model.getEnergy().y;
+										
+										if(f == 1 || f == 3)
+										{
+											s.model.setVelocity(new Vector2f(-a,b)); 
+											s.model.setEnergy(new Vector2f(-c,d));
+											s.collided = true;
+										}
+										if(f == 2 || f == 4)
+										{
+											s.model.setEnergy(new Vector2f(c,-d));
+											s.model.setVelocity(new Vector2f(a,-b));
+											s.collided = true;
+										}
 									}
-									if(f == 2 || f == 4)
+									else
 									{
-										s.model.setEnergy(new Vector2f(c,-d));
-										s.model.setVelocity(new Vector2f(a,-b));
-										s.collided = true;
+										
+										s.collided = false;
+	
 									}
 								}
 								else
 								{
-									
 									s.collided = false;
 								}
+	
 							}
-							else
-							{
-								s.collided = false;
-							}
+							s.sprite.move(-s.model.getVelocity().x, -s.model.getVelocity().y);
+
 						}
-						
-					}
+					
 				}
 				
 				/**
