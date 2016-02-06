@@ -41,46 +41,58 @@ public class Game {
 		return a.x*b.x+a.y*b.y;
 	}
 	
+	/**
+	 * @brief Funktion zum Überprüfen ob ein Punkt in einem Floatrect ist
+	 * @param f das Floatrect
+	 * @param P der Punkt
+	 * @return true wenn der Punkt enthalten ist, ansonsten false
+	 */
 	public static boolean contains(FloatRect f, Vector2f P)
 	{
 		Vector2f LO = new Vector2f(f.left, f.top);
 		Vector2f RU = Vector2f.add(LO, new Vector2f(f.width, f.height));
-		/*System.out.println(LO + " LO");
-		System.out.println(RU + " RU");
-		System.out.println(P + " P");*/
-		boolean contains;
 		
 		if(LO.x <= P.x && LO.y <= P.y && P.x <= RU.x && P.y <= RU.y)
 		{
-			contains = true;
-			/*System.out.println(contains);
-			System.out.println(f);
-			System.out.println(P);*/
+			return true;
 		}
-		else{
-			contains = false;
+		else
+		{
+			return false;
 		}
-		return contains;
 	}
 	
+	/**
+	 * @brief Funktion die die Überschneidung zweier Floatrects überpüft
+	 * @param a FloatRect a muss erheblich kleiner als b sein
+	 * @param b Das grössere Floatrect
+	 * @return true wenn sie sich überschneiden, ansonnsten false
+	 */
 	public static boolean intersection(FloatRect a, FloatRect b)
 	{
+		// ansatz: b ist erheblich grösser als a
+		// dadurch muss bei einer überschneidung immer min. ein Eckpunkt im anderen Rechteck liegen
+		// überprüfen ob Ecken von a in b:
 		Vector2f a_LO = new Vector2f(a.left, a.top);
 		Vector2f a_LU = Vector2f.add(a_LO, new Vector2f(0, a.height));
 		Vector2f a_RO = Vector2f.add(a_LO, new Vector2f(a.width, 0));
 		Vector2f a_RU = Vector2f.add(a_LO, new Vector2f(a.width, a.height));
 
 		if(contains(b,a_LO)||contains(b,a_LU)||contains(b,a_RO)||contains(b, a_RU))
+		{
 			return true;
+		}
 		else
+		{
 			return false;
+		}
 	}
 	
 	
 	
 	/**
 	 * @brief KollisionsÃ¼berprÃ¼fung und elastischer Stoss
-	 * @param spaceObjects 
+	 * @param spaceObjects liste der Spaceobjects, um alle überprüfen zu können
 	 */
 	public static void schneiden(Vector<SpaceObject> spaceObjects)
 	{
@@ -102,7 +114,7 @@ public class Game {
 					B.move(); 
 					
 					// Ist der Abstand der beiden Zentren kleiner als die Summe der Radien? 
-					if(absVec(Vector2f.sub(P1,P2)) <= Math.abs(A.model.getRadius())+Math.abs(B.model.getRadius()))
+					if(absVec(Vector2f.sub(P1,P2)) <= Math.abs(A.model.getRadius())+Math.abs(B.model.getRadius()) && !A.elastisch && !B.elastisch)
 					{
 						/*A.getSprite().move(Vector2f.sub(A.model.getVelocity(),Vector2f.mul(A.model.getVelocity(), 2)));
 						B.getSprite().move(Vector2f.sub(B.model.getVelocity(),Vector2f.mul(B.model.getVelocity(), 2)));
@@ -138,6 +150,8 @@ public class Game {
 						A.move();
 						B.move();
 						
+						A.elastisch = true;
+						
 						//A.collided = 2;
 						//B.collided = 2;
 					}
@@ -145,6 +159,7 @@ public class Game {
 					{
 						//Falls keine Kollision stattgefunden hat, B zurï¿½ckpositionieren
 						B.sprite.move(Vector2f.mul(B.model.getVelocity(),-1)); 
+						A.elastisch = false;
 					}
 				}
 			}
@@ -309,23 +324,19 @@ public class Game {
 					
 				}
 				
-				if(l.spaceObjects.size()!= 0){
-					for(SpaceObject s : l.spaceObjects)
+				if(l.spaceObjects.size()!= 0){ 				// es muss mindestens ein objekt haben
+					for(SpaceObject s : l.spaceObjects)		
 					{
 						for(int f = 1; f < s.Bereich.length; f++)
 						{
-							//System.out.println(s.Bereich[f]);
 							Tile tile = l.Feld[(int)s.Bereich[f].x][(int)s.Bereich[f].y];
-							//System.out.println(f + " f");
-							//System.out.println(tile.index);
 							FloatRect FR = tile.sprite.getGlobalBounds();
-							if(tile.index == 1 && s.collided==false){
-								//System.out.println(s.Bereich[0]);
-								//System.out.println(tile.sprite.getGlobalBounds());
-
-								if(intersection(s.sprite.getGlobalBounds(), FR))
+							if(tile.index == 1 && s.collided==false)
+							{
+								if(intersection(s.sprite.getGlobalBounds(), FR)) //kollisionsüberprüfung
 								{
-									//System.out.println(tile.position);
+									
+									// umdrehen der einen komponente der Geschwindigkeits- und Energievektoren
 									float a = s.model.getVelocity().x;
 									float b = s.model.getVelocity().y;
 									
@@ -334,7 +345,7 @@ public class Game {
 									
 									if(f == 1 || f == 3)
 									{
-										s.model.setVelocity(new Vector2f(-a,b));
+										s.model.setVelocity(new Vector2f(-a,b)); 
 										s.model.setEnergy(new Vector2f(-c,d));
 										s.collided = true;
 									}
@@ -344,9 +355,6 @@ public class Game {
 										s.model.setVelocity(new Vector2f(a,-b));
 										s.collided = true;
 									}
-									
-									
-									
 								}
 								else
 								{

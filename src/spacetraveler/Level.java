@@ -15,8 +15,7 @@ import org.jsfml.system.Vector2f;
  *
  * */
 public class Level {
-	//public Vector<Tile> tiles;					/**< @brief Hintergrund Tiles */
-	public Tile[][] Feld;
+	public Tile[][] Feld;						/**< @brief Koordinatenfeld der indices */	
 	
 	public Vector<SpaceObject> spaceObjects;	/**< @brief SpaceObjects im Level */
 	public Vector<Gravity> gravityFields;		/**< @brief GravityFields im Level */
@@ -68,10 +67,8 @@ public class Level {
 		
 		levelWidth = parser.nextInt();
 		levelHeight = parser.nextInt();
-		
-		// Spieler erstellen    (Spieler = 1. spaceObject)
-		
-		Feld = new Tile[levelHeight][levelWidth];
+				
+		Feld = new Tile[levelHeight][levelWidth]; // erstellen des Koordinatenfeldes
 		
 		
 		// Tiles laden und erstellen
@@ -128,7 +125,6 @@ public class Level {
 		
 		// Tile laden!
 		Feld[(int)(pos.x)][(int)(pos.y)] = new Tile(pos, hintergrundId);
-		//tiles.addElement(new Tile(pos, hintergrundId));
 		
 		Vector2f coord = pos;
 		pos = Vector2f.mul(pos, 512);
@@ -161,16 +157,18 @@ public class Level {
 		
 		parser.close();
 		
-		if(tileType == 4)
+		if(tileType == 4) //startfeld
 		{
-			Vector2f mitte = new Vector2f(pos.x+512/2, pos.y+512/2);
+			Vector2f mitte = new Vector2f(pos.x+512/2, pos.y+512/2); // herausfinden der Mitte
 
-			Texture startTex = new Texture();
+			//laden un positiionieren der Starttextur
+			Texture startTex = new Texture(); 
 			startTex.loadFromStream(Game.class.getResourceAsStream("/spacetraveler/rsc/goal.png"));
 			Sprite start = new Sprite(startTex);
 			start.setPosition(mitte);
 			sprites.add(start);
 			
+			//erstellen des Spielers
 			spaceObjects.add(0,new SpaceObject("/spacetraveler/rsc/spieler.png", 5.0f, new Vector2f(50, 0), coord, mitte, true));
 
 			

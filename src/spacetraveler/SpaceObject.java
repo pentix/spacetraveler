@@ -19,17 +19,19 @@ public class SpaceObject {
 	public Texture texture;			/**< @brief Textur des Spaceobjects */
 	public Sprite sprite;			/**< @brief Sprite des Spaceobjects */
 	public SpaceObjectModel model;	/**< @brief Model (fÃ¼r Berechnungen) des Spaceobjects */
-	public boolean collided = false;		/**< @todo collided dokumentieren */
+	public boolean collided = false;		/**< boolean um Doppelkollisionen mit der Wand zu minimieren */
+	public boolean elastisch = false;		/**< boolean um Doppelkollisionen mit anderenn Objekten zu minimieren*/
 	
 	private float angularMomentum;	/**< @brief Rotationsgeschwindigkeit */
 	
-	public Vector2f[] Bereich;
+	public Vector2f[] Bereich;		/**< @brief Array mit 5 Koordinaten zu Tiles */
 	
 	/**
 	 * @brief Konstruktor
 	 * @param texturePath Pfad zur Textur, die fÃ¼r das SpaceObject verwendet werden soll
 	 * @param m Masse des SpaceObjects
 	 * @param energy Anfangsenergievektor des SpaceObjects
+	 * @param coord position des SpaceObjects innerhalb des Koordinatenfeldes: Feld
 	 * @param pos Position auf dem Spielfeld
 	 * @param gravityOn true, wenn das Objekt von der Gravitation beeinflusst wird
 	 * @throws IOException Wenn die angegebene Textur nicht gefunden werden konnte
@@ -51,6 +53,16 @@ public class SpaceObject {
 
 	}
 	
+	/**
+	 * @brief neubesetzung von Bereich mit neuem Zentrum
+	 * Ansatz: Um die Wände überprüfen zu können überprüfen wir die 4 Tiles,
+	 * die um das aktuelle Tile sind auf index und Kollision.
+	 * Sollte es Kollidieren und ist es eine wand also index = 1,
+	 * prallt der spieler ab.
+	 * Ansonnsten geht er weiter und sobald sein zentrum das Tile wechselt,
+	 * werden die neuen 4 Tiles überprüft.
+	 * @param center Position innerhalb des Koordinatenfeldes Feld
+	 */
 	public void bereichVerschieben(Vector2f center)
 	{
 		Bereich[0] = center;
