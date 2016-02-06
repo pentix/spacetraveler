@@ -55,12 +55,12 @@ public class SpaceObject {
 	
 	/**
 	 * @brief neubesetzung von Bereich mit neuem Zentrum
-	 * Ansatz: Um die Wände überprüfen zu können überprüfen wir die 4 Tiles,
+	 * Ansatz: Um die Waende ueberpruefen zu koennen ueberpruefen wir die 4 Tiles,
 	 * die um das aktuelle Tile sind auf index und Kollision.
 	 * Sollte es Kollidieren und ist es eine wand also index = 1,
 	 * prallt der spieler ab.
 	 * Ansonnsten geht er weiter und sobald sein zentrum das Tile wechselt,
-	 * werden die neuen 4 Tiles überprüft.
+	 * werden die neuen 4 Tiles ueberprueft.
 	 * @param center Position innerhalb des Koordinatenfeldes Feld
 	 */
 	public void bereichVerschieben(Vector2f center)

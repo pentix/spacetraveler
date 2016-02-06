@@ -290,7 +290,7 @@ public class Game {
 	        			continue;
 	        		}
 	        		
-	        		if(gravLeft == true ){
+	        		if(gravLeft == true && l.gravityFields.size() > 0){
 	        			gravLeft = false;
 	        			l.gravityFields.remove(userGravityId);
 	        			userGravityId = -1;
@@ -308,7 +308,7 @@ public class Game {
 	        			continue;
 	        		}
 	        		
-	        		if(gravRight == true){
+	        		if(gravRight == true && l.gravityFields.size() > 0){
 	        			gravRight = false;
 	        			l.gravityFields.remove(userGravityId);
 	        			userGravityId = -1;
