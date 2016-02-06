@@ -8,6 +8,7 @@ import org.jsfml.system.*;
 import org.jsfml.window.*;
 import org.jsfml.window.Keyboard.Key;
 import org.jsfml.window.event.Event.*;
+import org.jsfml.window.event.MouseButtonEvent;
 
 
 
@@ -252,6 +253,10 @@ public class Game {
         				// Level1 laden und Menu deaktivieren
         				l = new Level("level1");
         				menuAktiv = false;
+        				
+        				gravRight = false;
+        				gravLeft = false;
+        				
         			} else if(spielBeendenButton.contains(mousePos)){
         				hauptfenster.close();
         			}
@@ -259,9 +264,20 @@ public class Game {
         			continue;
         		}
         		
-        	
+
+        		// Wenn schon ein Gravitationspunkt gesetzt wurde, diesen entfernen!
+        		if(ev.type == Type.MOUSE_BUTTON_PRESSED && (gravLeft || gravRight) && l.gravityFields.size() > 0){
+        			l.gravityFields.remove(userGravityId);
+        			userGravityId = -1;
+        			
+        			gravLeft = false;
+        			gravRight = false;
+        			
+        			break;
+        		}
         		
-        		if(Mouse.isButtonPressed(Mouse.Button.LEFT)){
+        		
+        		if(ev.type == Type.MOUSE_BUTTON_PRESSED && ev.asMouseButtonEvent().button == Mouse.Button.LEFT){
 	        		if(gravLeft == false){
 	        			gravLeft = true;
 	        			l.gravityFields.addElement(new Gravity((hauptfenster.mapPixelToCoords(Vector2i.sub(new Vector2i((int)Mouse.getPosition().x, (int)Mouse.getPosition().y), hauptfenster.getPosition()))), 5));
@@ -269,17 +285,9 @@ public class Game {
 	        			
 	        			continue;
 	        		}
-	        		
-	        		if(gravLeft == true && l.gravityFields.size() > 0){
-	        			gravLeft = false;
-	        			l.gravityFields.remove(userGravityId);
-	        			userGravityId = -1;
-	        			
-	        			continue;
-	        		}
         		}
         		
-        		if(Mouse.isButtonPressed(Mouse.Button.RIGHT)){
+        		if(ev.type == Type.MOUSE_BUTTON_PRESSED && ev.asMouseButtonEvent().button == Mouse.Button.RIGHT){
 	        		if(gravRight == false){
 	        			gravRight = true;
 	        			l.gravityFields.addElement(new Gravity((hauptfenster.mapPixelToCoords(Vector2i.sub(new Vector2i((int)Mouse.getPosition().x, (int)Mouse.getPosition().y), hauptfenster.getPosition()))), -5));
@@ -287,15 +295,8 @@ public class Game {
 	        			
 	        			continue;
 	        		}
-	        		
-	        		if(gravRight == true && l.gravityFields.size() > 0){
-	        			gravRight = false;
-	        			l.gravityFields.remove(userGravityId);
-	        			userGravityId = -1;
-	        			
-	        			continue;
-	        		}
         		}
+        		
         		
 			}
 
