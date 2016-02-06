@@ -302,7 +302,7 @@ public class Game {
 			
 			hauptfenster.clear();
 			
-			if(!gameOver){
+			if(!gameOver && !menuAktiv){
 				// Berechnungen
 				for(SpaceObject s : l.spaceObjects){
 					Vector2f gesamtEnergie = new Vector2f(0, 0);
