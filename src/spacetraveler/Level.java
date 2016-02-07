@@ -1,8 +1,8 @@
 package spacetraveler;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.Vector;
 
 import org.jsfml.graphics.Sprite;
 import org.jsfml.graphics.Texture;
@@ -17,9 +17,9 @@ import org.jsfml.system.Vector2f;
 public class Level {
 	public Tile[][] Feld;						/**< @brief Koordinatenfeld der indices */	
 	
-	public Vector<SpaceObject> spaceObjects;	/**< @brief SpaceObjects im Level */
-	public Vector<Gravity> gravityFields;		/**< @brief GravityFields im Level */
-	public Vector<Sprite> sprites;
+	public ArrayList<SpaceObject> spaceObjects;	/**< @brief SpaceObjects im Level */
+	public ArrayList<Gravity> gravityFields;		/**< @brief GravityFields im Level */
+	public ArrayList<Sprite> sprites;
 	
 	public Clock levelTimer;					/**< @brief Timer, der Zeit seit Beginn hochzählt */
 	public float levelTimeAvailable;			/**< @brief Zeit, die für das Level zur Verfügung steht */
@@ -53,9 +53,9 @@ public class Level {
 	
 		// Class Members initialisieren
 		//tiles = new Vector<>();
-		spaceObjects = new Vector<>();
-		gravityFields = new Vector<>();
-		sprites = new Vector<>();
+		spaceObjects = new ArrayList<>();
+		gravityFields = new ArrayList<>();
+		sprites = new ArrayList<>();
 	
 		// Leveldatei öffnen
 		Scanner parser = new Scanner(Game.class.getResourceAsStream("/spacetraveler/rsc/levels/" + levelId));
@@ -136,11 +136,11 @@ public class Level {
 		for(int n=0; n<anzahlSpaceObjects; n++){
 			String texturePath = parser.nextLine();
 			float m = parser.nextFloat();											parser.nextLine();
-			Vector2f E = new Vector2f(parser.nextFloat(), parser.nextFloat());		parser.nextLine();
+			Vector E = new Vector(parser.nextDouble(), parser.nextDouble());		    parser.nextLine();
 			Vector2f P = new Vector2f(parser.nextFloat(), parser.nextFloat());		parser.nextLine();
 			boolean gravityOn = parser.nextBoolean();								parser.nextLine();
 			
-			spaceObjects.addElement(new SpaceObject(texturePath, m, E, coord, Vector2f.add(pos, P), gravityOn));
+			spaceObjects.add(new SpaceObject(texturePath, m, E, coord, Vector2f.add(pos, P), gravityOn));
 		}
 		
 		// anzahlGravityFields
@@ -152,7 +152,7 @@ public class Level {
 			
 			float m = parser.nextFloat();											parser.nextLine();					
 			
-			gravityFields.addElement(new Gravity(Vector2f.add(pos, P), m));
+			gravityFields.add(new Gravity(Vector2f.add(pos, P), m));
 		}
 		
 		parser.close();
@@ -169,7 +169,7 @@ public class Level {
 			sprites.add(start);
 			
 			//erstellen des Spielers
-			spaceObjects.add(0,new SpaceObject("/spacetraveler/rsc/spieler.png", 5.0f, new Vector2f(50, 0), coord, mitte, true));
+			spaceObjects.add(0,new SpaceObject("/spacetraveler/rsc/spieler.png", 10.0f, new Vector(50, 0), coord, mitte, true));
 
 			
 		}
