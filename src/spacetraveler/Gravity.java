@@ -11,7 +11,7 @@ import org.jsfml.system.Vector2f;
  * 
  * Diese Klasse vereint unser Model (GravityModel) mit der SFML-Anzeige (Texture, Sprite, etc...)
  */
-public class Gravity {
+public class Gravity implements Graviton, FixedPoint{
 	public Texture texture;		/**< Textur der Klasse */
 	public Sprite sprite;		/**< Sprite der Klasse */
 	public GravityModel model;	/**< Rechnerisches Modell für die Gravitation */
@@ -31,7 +31,7 @@ public class Gravity {
 		sprite.setOrigin(texture.getSize().x/2, texture.getSize().y/2);
 		sprite.setPosition(center);
 		
-		model = new GravityModel(center, m);
+		model = new GravityModel(getPosition(), m);
 	}
 	
 	/**
@@ -41,5 +41,19 @@ public class Gravity {
 	public Sprite getSprite(){
 		return this.sprite;
 	}
-	
+
+	@Override
+	public double getMass() {
+		return model.m;
+	}
+
+	@Override
+	public Vector getPosition() {
+		return new Vector(sprite.getPosition());
+	}
+
+	@Override
+	public Vector getVelocity() {
+		return new Vector(0,0);
+	}
 }
