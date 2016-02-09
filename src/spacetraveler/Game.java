@@ -1,6 +1,11 @@
 package spacetraveler;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.IOException;
+import java.util.Scanner;
 import java.util.Vector;
 
 import org.jsfml.graphics.*;
@@ -210,6 +215,34 @@ public class Game {
 		//Create a new view by copying the window's default view
 		View view = new View(defaultView.getCenter(), defaultView.getSize());
 		
+		// Load font
+		Font font = new Font();
+		font.loadFromStream(Game.class.getResourceAsStream("/spacetraveler/rsc/DejaVuSans.ttf"));
+		
+		
+		// Lade die im Menu verfuegbaren Levels
+		Scanner levelsFile = new Scanner(Game.class.getResourceAsStream("/spacetraveler/rsc/levels/levels")); 
+		Vector<String> availableLevels = new Vector<>(); 
+		Vector<Text> levelOptions = new Vector<>();
+		
+		Text selectLevelText = new Text("Oder wähle ein Level aus:", font);
+		selectLevelText.setPosition(400, 250);
+		
+		
+		while((levelsFile.hasNextLine())){
+			availableLevels.addElement(levelsFile.nextLine());
+			levelOptions.addElement(new Text(availableLevels.lastElement(), font));
+			levelOptions.lastElement().setPosition(400, 300+50*levelOptions.size());
+			levelOptions.lastElement().setColor(Color.YELLOW);
+			
+			System.out.println("Gefunden: '" + availableLevels.lastElement() + "'");
+			
+			
+		}
+		
+		levelsFile.close();
+		
+		
 		// Menu aktiv?
 		boolean menuAktiv = true;
 		Texture menuTexture = new Texture();
@@ -227,10 +260,6 @@ public class Game {
 		gameOverTexture.loadFromStream(Game.class.getResourceAsStream("/spacetraveler/rsc/gameOver.png"));
 		Sprite gameOverSprite = new Sprite(gameOverTexture);
 		gameOverSprite.setOrigin(gameOverTexture.getSize().x/2, gameOverTexture.getSize().y/2);
-		
-		// Load font
-		Font font = new Font();
-		font.loadFromStream(Game.class.getResourceAsStream("/spacetraveler/rsc/DejaVuSans.ttf"));
 		
 		// Anzeigetext für Zeit erstellen
 		Text timeText = new Text("", font);
@@ -262,6 +291,7 @@ public class Game {
         		// Escape um zum Menü zu gelangen
         		if(ev.type == Type.KEY_PRESSED && ev.asKeyEvent().key == Key.ESCAPE){
         			menuAktiv = true;
+        			gameOver = true;
         			
         			continue;
         		}
@@ -277,8 +307,26 @@ public class Game {
         				gravRight = false;
         				gravLeft = false;
         				
+        				gameOver = false;
+        				
         			} else if(spielBeendenButton.contains(mousePos)){
         				hauptfenster.close();
+        			} else {
+        				for(int i=0; i<levelOptions.size(); i++){
+        					if(levelOptions.get(i).getGlobalBounds().contains(hauptfenster.mapPixelToCoords(mousePos))){
+        						System.out.println("Lade Level '" + availableLevels.get(i) + "'");
+        						
+        						l = new Level(availableLevels.get(i));
+                				menuAktiv = false;
+                				
+                				gravRight = false;
+                				gravLeft = false;
+                				
+                				gameOver = false;
+        						
+        						continue;
+        					}
+        				}
         			}
         			
         			continue;
@@ -292,6 +340,7 @@ public class Game {
         			
         			gravLeft = false;
         			gravRight = false;
+        			gameOver = false;
         			
         			break;
         		}
@@ -487,7 +536,20 @@ public class Game {
 				if(menuAktiv){
 					hauptfenster.clear(new Color(155, 150, 150));
 					menuSprite.setPosition(hauptfenster.mapPixelToCoords(new Vector2i(hauptfenster.getSize().x/2, hauptfenster.getSize().y/2)));
+					selectLevelText.setPosition(hauptfenster.mapPixelToCoords(new Vector2i(400, 250)));
+					
 					hauptfenster.draw(menuSprite);
+					hauptfenster.draw(selectLevelText);
+					
+					// Verschiedene Level anzeigen
+					int i = 0;
+					for(Text t : levelOptions){
+						// Repositionieren
+						t.setPosition(hauptfenster.mapPixelToCoords(new Vector2i(400, 300+50*i)));
+						
+						hauptfenster.draw(t);
+						i++;
+					}
 				}
 			}
 
