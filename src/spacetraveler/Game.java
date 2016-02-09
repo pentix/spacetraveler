@@ -114,6 +114,26 @@ public class Game {
 		}
 	}
 	
+	public static boolean SpaceObjectsCollision(SpaceObject A, SpaceObject B)
+	{
+		A.move();
+		B.move();
+		Vector2f P1 = A.getCenter();	//Zentrum 1
+		Vector2f P2 = B.getCenter();	//Zentrum 2
+		if(absVec(Vector2f.sub(P1,P2)) <= Math.abs(A.model.getRadius())+Math.abs(B.model.getRadius()))
+		{
+			A.sprite.move(Vector2f.mul(A.model.getVelocity(),-1)); 
+			B.sprite.move(Vector2f.mul(B.model.getVelocity(),-1)); 
+			return true;
+		}
+		else
+		{
+			A.sprite.move(Vector2f.mul(A.model.getVelocity(),-1)); 
+			B.sprite.move(Vector2f.mul(B.model.getVelocity(),-1));
+			return false;
+		}
+	}
+	
 	
 	
 	/**
@@ -415,6 +435,15 @@ public class Game {
 				for(SpaceObject s : l.spaceObjects){
 					s.getSprite().rotate(s.getAngularMomentum());
 					
+				}
+				
+				for(int s = 1; s < l.spaceObjects.size(); s++)
+				{
+					
+					if(SpaceObjectsCollision(l.spaceObjects.elementAt(0),l.spaceObjects.elementAt(s)))
+					{
+						gameOver = true;
+					}
 				}
 				
 				if(l.spaceObjects.size()!= 0){				// es muss mindestens ein objekt haben
