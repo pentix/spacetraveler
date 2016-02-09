@@ -25,7 +25,14 @@ public class Gravity {
 	public Gravity(Vector2f center, double m) throws IOException
 	{
 		texture = new Texture();
-		texture.loadFromStream(Game.class.getResourceAsStream("/spacetraveler/rsc/gravity.png"));
+		if(m > 0)
+		{
+			texture.loadFromStream(Game.class.getResourceAsStream("/spacetraveler/rsc/gravity.png"));
+		}
+		else
+		{
+			texture.loadFromStream(Game.class.getResourceAsStream("/spacetraveler/rsc/antigravity.png"));
+		}
 		
 		sprite = new Sprite(texture);
 		sprite.setOrigin(texture.getSize().x/2, texture.getSize().y/2);

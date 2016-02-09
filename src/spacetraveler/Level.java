@@ -19,6 +19,7 @@ public class Level {
 	
 	public Vector<SpaceObject> spaceObjects;	/**< @brief SpaceObjects im Level */
 	public Vector<Gravity> gravityFields;		/**< @brief GravityFields im Level */
+	public Vector<BlackHole> blackHoles;
 	public Sprite[] sprites;
 	
 	public Clock levelTimer;					/**< @brief Timer, der Zeit seit Beginn hochzählt */
@@ -55,6 +56,7 @@ public class Level {
 		//tiles = new Vector<>();
 		spaceObjects = new Vector<>();
 		gravityFields = new Vector<>();
+		blackHoles = new Vector<>();
 		sprites = new Sprite[2];
 	
 		// Leveldatei öffnen
@@ -128,6 +130,8 @@ public class Level {
 		
 		Vector2f coord = pos;
 		pos = Vector2f.mul(pos, 512);
+		Vector2f mitte = new Vector2f(pos.x+512/2, pos.y+512/2); // herausfinden der Mitte
+
 		
 		// anzahlSpaceObjects
 		int anzahlSpaceObjects = parser.nextInt();			parser.nextLine();
@@ -155,11 +159,21 @@ public class Level {
 			gravityFields.addElement(new Gravity(Vector2f.add(pos, P), m));
 		}
 		
+		// anzahlblackHoles
+		int anzahlBlackHoles = parser.nextInt();			parser.nextLine();
+		
+		// blackHoles
+		for(int n=0; n<anzahlBlackHoles; n++){
+			
+			float m = parser.nextFloat();											parser.nextLine();					
+			blackHoles.addElement(new BlackHole(mitte, m));
+		}
+		
 		parser.close();
 		
 		if(tileType == 4) //startfeld
 		{
-			Vector2f mitte = new Vector2f(pos.x+512/2, pos.y+512/2); // herausfinden der Mitte
+			
 
 			//laden un positiionieren der Starttextur
 			Texture startTex = new Texture(); 
@@ -175,7 +189,6 @@ public class Level {
 		}
 		if(tileType == 5) //zielfeld
 		{
-			Vector2f mitte = new Vector2f(pos.x+512/2, pos.y+512/2); // herausfinden der Mitte
 			Texture zielTex = new Texture(); 
 			zielTex.loadFromStream(Game.class.getResourceAsStream("/spacetraveler/rsc/goal.png"));
 			Sprite ziel = new Sprite(zielTex);

@@ -281,7 +281,7 @@ public class Game {
 
 		
 		// Level erstellen (Laden, um l zu initialisieren!)
-		Level l = new Level("level3");
+		Level l = new Level("level2");
 		
 		
 		while(hauptfenster.isOpen()){
@@ -393,8 +393,20 @@ public class Game {
 							gesamtEnergie = Vector2f.add(gesamtEnergie, g.model.getEnergy(s));
 						}
 					
-
+						if(l.blackHoles.size() != 0){
+							for(BlackHole b: l.blackHoles){
+								if(absVec(Vector2f.sub(s.getSprite().getPosition(),b.center)) <= 200)
+								{
+									gesamtEnergie = Vector2f.add(gesamtEnergie, b.model.getEnergy(s));
+									if(absVec(Vector2f.sub(s.getSprite().getPosition(),b.center)) <= 50)
+									{
+										gameOver = true;
+									}
+								}
+							}
+						}
 						s.model.addEnergy(gesamtEnergie);
+						
 					}
 			
 				}
@@ -515,6 +527,15 @@ public class Game {
 				for(Gravity g : l.gravityFields){
 					hauptfenster.draw(g.getSprite());
 				}
+				
+				for(BlackHole b : l.blackHoles){
+					hauptfenster.draw(b.getSprite());
+				}
+
+				for(int x = 0; x < l.sprites.length; x++)
+				{
+					hauptfenster.draw(l.sprites[x]);
+				}
 			
 				// Alle SpaceObjects zeichnen!
 				for(SpaceObject s : l.spaceObjects){	
@@ -522,10 +543,6 @@ public class Game {
 				}
 				
 
-				for(int x = 0; x < l.sprites.length; x++)
-				{
-					hauptfenster.draw(l.sprites[x]);
-				}
 				
 				// Zeit anzeigen!
 				long timePassed = l.levelTimer.getElapsedTime().asMilliseconds();
