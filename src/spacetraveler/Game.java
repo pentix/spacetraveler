@@ -255,6 +255,12 @@ public class Game {
 		IntRect spielStartenButton = new IntRect(72, 244, 223, 44);
 		IntRect spielBeendenButton = new IntRect(72, 328, 247, 44); 
 		
+		// Load youWon Image
+		Texture youWonTexture = new Texture();
+		youWonTexture.loadFromStream(Game.class.getResourceAsStream("/spacetraveler/rsc/youWon.png"));
+		Sprite youWonSprite = new Sprite(youWonTexture);
+		youWonSprite.setOrigin(youWonTexture.getSize().x/2, youWonTexture.getSize().y/2);
+		
 		// Load GameOver Image
 		Texture gameOverTexture = new Texture();
 		gameOverTexture.loadFromStream(Game.class.getResourceAsStream("/spacetraveler/rsc/gameOver.png"));
@@ -270,6 +276,7 @@ public class Game {
 	
 		
 		boolean gameOver = false;		/**< @brief true, wenn der Spieler das Spiel verloren hat */
+		boolean youWon = false; 		/**< @breif true, wenn der Spieler das Spiel gewonnen hat */
 		int userGravityId = -1;
 
 		
@@ -292,6 +299,7 @@ public class Game {
         		if(ev.type == Type.KEY_PRESSED && ev.asKeyEvent().key == Key.ESCAPE){
         			menuAktiv = true;
         			gameOver = true;
+        			youWon = true;
         			
         			continue;
         		}
@@ -308,6 +316,7 @@ public class Game {
         				gravLeft = false;
         				
         				gameOver = false;
+        				youWon = false;
         				
         			} else if(spielBeendenButton.contains(mousePos)){
         				hauptfenster.close();
@@ -323,6 +332,7 @@ public class Game {
                 				gravLeft = false;
                 				
                 				gameOver = false;
+                				youWon = false;
         						
         						continue;
         					}
@@ -341,6 +351,7 @@ public class Game {
         			gravLeft = false;
         			gravRight = false;
         			gameOver = false;
+        			youWon = false;
         			
         			break;
         		}
@@ -372,7 +383,7 @@ public class Game {
 			
 			hauptfenster.clear();
 			
-			if(!gameOver && !menuAktiv){
+			if(!gameOver && !menuAktiv && !youWon){
 				// Berechnungen
 				for(SpaceObject s : l.spaceObjects){
 					Vector2f gesamtEnergie = new Vector2f(0, 0);
@@ -464,6 +475,11 @@ public class Game {
 						}
 					}
 				}
+				
+				if(intersection(l.sprites[1].getGlobalBounds(),l.spaceObjects.elementAt(0).sprite.getGlobalBounds()))
+				{
+					youWon = true;
+				}
 			
 				
 				// Überprüfen, ob die Zeit abgelaufen ist.
@@ -505,12 +521,10 @@ public class Game {
 					hauptfenster.draw(s.getSprite());
 				}
 				
-				if(!l.sprites.isEmpty())
+
+				for(int x = 0; x < l.sprites.length; x++)
 				{
-					for(Sprite sp: l.sprites)
-					{
-						hauptfenster.draw(sp);
-					}
+					hauptfenster.draw(l.sprites[x]);
 				}
 				
 				// Zeit anzeigen!
@@ -531,6 +545,12 @@ public class Game {
 					gameOverSprite.setPosition(hauptfenster.mapPixelToCoords(new Vector2i(hauptfenster.getSize().x/2, hauptfenster.getSize().y/2)));
 					hauptfenster.draw(gameOverSprite);
 				}
+				
+				if(youWon){
+					youWonSprite.setPosition(hauptfenster.mapPixelToCoords(new Vector2i(hauptfenster.getSize().x/2, hauptfenster.getSize().y/2)));
+					hauptfenster.draw(youWonSprite);
+				}
+				
 				
 				// Wenn Menü aktiviert wurde, Menü anzeigen
 				if(menuAktiv){

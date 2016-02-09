@@ -19,7 +19,7 @@ public class Level {
 	
 	public Vector<SpaceObject> spaceObjects;	/**< @brief SpaceObjects im Level */
 	public Vector<Gravity> gravityFields;		/**< @brief GravityFields im Level */
-	public Vector<Sprite> sprites;
+	public Sprite[] sprites;
 	
 	public Clock levelTimer;					/**< @brief Timer, der Zeit seit Beginn hochzählt */
 	public float levelTimeAvailable;			/**< @brief Zeit, die für das Level zur Verfügung steht */
@@ -55,7 +55,7 @@ public class Level {
 		//tiles = new Vector<>();
 		spaceObjects = new Vector<>();
 		gravityFields = new Vector<>();
-		sprites = new Vector<>();
+		sprites = new Sprite[2];
 	
 		// Leveldatei öffnen
 		Scanner parser = new Scanner(Game.class.getResourceAsStream("/spacetraveler/rsc/levels/" + levelId));
@@ -166,12 +166,21 @@ public class Level {
 			startTex.loadFromStream(Game.class.getResourceAsStream("/spacetraveler/rsc/goal.png"));
 			Sprite start = new Sprite(startTex);
 			start.setPosition(mitte);
-			sprites.add(start);
+			sprites[0] = start;
 			
 			//erstellen des Spielers
 			spaceObjects.add(0,new SpaceObject("/spacetraveler/rsc/spieler.png", 5.0f, new Vector2f(50, 0), coord, mitte, true));
 
 			
+		}
+		if(tileType == 5) //zielfeld
+		{
+			Vector2f mitte = new Vector2f(pos.x+512/2, pos.y+512/2); // herausfinden der Mitte
+			Texture zielTex = new Texture(); 
+			zielTex.loadFromStream(Game.class.getResourceAsStream("/spacetraveler/rsc/goal.png"));
+			Sprite ziel = new Sprite(zielTex);
+			ziel.setPosition(mitte);
+			sprites[1] = (ziel);
 		}
 	}
 	
