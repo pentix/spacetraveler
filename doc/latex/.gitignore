@@ -1,8 +1,8 @@
-doc/latex/dokumentation_spacetraveler-blx.bib
-doc/latex/dokumentation_spacetraveler.aux
-doc/latex/dokumentation_spacetraveler.log
-doc/latex/dokumentation_spacetraveler.out
-doc/latex/dokumentation_spacetraveler.pdf
-doc/latex/dokumentation_spacetraveler.run.xml
-doc/latex/dokumentation_spacetraveler.toc
-doc/latex/titelseite.aux
+*.bib
+*.aux
+*.log
+*.out
+*.pdf
+*.run.xml
+*.toc
+*.aux
