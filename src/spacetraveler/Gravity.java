@@ -14,7 +14,7 @@ import org.jsfml.system.Vector2f;
 public class Gravity {
 	public Texture texture;		/**< Textur der Klasse */
 	public Sprite sprite;		/**< Sprite der Klasse */
-	public GravityModel model;	/**< Rechnerisches Modell für die Gravitation */
+	public GravityModel model;	/**< Rechnerisches Modell fuer die Gravitation */
 	
 	/**
 	 * @brief Konstruktor
@@ -42,7 +42,7 @@ public class Gravity {
 	}
 	
 	/**
-	 * @brief getter für Sprite
+	 * @brief getter fuer Sprite
 	 * @return Sprite der Klasse
 	 */
 	public Sprite getSprite(){

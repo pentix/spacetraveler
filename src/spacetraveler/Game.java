@@ -18,18 +18,18 @@ import org.jsfml.window.event.MouseButtonEvent;
 
 
 /**
- * @brief Gameklasse. Enthält die main()-Methode
+ * @brief Gameklasse. Enthaelt die main()-Methode
  * 
  */
 public class Game {
 	
-	private static boolean gravLeft = false; 		/**< @brief Wird linke Maustaste gedrückt?*/
-	private static boolean gravRight = false; 		/**< @brief Wird rechte Maustaste gedrückt?*/
+	private static boolean gravLeft = false; 		/**< @brief Wird linke Maustaste gedrueckt?*/
+	private static boolean gravRight = false; 		/**< @brief Wird rechte Maustaste gedrueckt?*/
 	
 	/**
-	 * @brief Hilfsfunktion zum Berechnen der Länge des Vectors
+	 * @brief Hilfsfunktion zum Berechnen der Laenge des Vectors
 	 * @param v ein Vektor
-	 * @return Länge des Vektors
+	 * @return Laenge des Vektors
 	 */
 	public static float absVec(Vector2f v)
 	{
@@ -137,7 +137,7 @@ public class Game {
 	
 	
 	/**
-	 * @brief Kollisionsüberprüfung und elastischer Stoss
+	 * @brief Kollisionsueberpruefung und elastischer Stoss
 	 * @param spaceObjects liste der Spaceobjects, um alle �berpr�fen zu k�nnen
 	 */
 	public static void schneiden(Vector<SpaceObject> spaceObjects)
@@ -222,7 +222,7 @@ public class Game {
 	
 	/**
 	 * @brief Main-Methode des ganzen Spiels
-	 * @param args Konsolenargumente, die dem Programm übergeben werden. (Werden nicht ausgewertet)
+	 * @param args Konsolenargumente, die dem Programm uebergeben werden. (Werden nicht ausgewertet)
 	 */
 	public static void main(String args[]) throws InterruptedException, IOException{
 		RenderWindow hauptfenster = new RenderWindow(new VideoMode(1200, 800), "SpaceTraveler", Window.TITLEBAR | Window.CLOSE);
@@ -245,7 +245,7 @@ public class Game {
 		Vector<String> availableLevels = new Vector<>(); 
 		Vector<Text> levelOptions = new Vector<>();
 		
-		Text selectLevelText = new Text("Oder wähle ein Level aus:", font);
+		Text selectLevelText = new Text("Oder waehle ein Level aus:", font);
 		selectLevelText.setPosition(400, 250);
 		
 		
@@ -287,7 +287,7 @@ public class Game {
 		Sprite gameOverSprite = new Sprite(gameOverTexture);
 		gameOverSprite.setOrigin(gameOverTexture.getSize().x/2, gameOverTexture.getSize().y/2);
 		
-		// Anzeigetext für Zeit erstellen
+		// Anzeigetext fuer Zeit erstellen
 		Text timeText = new Text("", font);
 		timeText.setPosition(25, 25);
 		
@@ -315,7 +315,7 @@ public class Game {
         			continue;
         		}
         		
-        		// Escape um zum Menü zu gelangen
+        		// Escape um zum Menue zu gelangen
         		if(ev.type == Type.KEY_PRESSED && ev.asKeyEvent().key == Key.ESCAPE){
         			menuAktiv = true;
         			gameOver = true;
@@ -324,7 +324,7 @@ public class Game {
         			continue;
         		}
         		
-        		// Menü Klick abfangen
+        		// Menue Klick abfangen
         		if(menuAktiv && ev.type == Type.MOUSE_BUTTON_RELEASED){
         			Vector2i mousePos = ev.asMouseButtonEvent().position;
         			if(spielStartenButton.contains(mousePos)){
@@ -523,7 +523,7 @@ public class Game {
 				}
 			
 				
-				// Überprüfen, ob die Zeit abgelaufen ist.
+				// Ueberpruefen, ob die Zeit abgelaufen ist.
 				if(l.levelTimer.getElapsedTime().asSeconds() > l.levelTimeAvailable){
 					gameOver = true;
 				}
@@ -598,7 +598,7 @@ public class Game {
 				}
 				
 				
-				// Wenn Menü aktiviert wurde, Menü anzeigen
+				// Wenn Menue aktiviert wurde, Menue anzeigen
 				if(menuAktiv){
 					hauptfenster.clear(new Color(155, 150, 150));
 					menuSprite.setPosition(hauptfenster.mapPixelToCoords(new Vector2i(hauptfenster.getSize().x/2, hauptfenster.getSize().y/2)));

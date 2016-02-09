@@ -3,7 +3,7 @@ package spacetraveler;
 import org.jsfml.system.*;
 
 /**
- * @brief Klasse für rechnerische Eigenschaften der Gravitationspunkte
+ * @brief Klasse fuer rechnerische Eigenschaften der Gravitationspunkte
  */
 public class GravityModel {
 	public Vector2f center;		/**< Gravitationszentrum */
@@ -23,8 +23,8 @@ public class GravityModel {
 	 * @brief Gibt die auf ein SpaceObject wirkende Energie aus
 	 * 
 	 * Berechnet also die Auswirkungen der Gravitation auf das Objekt s
-	 * @param s SpaceObject für das die Energieauswirkungen berechnet werden sollen
-	 * @return Energievektor, der dem SpaceObject hinzugefügt werden kann
+	 * @param s SpaceObject fuer das die Energieauswirkungen berechnet werden sollen
+	 * @return Energievektor, der dem SpaceObject hinzugefuegt werden kann
 	 */
 	public Vector2f getEnergy(SpaceObject s){
 		float dx = center.x-s.getSprite().getPosition().x;

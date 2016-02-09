@@ -10,8 +10,8 @@ import org.jsfml.system.Clock;
 import org.jsfml.system.Vector2f;
 
 /**
- * @brief Enthält alle für ein Level notwendige Objekte (Gravitationspunkte, etc...)
- * @throws IOException Wenn Dateien nicht geladen werden können
+ * @brief Enthaelt alle fuer ein Level notwendige Objekte (Gravitationspunkte, etc...)
+ * @throws IOException Wenn Dateien nicht geladen werden koennen
  *
  * */
 public class Level {
@@ -22,20 +22,20 @@ public class Level {
 	public Vector<BlackHole> blackHoles;
 	public Sprite[] sprites;
 	
-	public Clock levelTimer;					/**< @brief Timer, der Zeit seit Beginn hochzählt */
-	public float levelTimeAvailable;			/**< @brief Zeit, die für das Level zur Verfügung steht */
+	public Clock levelTimer;					/**< @brief Timer, der Zeit seit Beginn hochzaehlt */
+	public float levelTimeAvailable;			/**< @brief Zeit, die fuer das Level zur Verfuegung steht */
 	
 	public Vector2f levelStart; 				/**< @brief Level Startpunkt */
 	public Vector2f levelZiel;					/**< @brief Level Zielpunkt */
 	
 	public int levelWidth;						/**< @brief Breite des Levels */
-	public int levelHeight;						/**< @brief Höhe des Levels */
+	public int levelHeight;						/**< @brief Hoehe des Levels */
 	
 	
 	/**
-	 * @brief Liest ein Level aus der Datei ein und erstellt die dazugehörigen Objekte
+	 * @brief Liest ein Level aus der Datei ein und erstellt die dazugehoerigen Objekte
 	 * @param levelId Name des Levels ( = Name der Datei in /spacetraveler/rsc/levels/)
-	 * @throws IOException Wenn Leveldatei nicht geöffnet werden kann
+	 * @throws IOException Wenn Leveldatei nicht geoeffnet werden kann
 	 * 
 	 * Struktur der Leveldatei:
 	 * 
@@ -59,7 +59,7 @@ public class Level {
 		blackHoles = new Vector<>();
 		sprites = new Sprite[2];
 	
-		// Leveldatei öffnen
+		// Leveldatei oeffnen
 		Scanner parser = new Scanner(Game.class.getResourceAsStream("/spacetraveler/rsc/levels/" + levelId));
 		
 		// Levelinformationen laden
@@ -91,7 +91,7 @@ public class Level {
 	
 	
 	/**
-	 * @brief Lädt das Hintergrundbild eines Tiles und fügt die Objekte des Tiles dem aktuellen Level hinzu
+	 * @brief Laedt das Hintergrundbild eines Tiles und fuegt die Objekte des Tiles dem aktuellen Level hinzu
 	 * @param pos Position des Tiles (in absoluten Bildschirmkoordinaten)
 	 * @param tileType Gibt den Typ/die Art des Tiles an
 	 * @throws IOException Dateizugriffsfehler

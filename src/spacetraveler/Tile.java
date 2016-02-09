@@ -11,10 +11,10 @@ import org.jsfml.system.Vector2f;
  * 
  * @brief Darstellung der Tiles
  * 
- * Diese Klasse dient dazu eine Sprite-Instanz, als auch die dazugehörige Texture
- * zu bündeln, um sie nicht einzeln verwalten zu müssen. Diese Klasse beeinhaltet keine
- * Methoden, sondern lediglich öffentlich zugängliche Attribute. Der Konstruktor
- * dient dazu, die für die Darstellung nötigen Daten einzulesen und zu laden.
+ * Diese Klasse dient dazu eine Sprite-Instanz, als auch die dazugehoerige Texture
+ * zu buendeln, um sie nicht einzeln verwalten zu muessen. Diese Klasse beeinhaltet keine
+ * Methoden, sondern lediglich oeffentlich zugaengliche Attribute. Der Konstruktor
+ * dient dazu, die fuer die Darstellung noetigen Daten einzulesen und zu laden.
  *
  */
 public class Tile {
@@ -27,7 +27,7 @@ public class Tile {
 	public Vector2f coord;
 	
 	/**
-	 * @brief Konstruktor des Tiles: Lädt Texturdaten und erstellt das Sprite
+	 * @brief Konstruktor des Tiles: Laedt Texturdaten und erstellt das Sprite
 	 * @param p Position des Tiles (in absoluten Bildschirmkoordinaten)
 	 * @param index Hintergrundbild des Tiles ( = Dateiname /spacetraveler/rsc/tiles/tile_bg***.png)
 	 * @throws IOException Dateizugriffsfehler

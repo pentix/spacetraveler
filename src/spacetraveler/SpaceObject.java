@@ -7,10 +7,10 @@ import org.jsfml.system.*;
 
 /**
  * 
- * @brief Superklasse für alle Objekte, die sich auf dem Bildschirm bewegen können.
+ * @brief Superklasse fuer alle Objekte, die sich auf dem Bildschirm bewegen koennen.
  * 
  * Die Klasse vereint unser Model (SpaceObjectModel) mit den SFML-Darstellungsklassen wie
- * Sprite und Texture. Im Code muss also nur ein SpaceObject erstellt werden, die immer dazugehörigen
+ * Sprite und Texture. Im Code muss also nur ein SpaceObject erstellt werden, die immer dazugehoerigen
  * anderen Klassen werden automatisch erzeugt.
  *
  */
@@ -18,7 +18,7 @@ public class SpaceObject {
 
 	public Texture texture;			/**< @brief Textur des Spaceobjects */
 	public Sprite sprite;			/**< @brief Sprite des Spaceobjects */
-	public SpaceObjectModel model;	/**< @brief Model (für Berechnungen) des Spaceobjects */
+	public SpaceObjectModel model;	/**< @brief Model (fuer Berechnungen) des Spaceobjects */
 	public boolean collided = false;		/**< boolean um Doppelkollisionen mit der Wand zu minimieren */
 	public boolean elastisch = false;		/**< boolean um Doppelkollisionen mit anderenn Objekten zu minimieren*/
 	
@@ -28,7 +28,7 @@ public class SpaceObject {
 	
 	/**
 	 * @brief Konstruktor
-	 * @param texturePath Pfad zur Textur, die für das SpaceObject verwendet werden soll
+	 * @param texturePath Pfad zur Textur, die fuer das SpaceObject verwendet werden soll
 	 * @param m Masse des SpaceObjects
 	 * @param energy Anfangsenergievektor des SpaceObjects
 	 * @param coord position des SpaceObjects innerhalb des Koordinatenfeldes: Feld
@@ -91,15 +91,15 @@ public class SpaceObject {
 	}
 	
 	/**
-	 * @brief Fügt dem Objekt an Rotationsgeschwindigkeit hinzu, d.h., beschleunigt das Objekt in der Rotation
-	 * @param am Zusätzliche Rotationsgeschwindigkeit [Grad/s]
+	 * @brief Fuegt dem Objekt an Rotationsgeschwindigkeit hinzu, d.h., beschleunigt das Objekt in der Rotation
+	 * @param am Zusaetzliche Rotationsgeschwindigkeit [Grad/s]
 	 */
 	public void addAngularMomentum(float am){
 		this.angularMomentum += am;
 	}
 	
 	/**
-	 * @brief getter für angularMomentum
+	 * @brief getter fuer angularMomentum
 	 * @return Rotationsgeschwindigkeit [Grad/s]
 	 */
 	public float getAngularMomentum(){
@@ -107,7 +107,7 @@ public class SpaceObject {
 	}
 	
 	/**
-	 * @brief getter für verwendetes Sprite
+	 * @brief getter fuer verwendetes Sprite
 	 * @return Verwendetes Spriteobjekt
 	 */
 	public Sprite getSprite(){

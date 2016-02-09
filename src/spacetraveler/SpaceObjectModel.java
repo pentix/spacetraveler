@@ -6,7 +6,7 @@ import org.jsfml.graphics.CircleShape;
 import org.jsfml.system.*;
 
 /**
- * @brief Rechnerisches Modell für SpaceObjects
+ * @brief Rechnerisches Modell fuer SpaceObjects
  */
 public class SpaceObjectModel {
 	private Vector2f v;			/**< @brief Bewegungsrichtung / Geschwindigkeit */
@@ -27,7 +27,7 @@ public class SpaceObjectModel {
 	
 	
 	/**
-	 * @brief Fügt dem Objekt gerichtete Energie hinzu
+	 * @brief Fuegt dem Objekt gerichtete Energie hinzu
 	 * @param energy Die gerichtete Energie
 	 */
 	public void addEnergy(Vector2f energy){
@@ -63,7 +63,7 @@ public class SpaceObjectModel {
 	}
     
 	/**
-	 * getter für Energy
+	 * getter fuer Energy
 	 * @return Energie des Objektes
 	 */
     public Vector2f getEnergy()
@@ -72,7 +72,7 @@ public class SpaceObjectModel {
     }
 	
     /**
-     * @brief getter für v
+     * @brief getter fuer v
      * @return Geschwindigkeitsvektor v des Objekts
      */
 	public Vector2f getVelocity()
@@ -82,8 +82,8 @@ public class SpaceObjectModel {
 	 
 			
 	/**
-	 * @brief getter für gravityOn
-	 * @return Gravitation für dieses Objekt eingeschaltet?
+	 * @brief getter fuer gravityOn
+	 * @return Gravitation fuer dieses Objekt eingeschaltet?
 	 */
 	public boolean isGravityOn()
 	{
@@ -95,7 +95,7 @@ public class SpaceObjectModel {
 	 * @brief Konstruktor
 	 * @param m Masse des Objekts
 	 * @param energy Anfangsenergievektor des Objekts
-	 * @param gravityOn Gibt an ob das Objekt von Gravitationskräften beeinflusst wird
+	 * @param gravityOn Gibt an ob das Objekt von Gravitationskraeften beeinflusst wird
 	 */
 	public SpaceObjectModel(double m, Vector2f energy, boolean gravityOn, int Radius){
 		this.m = m;
