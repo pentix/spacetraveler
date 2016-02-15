@@ -48,7 +48,7 @@ public class Game {
 	}
 	
 	/**
-	 * @brief Funktion zum ï¿½berprï¿½fen ob ein Punkt in einem Floatrect ist
+	 * @brief Funktion zum ueberpruefen ob ein Punkt in einem Floatrect ist
 	 * @param f das Floatrect
 	 * @param P der Punkt
 	 * @return true wenn der Punkt enthalten ist, ansonsten false
@@ -69,16 +69,16 @@ public class Game {
 	}
 	
 	/**
-	 * @brief Funktion die die ï¿½berschneidung zweier Floatrects ï¿½berpï¿½ft
+	 * @brief Funktion die die ueberschneidung zweier Floatrects ueberpueft
 	 * @param a FloatRect a muss erheblich kleiner als b sein
-	 * @param b Das grï¿½ssere Floatrect
-	 * @return true wenn sie sich ï¿½berschneiden, ansonnsten false
+	 * @param b Das groessere Floatrect
+	 * @return true wenn sie sich ueberschneiden, ansonnsten false
 	 */
 	public static boolean intersection(FloatRect a, FloatRect b)
 	{
-		// ansatz: b ist erheblich grï¿½sser als a
-		// dadurch muss bei einer ï¿½berschneidung immer min. ein Eckpunkt im anderen Rechteck liegen
-		// ï¿½berprï¿½fen ob Ecken von a in b:
+		// ansatz: b ist erheblich groesser als a
+		// dadurch muss bei einer Ueberschneidung immer min. ein Eckpunkt im anderen Rechteck liegen
+		// Ueberpruefen ob Ecken von a in b:
 		Vector2f a_LO = new Vector2f(a.left, a.top);
 		Vector2f a_LU = Vector2f.add(a_LO, new Vector2f(0, a.height));
 		Vector2f a_RO = Vector2f.add(a_LO, new Vector2f(a.width, 0));
@@ -96,9 +96,9 @@ public class Game {
 	
 	public static boolean containsFloat(FloatRect a, FloatRect b)
 	{
-		// ansatz: b ist erheblich grï¿½sser als a
-		// dadurch muss bei einer ï¿½berschneidung immer min. ein Eckpunkt im anderen Rechteck liegen
-		// ï¿½berprï¿½fen ob Ecken von a in b:
+		// ansatz: b ist erheblich groesser als a
+		// dadurch muss bei einer Ueberschneidung immer min. ein Eckpunkt im anderen Rechteck liegen
+		// Ueberpruefen ob Ecken von a in b:
 		Vector2f a_LO = new Vector2f(a.left, a.top);
 		Vector2f a_LU = Vector2f.add(a_LO, new Vector2f(0, a.height));
 		Vector2f a_RO = Vector2f.add(a_LO, new Vector2f(a.width, 0));
@@ -114,6 +114,12 @@ public class Game {
 		}
 	}
 	
+	/**
+	 * @brief Überprüfen ob im naechsten Schritt zwei SpaceObjects kollidieren werden
+	 * @param A	erstes SpaceObject
+	 * @param B	zweites SpaceObject
+	 * @return bei Kollision true, ansonsten false
+	 */
 	public static boolean SpaceObjectsCollision(SpaceObject A, SpaceObject B)
 	{
 		A.move();
@@ -138,7 +144,7 @@ public class Game {
 	
 	/**
 	 * @brief Kollisionsueberpruefung und elastischer Stoss
-	 * @param spaceObjects liste der Spaceobjects, um alle ï¿½berprï¿½fen zu kï¿½nnen
+	 * @param spaceObjects liste der Spaceobjects, um alle ueberpruefen zu kuennen
 	 */
 	public static void schneiden(Vector<SpaceObject> spaceObjects)
 	{
@@ -198,12 +204,10 @@ public class Game {
 						
 						A.elastisch = true;
 						
-						//A.collided = 2;
-						//B.collided = 2;
 					}
 					else
 					{
-						//Falls keine Kollision stattgefunden hat, B zurï¿½ckpositionieren
+						//Falls keine Kollision stattgefunden hat, B zurueckpositionieren
 						B.sprite.move(Vector2f.mul(B.model.getVelocity(),-1)); 
 						A.elastisch = false;
 					}
@@ -297,7 +301,7 @@ public class Game {
 		
 		boolean gameOver = false;		/**< @brief true, wenn der Spieler das Spiel verloren hat */
 		boolean youWon = false; 		/**< @breif true, wenn der Spieler das Spiel gewonnen hat */
-		int userGravityId = -1;
+		int userGravityId = -1;			/**< @brief -1, wenn kein Gravitationszentrum gesetzt ist */
 
 		
 		// Level erstellen (Laden, um l zu initialisieren!)
@@ -387,6 +391,7 @@ public class Game {
 	        		}
         		}
         		
+        		
         		if(ev.type == Type.MOUSE_BUTTON_PRESSED && ev.asMouseButtonEvent().button == Mouse.Button.RIGHT){
 	        		if(gravRight == false){
 	        			gravRight = true;
@@ -395,9 +400,7 @@ public class Game {
 	        			
 	        			continue;
 	        		}
-        		}
-        		
-        		
+        		}	
 			}
 
 			
@@ -413,7 +416,7 @@ public class Game {
 							gesamtEnergie = Vector2f.add(gesamtEnergie, g.model.getEnergy(s));
 						}
 					
-						if(l.blackHoles.size() != 0){
+						if(l.blackHoles.size() != 0){ // Wenn Schwarze Loecher enthalten sind, Abstand ueberpruefen
 							for(BlackHole b: l.blackHoles){
 								if(absVec(Vector2f.sub(s.getSprite().getPosition(),b.center)) <= 200)
 								{
@@ -446,11 +449,15 @@ public class Game {
 					}
 				}
 				
-				if(l.spaceObjects.size()!= 0){				// es muss mindestens ein objekt haben
+				/**
+				 * Abschnitt zur Berechnung der Position der SpaceObjects im Feld
+				 * Zuerst Berechnung der umliegenden Sprites und KOllision
+				 * Danach Ermittlung auf welchem Tile es momentan ist
+				 */
+				if(l.spaceObjects.size()!= 0){				// es muss mindestens ein Objekt haben
 					for(SpaceObject s : l.spaceObjects)		
 					{
 						s.sprite.move(s.model.getVelocity());;
-
 						
 							for(int f = 1; f < s.Bereich.length; f++)
 							{
@@ -458,7 +465,7 @@ public class Game {
 								FloatRect FR = tile.sprite.getGlobalBounds();
 								if(tile.index == 1)
 								{
-									if(intersection(s.sprite.getGlobalBounds(), FR)) //kollisionsï¿½berprï¿½fung
+									if(intersection(s.sprite.getGlobalBounds(), FR)) //kollisionsueberpruefung
 									{										
 										// umdrehen der einen komponente der Geschwindigkeits- und Energievektoren
 										float a = s.model.getVelocity().x;
@@ -480,27 +487,27 @@ public class Game {
 											s.collided = true;
 										}
 									}
+									
 									else
 									{
-										
 										s.collided = false;
-	
 									}
+									
 								}
+								
 								else
 								{
 									s.collided = false;
 								}
-	
+								
 							}
+							
 							s.sprite.move(-s.model.getVelocity().x, -s.model.getVelocity().y);
-
 						}
-					
 				}
 				
 				/**
-				 * ï¿½berprï¿½fen der Kollision unter den Objekten
+				 * ueberpruefen der Kollision unter den Objekten
 				 * Bewegen aller Objekte
 				 */
 				schneiden(l.spaceObjects);
@@ -528,8 +535,6 @@ public class Game {
 					gameOver = true;
 				}
 				
-				view.setCenter(l.spaceObjects.get(0).getSprite().getPosition());
-				
 				// Hintergrund / View gut positionieren!
 				view.setCenter(l.spaceObjects.get(0).getSprite().getPosition());
 				hauptfenster.setView(view);
@@ -548,19 +553,17 @@ public class Game {
 					}
 				}
 				
-				/*for(Tile t : l.tiles){
-					hauptfenster.draw(t.sprite);
-				}*/
-				
 				// Alle Gravitys zeichnen
 				for(Gravity g : l.gravityFields){
 					hauptfenster.draw(g.getSprite());
 				}
 				
+				// Alle blackHoles zeichnen
 				for(BlackHole b : l.blackHoles){
 					hauptfenster.draw(b.getSprite());
 				}
-
+				
+				// Alle zusätzlichen Sprites zeichnen
 				for(int x = 0; x < l.sprites.length; x++)
 				{
 					hauptfenster.draw(l.sprites[x]);
@@ -621,7 +624,7 @@ public class Game {
 
 			
 			hauptfenster.display();
-			Thread.sleep(1000/25);
+			Thread.sleep(1000/25); // Beschraenkung der Geschwindigkeit
 		}
 	}
 	

@@ -19,8 +19,8 @@ public class Level {
 	
 	public Vector<SpaceObject> spaceObjects;	/**< @brief SpaceObjects im Level */
 	public Vector<Gravity> gravityFields;		/**< @brief GravityFields im Level */
-	public Vector<BlackHole> blackHoles;
-	public Sprite[] sprites;
+	public Vector<BlackHole> blackHoles;		/**< @brief BlackHoles im Level */
+	public Sprite[] sprites;					/**< @brief zusaetzliche Sprites für Start und Ziel im Level*/
 	
 	public Clock levelTimer;					/**< @brief Timer, der Zeit seit Beginn hochzaehlt */
 	public float levelTimeAvailable;			/**< @brief Zeit, die fuer das Level zur Verfuegung steht */
@@ -53,7 +53,6 @@ public class Level {
 	public Level(String levelId) throws IOException{
 	
 		// Class Members initialisieren
-		//tiles = new Vector<>();
 		spaceObjects = new Vector<>();
 		gravityFields = new Vector<>();
 		blackHoles = new Vector<>();
@@ -159,12 +158,11 @@ public class Level {
 			gravityFields.addElement(new Gravity(Vector2f.add(pos, P), m));
 		}
 		
-		// anzahlblackHoles
-		int anzahlBlackHoles = parser.nextInt();			parser.nextLine();
-		
 		// blackHoles
-		for(int n=0; n<anzahlBlackHoles; n++){
-			
+		
+		int anzahlBlackHoles = parser.nextInt();			parser.nextLine();
+		//Wenn anzahlBlackHoles = 0 keine BlackHoles
+		if(anzahlBlackHoles != 0){
 			float m = parser.nextFloat();											parser.nextLine();					
 			blackHoles.addElement(new BlackHole(mitte, m));
 		}
@@ -175,14 +173,14 @@ public class Level {
 		{
 			
 
-			//laden un positiionieren der Starttextur
+			//laden und positionieren der Starttextur
 			Texture startTex = new Texture(); 
 			startTex.loadFromStream(Game.class.getResourceAsStream("/spacetraveler/rsc/goal.png"));
 			Sprite start = new Sprite(startTex);
 			start.setPosition(mitte);
 			sprites[0] = start;
 			
-			//erstellen des Spielers
+			//Erstellen des Spielers
 			spaceObjects.add(0,new SpaceObject("/spacetraveler/rsc/spieler.png", 5.0f, new Vector2f(50, 0), coord, mitte, true));
 
 			

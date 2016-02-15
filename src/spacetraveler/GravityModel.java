@@ -21,8 +21,8 @@ public class GravityModel {
 	
 	/** 
 	 * @brief Gibt die auf ein SpaceObject wirkende Energie aus
-	 * 
 	 * Berechnet also die Auswirkungen der Gravitation auf das Objekt s
+	 * 
 	 * @param s SpaceObject fuer das die Energieauswirkungen berechnet werden sollen
 	 * @return Energievektor, der dem SpaceObject hinzugefuegt werden kann
 	 */

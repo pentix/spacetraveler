@@ -13,7 +13,7 @@ public class SpaceObjectModel {
 	private Vector2f e;			/**< @brief Energievektor */
 	private double m;			/**< @brief Masse */
 	private boolean gravityOn;	/**< @brief Wirkt Gravitation auf dieses Objekt? */
-	private int radius;	
+	private int radius;			/**< @brief radius des Kollisionskreises */
 	
 	/**
 	 * @brief Berechnet den Geschwindigkeitsvektor anhand des Energievektors neu.

@@ -16,15 +16,15 @@ import org.jsfml.system.*;
  */
 public class SpaceObject {
 
-	public Texture texture;			/**< @brief Textur des Spaceobjects */
-	public Sprite sprite;			/**< @brief Sprite des Spaceobjects */
-	public SpaceObjectModel model;	/**< @brief Model (fuer Berechnungen) des Spaceobjects */
+	public Texture texture;					/**< @brief Textur des Spaceobjects */
+	public Sprite sprite;					/**< @brief Sprite des Spaceobjects */
+	public SpaceObjectModel model;			/**< @brief Model (fuer Berechnungen) des Spaceobjects */
 	public boolean collided = false;		/**< boolean um Doppelkollisionen mit der Wand zu minimieren */
 	public boolean elastisch = false;		/**< boolean um Doppelkollisionen mit anderenn Objekten zu minimieren*/
 	
-	private float angularMomentum;	/**< @brief Rotationsgeschwindigkeit */
+	private float angularMomentum;			/**< @brief Rotationsgeschwindigkeit */
 	
-	public Vector2f[] Bereich;		/**< @brief Array mit 5 Koordinaten zu Tiles */
+	public Vector2f[] Bereich;				/**< @brief Array mit 5 Koordinaten zu Tiles */
 	
 	/**
 	 * @brief Konstruktor
