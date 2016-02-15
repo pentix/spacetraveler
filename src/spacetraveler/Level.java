@@ -20,7 +20,7 @@ public class Level {
 	public Vector<SpaceObject> spaceObjects;	/**< @brief SpaceObjects im Level */
 	public Vector<Gravity> gravityFields;		/**< @brief GravityFields im Level */
 	public Vector<BlackHole> blackHoles;		/**< @brief BlackHoles im Level */
-	public Sprite[] sprites;					/**< @brief zusaetzliche Sprites für Start und Ziel im Level*/
+	public Sprite[] sprites;					/**< @brief zusaetzliche Sprites fuer Start und Ziel im Level*/
 	
 	public Clock levelTimer;					/**< @brief Timer, der Zeit seit Beginn hochzaehlt */
 	public float levelTimeAvailable;			/**< @brief Zeit, die fuer das Level zur Verfuegung steht */

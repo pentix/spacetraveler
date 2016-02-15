@@ -8,7 +8,7 @@ import org.jsfml.system.Vector2f;
 
 /**
  * 
- * @brief Klasse für Schwarze Loecher Klasse Gravity vererbt
+ * @brief Klasse fuer Schwarze Loecher Klasse Gravity vererbt
  *
  */
 public class BlackHole extends Gravity {
@@ -16,7 +16,7 @@ public class BlackHole extends Gravity {
 	public Vector2f center = this.model.center;
 
 	/**
-	 * @brief Konstruktor für Schwarze Loecher
+	 * @brief Konstruktor fuer Schwarze Loecher
 	 * @param center Zentrum des Schwarzen Loches
 	 * @param m Masse des Schwarzen Loches
 	 * @throws IOException wenn die Textur nicht geladen werden kann.

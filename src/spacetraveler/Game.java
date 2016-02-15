@@ -117,7 +117,7 @@ public class Game {
 	}
 	
 	/**
-	 * @brief Überprüfen ob im naechsten Schritt zwei SpaceObjects kollidieren werden
+	 * @brief Ueberpruefen ob im naechsten Schritt zwei SpaceObjects kollidieren werden
 	 * @param A	erstes SpaceObject
 	 * @param B	zweites SpaceObject
 	 * @return bei Kollision true, ansonsten false
@@ -565,7 +565,7 @@ public class Game {
 					hauptfenster.draw(b.getSprite());
 				}
 				
-				// Alle zusätzlichen Sprites zeichnen
+				// Alle zusaetzlichen Sprites zeichnen
 				for(int x = 0; x < l.sprites.length; x++)
 				{
 					hauptfenster.draw(l.sprites[x]);

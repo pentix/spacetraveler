@@ -25,7 +25,7 @@ public class Gravity {
 	public Gravity(Vector2f center, double m) throws IOException
 	{
 		texture = new Texture();
-		if(m > 0) // bei positiver Masse grüner Punkt
+		if(m > 0) // bei positiver Masse gruener Punkt
 		{
 			texture.loadFromStream(Game.class.getResourceAsStream("/spacetraveler/rsc/gravity.png"));
 		}
