@@ -26,6 +26,8 @@ public class Game {
 	private static boolean gravLeft = false; 		/**< @brief Wird linke Maustaste gedrueckt?*/
 	private static boolean gravRight = false; 		/**< @brief Wird rechte Maustaste gedrueckt?*/
 	
+	private static Level l;
+	
 	/**
 	 * @brief Hilfsfunktion zum Berechnen der Laenge des Vectors
 	 * @param v ein Vektor
@@ -301,7 +303,7 @@ public class Game {
 
 		
 		// Level erstellen (Laden, um l zu initialisieren!)
-		Level l = new Level("level2");
+		l = new Level("level2");
 		
 		
 		while(hauptfenster.isOpen()){
