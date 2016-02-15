@@ -173,14 +173,25 @@ Ein spaceObject kann von einem Actor (Gravitationspunkt) angezogen werden. Das s
 	%% technische ausführung
 
 \subsection{Dokumentation}
-%4.3 eigene dokumentation - erklären wie das erstellt wurde, darauf verweisen
+Diese Dokumentation wurde in \LaTeX \. erstellt. Da die Quellcodedateien im Textformat und nicht
+binär vorliegen konnten wir sie ebenfalls in unser Revisionskontrollsystem einbinden und parallel
+an ihr schreiben.
+
+Da wir unseren Code mit den entsprechenden Kommentaren ausgeschmückt haben,
+konnten wir eine detaillierte Codedokumentation mit dem Programm \textit{doxygen} (ähnlich wie javadoc) erstellen lassen.
+Die PDF-Datei, die dabei herauskam liess sich leicht an unsere Dokumentation anhängen.
+
+Der Quellcode wurde über das \textit{listings}-Paket direkt von LaTeX selbst eingelesen und formatiert.
 
 \subsubsection{Gravitation}
 - Punkte die den Spieler unterschiedlich stark anziehen.
 %gravityModel erklären
 
 \subsubsection{Der Spieler ist ein Raumschiff}
-% bild und vielleicht SpaceObjects hier
+Der Spieler steuert ein Raumschiff, indem er es von den beschrieben Gravitationspunkten in eine Richtung ziehen oder stossen lässt.\\
+
+\includegraphics[scale=0.5]{img/spieler.png}
+
 
 \subsubsection{Raum frei von auswärtigen Kräften}
 % kurze erläuterung
@@ -197,7 +208,7 @@ Ein spaceObject kann von einem Actor (Gravitationspunkt) angezogen werden. Das s
 \section{Entwurf}
 \subsection{UML Diagramm}
 \vspace{0.3cm}
-\includegraphics[height=0.85\textwidth,angle=90]{uml.png}
+\includegraphics[height=0.85\textwidth,angle=90]{img/uml.png}
 
 \section{Implementierung}
 % Quellcode
