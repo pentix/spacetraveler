@@ -222,7 +222,8 @@ Danach lassen wir das Sprite des SpaceObjects zeichnen.
 
 
 \subsubsection{Raum frei von auswärtigen Kräften}
-% kurze erläuterung
+Unser Spiel befindet sich irgendwo in einem fiktiven Weltraum. Es gibt keine grossen Körper um das
+Level herum, die die Gravitation auf besondere Weise beeinflussen würden. Dies haben wir bewusst weggelassen.
 
 
 \subsubsection{Gravitation}
@@ -247,11 +248,11 @@ wobei \textit{auswirkungen} ein (mathematischer) Vektor ist, der \q{Energieände
 Da dies den rechnerischen Teil der Gravitationspunkte betrifft, findet sich die Implementierung in der \textit{GravityModel}-Klasse
 Wenn $m$ die Masse des spaceObjects ist, berechnet sich die Energieänderung wie folgt:
 Seien $\Delta x$ und $\Delta y$ die Differenzen der Koordinaten zwischen dem spaceObject und dem Gravitationspunkt,
-folglich ist $d = \sqrt{\Delta x^2 + \Delta y^2}$ der direkte Abstand. Die Energieänderung in $x$- und $y$-Richtung
+folglich ist $d = \sqrt{\Delta x^2 + \Delta y^2}$ der direkte Abstand. Die neue Energie eines Objektes (in $x$- und $y$-Richtung)
 ist damit gegeben als (siehe \textit{gravityModel.getEnergy()}): 
-\[ \vec{E}_{neu} = E + m \cdot \frac{1}{d} \begin{pmatrix}\Delta x \\ \Delta y\end{pmatrix} \]
+\[ \vec{E}_{neu} = \vec{E} + m \cdot \frac{1}{d} \begin{pmatrix}\Delta x \\ \Delta y\end{pmatrix} \]
 
-Aus dieser Energieänderung lässt sich wiederum die neue Geschwindigkeit des Objekts berechnen (siehe \textit{spaceObject.updateVelocity()}):
+Aus dieser Energie lässt sich wiederum die neue Geschwindigkeit des Objekts berechnen (siehe \textit{spaceObject.updateVelocity()}):
 \[ \vec{v}_{neu} = \frac{2}{m} \cdot \vec{E}_{neu}\] 
 
 Die Formeln entsprechen ebenfalls nicht ganz der Realität, so wird in der klassischen Physik zwischen Beschleunigung, Energie und Kraft unterschieden,
@@ -293,8 +294,14 @@ gezeichnet, sondern nur eine Grafik die sich mit \q{GAME OVER} über den Spielbi
 Mit der Escape-Taste gelangt man dann wieder zurück ins Hauptmenü. Wird ein neues Level geladen,
 wird die $gameOver$-Variable wieder auf $false$ gesetzt, damit das Spiel starten kann.
 
-\subsubsection{Kleine Reibung}
 
+\subsubsection{Kleine Reibung}
+Wenn ein Objekt angezogen wird, ihm somit Energie hinzugefügt wird, wird die neue Energie des Objekts auf 99\%
+des ursprünglichen Wertes gesetzt. (Siehe \textit{spaceObjectModel.addEnergy()}) Bei genug einzelnen Schritten konvergiert damit die Energie des Objekts gegen 0 und
+das Objekt pendelt sich am Gravitationspunkt ein. Dies haben wir so implementiert, damit es für den Spieler leicht ist,
+sein Raumschiff an einer bestimmten Stelle zu fixieren.
+\[ \vec{E} = \vec{E}_{alt} \cdot 0.99 \]
+\[ \lim_{n\rightarrow \infty} \vec{E} \cdot 0.99^n = \begin{pmatrix}0\\0\end{pmatrix} \] 
 
 \subsubsection{Zeit}
 
