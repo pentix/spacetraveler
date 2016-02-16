@@ -283,8 +283,14 @@ gezeichnet, sondern nur eine Grafik die sich mit \q{GAME OVER} über den Spielbi
 Mit der Escape-Taste gelangt man dann wieder zurück ins Hauptmenü. Wird ein neues Level geladen,
 wird die $gameOver$-Variable wieder auf $false$ gesetzt, damit das Spiel starten kann.
 
-\subsubsection{Kleine Reibung}
 
+\subsubsection{Kleine Reibung}
+Wenn ein Objekt angezogen wird, ihm somit Energie hinzugefügt wird, wird die neue Energie des Objekts auf 99\%
+des ursprünglichen Wertes gesetzt. (Siehe \textit{spaceObjectModel.addEnergy()}) Bei genug einzelnen Schritten konvergiert damit die Energie des Objekts gegen 0 und
+das Objekt pendelt sich am Gravitationspunkt ein. Dies haben wir so implementiert, damit es für den Spieler leicht ist,
+sein Raumschiff an einer bestimmten Stelle zu fixieren.
+\[ \vec{E} = \vec{E}_{alt} \cdot 0.99 \]
+\[ \lim_{n\rightarrow \infty} \vec{E} \cdot 0.99^n = \begin{pmatrix}0\\0\end{pmatrix} \] 
 
 \subsubsection{Zeit}
 
