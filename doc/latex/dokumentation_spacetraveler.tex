@@ -165,16 +165,18 @@ Geschwindigkeitsvektor, der seine Richtung bestimmt und nachdem er immer (und au
 \subsubsection{Technische Ausführung}
 \begin{itemize}
 \item Mit der Maus soll das Setzen eines Gravitationspunktes - und damit die Steuerung der Spielfigur - möglich sein.
+\item Mit der Tastatur soll man aus dem Spiel zurück ins Menü gelangen. (Escape-Taste)
+\item Das Spiel soll in ein eigenes Fenster registrieren, in das wir zeichnen können. 
 \item Java packages: \begin{itemize}
-	\item java.util.* \textit{(Datenstrukturen)}
-	\item java.io.* \textit{(Um Daten aus dem .jar als Streams zu laden)}
+	\item java.util.* \textit{(Native Java Datenstrukturen/Klassen, z. Bsp. Vector, Scanner)}
+	\item java.io.* \textit{(Um Daten aus der .jar-Datei direkt als Streams zu lesen)}
 \end{itemize}
 \item JSFML packages: \begin{itemize}
-	\item org.jsfml.Graphics.* \textit{(Grafik-API von JSFML)}
-	\item ...
+	\item org.jsfml.graphics.* \textit{(Grafik-API von JSFML, für Sprites, Anzeige, etc.)}
+	\item org.jsfml.system.* \textit{(System-API von JSFML, für Timer, etc.)}
+	\item org.jsfml.window.* \textit{(Window-API von JSFML, für Fenster, Eingabe, etc.)}
 \end{itemize}
 \end{itemize}
-	%% technische ausführung
 
 \subsection{Dokumentation}
 Diese Dokumentation wurde in \LaTeX \,\, erstellt. Da die Rohdateien in LaTeX im Textformat und nicht
