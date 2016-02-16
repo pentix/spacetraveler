@@ -187,9 +187,27 @@ Die PDF-Datei, die dabei herauskam liess sich leicht an unsere Dokumentation anh
 Der Quellcode wurde über das \textit{listings}-Paket direkt von LaTeX selbst eingelesen und formatiert.
 
 \subsubsection{Der Spieler ist ein Raumschiff}
-Der Spieler steuert sein Raumschiff, indem er es von den beschrieben Gravitationspunkten in eine Richtung ziehen oder stossen lässt.\\
+Wie man in der Story lesen kann, dreht sich unser Spiel vollständig um den Wissenschaftler im Raumschiff. Eigentlich geht es nur um das Raumschiff, denn dieses muss man sicher ans Ziel bringen.
+Um dieses Raumschiff zu erstellen, nutzten wir die JSFML Bibliotheken.\\
+
+\textbf{Fenster und Texturen anzeigen}	\\
+Zuerst erstellen, skalieren und positionieren wir das Fenster auf den Zeilen 234-236 der Klasse Game.java.
+Danach erstellen wir eine View.
+Solch eine View kann man sich als eine Kamera vorstellen, die mobil ist und nur das anzeigt, was sie sieht.
+Zuerst ist diese View default und hat die Dimensionen des Fensters.
+In Zeile 541 setzen wir jedoch diese Kamera auf den Spieler.
+Damit überhaupt etwas angezeigt werden kann, muss es gezeichnet werden. 
+Die Klasse RenderWindow besitzt deshalb eine Methode draw(Drawable), die wir vor allem am Ende der Gameklasse aufrufen.
+Mit dieser Methode wird das bestimmte Objekt der Art Drawable.
+Es gibt viele Klassen in den JSFML-Bibliotheken, die von dieser Art sind.
+Wir nutzten jedoch eine am Häufigsten: die Sprites.
+Die JSFML-Klasse Sprite ist sehr nützlich für Objekte, die sich bewegen und miteinander interagieren sollten.
+Um ein Sprite zu
+
+
 
 \includegraphics[scale=0.5]{img/spieler.png}
+
 
 
 \subsubsection{Raum frei von auswärtigen Kräften}

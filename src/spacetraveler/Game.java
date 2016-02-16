@@ -26,7 +26,7 @@ public class Game {
 	private static boolean gravLeft = false; 		/**< @brief Wird linke Maustaste gedrueckt?*/
 	private static boolean gravRight = false; 		/**< @brief Wird rechte Maustaste gedrueckt?*/
 	
-	private static Level l;
+	private static Level l;							/**< @todo erklaeren */
 	
 	/**
 	 * @brief Hilfsfunktion zum Berechnen der Laenge des Vectors
@@ -232,7 +232,7 @@ public class Game {
 	 */
 	public static void main(String args[]) throws InterruptedException, IOException{
 		RenderWindow hauptfenster = new RenderWindow(new VideoMode(1200, 800), "SpaceTraveler", Window.TITLEBAR | Window.CLOSE);
-		hauptfenster.clear();
+		//hauptfenster.clear();
 		hauptfenster.setPosition(new Vector2i(-10,0));
 
 		//Get the window's default view
