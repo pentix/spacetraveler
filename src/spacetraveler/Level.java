@@ -114,6 +114,9 @@ public class Level {
 	 * int | anzahlGravityFields
 	 * 	floats	| posX, posX
 	 * 	float	| m
+	 * int | anzahlBlackHoles
+	 *  floats  | posX, posY
+	 *  float   | m
 	 *
 	 *
 	 */

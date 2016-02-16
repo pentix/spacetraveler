@@ -108,7 +108,8 @@ Dies nennt man den vollkommen elastischen Stoss.\\
 Beide Fälle sind Idealfälle.
 Sie kommen in der realen Welt nicht vor.
 In unserem Spiel wollten wir einen beinahe vollkommen elastischen Stoss umsetzen.
-% langet da? wo selli da wege vektorfällig schriibe im andere teil denne?
+\todo{langet da? wo selli da wege vektorfällig schriibe im andere teil denne?}
+\ant{Jio, da wär gäbig...}
 
 
 
@@ -147,8 +148,10 @@ Maus und funktionierender JRE.
 
 \section{Spezifikation}
 \subsection{Use Cases}
+\todo{Weitere Usecases?}
 \subsubsection{Spieler}
 \includegraphics[scale=0.2]{use_cases/spieler.png}
+\todo{Beschreibung ergänzen}
 
 
 \subsubsection{spaceObject}
@@ -173,13 +176,13 @@ Ein spaceObject kann von einem Actor (Gravitationspunkt) angezogen werden. Das s
 	%% technische ausführung
 
 \subsection{Dokumentation}
-Diese Dokumentation wurde in \LaTeX \. erstellt. Da die Quellcodedateien im Textformat und nicht
+Diese Dokumentation wurde in \LaTeX \,\, erstellt. Da die Rohdateien in LaTeX im Textformat und nicht
 binär vorliegen konnten wir sie ebenfalls in unser Revisionskontrollsystem einbinden und parallel
-an ihr schreiben.
+an ihr schreiben.\\
 
 Da wir unseren Code mit den entsprechenden Kommentaren ausgeschmückt haben,
 konnten wir eine detaillierte Codedokumentation mit dem Programm \textit{doxygen} (ähnlich wie javadoc) erstellen lassen.
-Die PDF-Datei, die dabei herauskam liess sich leicht an unsere Dokumentation anhängen.
+Die PDF-Datei, die dabei herauskam liess sich leicht an unsere Dokumentation anhängen.\\
 
 Der Quellcode wurde über das \textit{listings}-Paket direkt von LaTeX selbst eingelesen und formatiert.
 
@@ -187,9 +190,42 @@ Der Quellcode wurde über das \textit{listings}-Paket direkt von LaTeX selbst ei
 - Punkte die den Spieler unterschiedlich stark anziehen.
 Im Rahmen der Implementierung der Gravitation haben wir die ganze Physik ins Spiel gebracht.
 %gravityModel erklären
+Unsere Gravitation stellt eine vereinfachte Simulation dar, die nicht ganz mit der Realität übereinstimmt.
+So ziehen sich in der echten Welt Objekte gleichzeitig an, was zu komplizierten gekoppelten Gleichungen führt, während dies in
+unserem Spiel vernachlässigt wird und die Anziehungswirkung sequentiell in kleinen Abständen berechnet wird.\\
+
+Alle Objekte, auf die sich die sich die Gravitation im Spiel auswirken kann (sog. spaceObjects), befinden sich in einer Liste (\textit{spaceObjects})
+In einer äusseren Schleife werden alle Objekte durchiteriert, in der inneren Schleife werden die Auswirkungen jedes Gravitationspunktes berechnet und
+das Objekt verschoben. In Pseudocode:
+\begin{verbatim}
+FÜR jedes objekt in spaceObjects:
+    FÜR jeden punkt in objekt.gravitationsPunkte:
+        objekt.addEnergy(punkt.getEnergy(objekt))
+\end{verbatim}
+
+wobei \textit{auswirkungen} ein (mathematischer) Vektor ist, der \q{Energieänderungen} in $x$- und $y$-Richtung angibt.
+Da dies den rechnerischen Teil der Gravitationspunkte betrifft, findet sich die Implementierung in der \textit{GravityModel}-Klasse
+Die Energieänderung berechnet sich wie folgt:
+Seien $\Delta x$ und $\Delta y$ die Differenzen der Koordinaten zwischen dem spaceObject und dem Gravitationspunkt,
+folglich ist $d = \sqrt{\Delta x^2 + \Delta y^2}$ der direkte Abstand. Die Energieänderung in $x$- und $y$-Richtung
+ist damit gegeben als (siehe \textit{gravityModel.getEnergy()}): 
+\[ \vec{E}_{neu} = E + m \cdot \frac{1}{d} \begin{pmatrix}\Delta x \\ \Delta y\end{pmatrix} \]
+
+Aus dieser Energieänderung lässt sich wiederum die neue Geschwindigkeit des Objekts berechnen (siehe \textit{spaceObject.updateVelocity()}):
+\[ \vec{v}_{neu} = \frac{2}{m} \cdot \vec{E}_{neu}\] 
+
+Die Formeln entsprechen ebenfalls nicht ganz der Realität, so wird in der klassischen Physik zwischen Beschleunigung, Energie und Kraft unterschieden,
+während wir diese Begriffe etwas unsauber mischen. Die Kraft, mit der sich 2 Objekte - nach Newton - anziehen beträgt
+\[ F = G \cdot \frac{m_1 \cdot m_2}{d^2} \]
+und nimmt im Abstand quadratisch ab. Unsere Tests ergaben aber, dass bei quadratisch abnehmender Gravitation, das
+Spiel nicht mehr \q{so lustig} war, wie mit linearer Gravitation. Die Objekte wurden in einem gewissen Abstand, wie er
+im Spiel durchaus vorkommen könnte, (fast) gar nicht angezogen, die Bahnkurven waren aber in der Nähe der Objekte
+unberechenbar und das Spiel somit nicht wirklich spielbar. Deshalb entschieden wir uns, die Anziehungskraft
+nur linear abzuschwächen lassen.
+
 
 \subsubsection{Der Spieler ist ein Raumschiff}
-Der Spieler steuert ein Raumschiff, indem er es von den beschrieben Gravitationspunkten in eine Richtung ziehen oder stossen lässt.\\
+Der Spieler steuert sein Raumschiff, indem er es von den beschrieben Gravitationspunkten in eine Richtung ziehen oder stossen lässt.\\
 
 \includegraphics[scale=0.5]{img/spieler.png}
 
