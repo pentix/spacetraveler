@@ -252,6 +252,18 @@ im Spiel durchaus vorkommen könnte, (fast) gar nicht angezogen, die Bahnkurven 
 unberechenbar und das Spiel somit nicht wirklich spielbar. Deshalb entschieden wir uns, die Anziehungskraft
 nur linear abzuschwächen lassen.
 
+
+\subsubsection{Der Spieler ist ein Raumschiff}
+Der Spieler steuert sein Raumschiff, indem er es von den beschrieben Gravitationspunkten in eine Richtung ziehen oder stossen lässt.\\
+
+\includegraphics[scale=0.5]{img/spieler.png}
+
+
+\subsubsection{Raum frei von auswärtigen Kräften}
+Unser Spiel befindet sich irgendwo in einem fiktiven Weltraum. Es gibt keine grossen Körper um das
+Level herum, die die Gravitation auf besondere Weise beeinflussen würden. Dies haben wir bewusst weggelassen.
+ 
+
 \subsubsection{Spieler bewegen / Gravitationspunkt}
 % hier spezifisch den punkt bei mausklick
 
@@ -267,16 +279,29 @@ nur linear abzuschwächen lassen.
 \subsubsection{- Gegner und Hindernisse}
 % Asteroiden und Schwarzes Loch
 
-\subsubsection{- Gameover}
+\subsubsection{Gameover}
+Wenn der Spieler mit einem Asteroiden kollidiert oder in ein schwarzes Loch
+hineingezogen wird, ist das Spiel vorbei. Wird festgestellt, dass sich die 
+Positionen des Spielers und eines anderen Objektes überschneiden, wird eine boolsche
+Variable $gameOver$, die beim Start mit $false$ initialisiert wurde, auf $true$ gesetzt.
 
-\subsubsection{- kleine Reibung}
+Vor dem eigentlich Rendering, also wenn alle Änderungen der Spielewelt berechnet wurden
+und nur noch alles auf den Bildschirm gezeichnet werden muss, wird auf dieses Flag getestet.
+Kollidierte der Spieler also seit dem letzten Rendervorgang, werden nicht mehr alle Objekte
+gezeichnet, sondern nur eine Grafik die sich mit \q{GAME OVER} über den Spielbildschirm erstreckt.
+
+Mit der Escape-Taste gelangt man dann wieder zurück ins Hauptmenü. Wird ein neues Level geladen,
+wird die $gameOver$-Variable wieder auf $false$ gesetzt, damit das Spiel starten kann.
+
+\subsubsection{Kleine Reibung}
+
 
 \subsubsection{Zeit}
 
 \subsubsection{Startmenu}
 
 \subsubsection{Spielanleitung}
-
+\inmilestonetwo
 
 \clearpage
 \newpage
