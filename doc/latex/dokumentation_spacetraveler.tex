@@ -220,7 +220,7 @@ Wenn $m$ die Masse des spaceObjects ist, berechnet sich die Energieänderung wie
 Seien $\Delta x$ und $\Delta y$ die Differenzen der Koordinaten zwischen dem spaceObject und dem Gravitationspunkt,
 folglich ist $d = \sqrt{\Delta x^2 + \Delta y^2}$ der direkte Abstand. Die neue Energie eines Objektes (in $x$- und $y$-Richtung)
 ist damit gegeben als (siehe \textit{gravityModel.getEnergy()}): 
-\[ \vec{E}_{neu} = E + m \cdot \frac{1}{d} \begin{pmatrix}\Delta x \\ \Delta y\end{pmatrix} \]
+\[ \vec{E}_{neu} = \vec{E} + m \cdot \frac{1}{d} \begin{pmatrix}\Delta x \\ \Delta y\end{pmatrix} \]
 
 Aus dieser Energie lässt sich wiederum die neue Geschwindigkeit des Objekts berechnen (siehe \textit{spaceObject.updateVelocity()}):
 \[ \vec{v}_{neu} = \frac{2}{m} \cdot \vec{E}_{neu}\] 
