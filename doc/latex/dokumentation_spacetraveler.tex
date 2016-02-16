@@ -55,7 +55,7 @@ Ziel unseres Spieles ist es, dass der Spieler sein Raumschiff von einer Startpos
 zum Ziel bringt. Dazu eine kleine Story:
 \begin{quote}
 Der verrückte Wissenschaftler Prof. Lewinsky war mit seiner Rakete auf der Suche nach einem äusserst seltenen Element welches er zur Fertigung seiner Gravitationskanone benötigt. 
-In einer weit entfernten Galaxie wurde er Fündig. 
+In einer weit entfernten Galaxie wurde er fündig. 
 Beim Treibstoff hatte er sich jedoch verrechnet und stand nun ohne Antrieb am anderen Ende des Universums.
 Glücklicherweise konnte er seine Gravitationskanone an Bord fertigstellen.
 Deine Aufgabe ist es nun Prof. Lewinsky mithilfe der instabilen und ungetesteten Gravitationskanone nach Hause zu befördern. 
@@ -78,7 +78,7 @@ Um Kräfte zu berechnen nimmt man das Produkt aus Beschleunigung und Masse.
 Also ist die Beschleunigung, wenn die Kraft bekannt ist, auch von dem Faktor Masse abhängig. ...
 
 \subsection{Gravitation}
-Unter Gravitation versteht man in der Physik, die Anziehngskraft, mit der sich Masse anzieht.
+Unter Gravitation versteht man in der Physik, die Anziehungskraft, mit der sich Masse anzieht.
 Bekannt ist uns die Gravitation von den Planeten und ihren Anziehungskräften.
 Die Sonne zieht mit ihrer enormen Masse die Planeten an und die Planeten ziehen die Monde an.
 Auf der Erde zeigt sich Gravitation als Schwerkraft, die uns am Boden hält.
@@ -199,6 +199,7 @@ Solch eine View kann man sich als eine Kamera vorstellen, die mobil ist und nur 
 Zuerst ist diese View eine Standard-View und hat die Dimensionen des Fensters.
 In Zeile 541 setzen wir jedoch diese Kamera auf den Spieler.
 Damit überhaupt etwas angezeigt werden kann, muss es gezeichnet werden. 
+
 Die Klasse \textit{RenderWindow} besitzt deshalb eine Methode \textit{draw(Drawable)}, die wir vor allem am Ende der Game-Klasse aufrufen.
 Mit dieser Methode wird das bestimmte Objekt des Typs Drawable auf das Fenster gezeichnet.
 Es gibt viele Klassen in den JSFML-Bibliotheken, die von dieser Klasse erben, sich also auf im Spielfenster zeichnen lassen.
@@ -292,6 +293,13 @@ nur linear abzuschwächen lassen.
 
 \subsubsection{- Gegner und Hindernisse}
 % Asteroiden und Schwarzes Loch
+
+Nebem dem Spieler haben wir zwei weitere Objekte erschaffen.
+Zum einen sind das die Asteroiden, andererseits sind das die Schwarzen Löcher.		\\
+
+\textbf{Asteroiden}		\\
+Die Asteroiden sind wie der Spieler Objekte
+
 
 \subsubsection{Gameover}
 Wenn der Spieler mit einem Asteroiden kollidiert oder in ein schwarzes Loch
