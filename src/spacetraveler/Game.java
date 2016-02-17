@@ -1,3 +1,19 @@
+/*
+ * 17.02.2016
+ * (c) Jonas Wahlen
+ * (c) Gabriel Gavrilas
+ * (c) Patrick Eigensatz
+ * 
+ * Verwendete Libraries: JSFML : http://jsfml.org
+ * 
+ * Arbeitsteilung:
+ * 	  * Gabriel: Kollisionserkennung
+ *    * Patrick: Technischer Ablauf, Rendering, etc.
+ *    * Jonas: Tiles
+ * 
+*/ 
+
+
 package spacetraveler;
 
 import java.io.BufferedInputStream;
@@ -26,7 +42,7 @@ public class Game {
 	private static boolean gravLeft = false; 		/**< @brief Wird linke Maustaste gedrueckt?*/
 	private static boolean gravRight = false; 		/**< @brief Wird rechte Maustaste gedrueckt?*/
 	
-	private static Level l;							/**< @todo erklaeren */
+	private static Level l;							/**< @todo Die aktuelle Instanz der Levelklasse */
 	
 	/**
 	 * @brief Hilfsfunktion zum Berechnen der Laenge des Vectors

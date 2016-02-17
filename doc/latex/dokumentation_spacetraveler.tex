@@ -14,6 +14,8 @@
 \usepackage{csquotes}
 \usepackage{subcaption}
 
+\usepackage{pdfpages}
+
 
 \DeclareUnicodeCharacter{00A0}{ }
 
@@ -351,7 +353,7 @@ gesetzt und der Spieler gelangt vor dem nächsten Renderzyklus wieder in das Hau
 \section{Implementierung}
 % Quellcode
 \input{quellcode}
-
+\fontsize{12pt}{14pt}\selectfont
 
 \section{Resultate und Testen}
 \inmilestonetwo
@@ -359,6 +361,15 @@ gesetzt und der Spieler gelangt vor dem nächsten Renderzyklus wieder in das Hau
 \inmilestonetwo
 
 
+\section*{Anhang: Codedokumentation}
+In unserem Code haben wir Kommentare zu den einzelnen Klassen und Methoden hinzugefügt.
+Diese Kommentare werden vom Programm \textit{doxygen} automatisch extrahiert und es wird eine
+Dokumentation aller Klassen und Methoden erstellt. In der Dokumentation finden sich auch
+Grafiken. Diese Dokumentation folgt hier im Anhang:\\
+
+\includepdf[pages=-]{refman.pdf}
+
+\ 
 
 
 \end{document}
