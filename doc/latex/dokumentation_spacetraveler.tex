@@ -282,7 +282,13 @@ nur linear abzuschwächen lassen.
 
 
 \subsubsection{Spieler bewegen / Gravitationspunkt}
-% hier spezifisch den punkt bei mausklick
+Anders als bei anderen 2D-Spielen (SuperMario, Pacman, etc...) ist es in unserem Spiel nicht
+möglich den Spieler per Pfeiltasten zu steuern. Es ist nur möglich einen Gravitationspunkt zu setzen, der den Spieler gegen sich zieht.
+Da der Spieler nicht durch die Wände fliegen kann, prallt er daran ab und kommt nicht unbedingt zum Ziel. Es gilt also
+die Gravitationspunkte so zu setzen, dass der Spieler damit bewusst in die richtige Richtung beschleunigt und gebremst werden kann.\\
+
+Die Schwierigkeit besteht also darin, dass gezielte Bremsmanöver (zum Beispiel vor einem Asteroiden) fast nicht möglich sind und 
+der Spieler trotzdem in der vorgesehenen Zeit durch das Level kommen soll.
 
 
 \subsubsection{Levels}
@@ -330,7 +336,7 @@ Um all dies aus einer Level-Datei und aus den TileType-Dateien zu lesen wird ein
 
 \textbf{Start und Ziel}
 \\
-
+\todo{Hier vervollständigen}
 \textbf{Wände}
 
 \subsubsection{- Gegner und Hindernisse}
@@ -341,6 +347,9 @@ Zum einen sind das die Asteroiden, andererseits sind das die Schwarzen Löcher.	
 
 \textbf{Asteroiden}		\\
 Die Asteroiden sind wie der Spieler Objekte
+
+\textbf{Schwarze Löcher}		\\
+...
 
 
 \subsubsection{Gameover}
