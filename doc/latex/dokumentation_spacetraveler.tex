@@ -81,13 +81,30 @@ In unserem Spiel haben wir einige Elemente der Physik der realen Welt übernomme
 Dabei handelt es sich nur schon um Geschwindigkeit, Beschleunigung und Kräfte.
 Dazu haben wir auch die Gravitation und den elastischen Stoss, als komplexere Vorgänge modelliert.
 \subsubsection{Geschwindigkeit, Beschleunigung, Kraft}
-Unser Spieler bewegt sich im Level.
-Hier ist bereits die Sprache von Geschwindigkeit.
-Zur Geschwindigkeit ist wohl keine Erklärung nötig.
-Dazu kommt die Beschleunigung, die man als zeitliche Änderung der Geschwindigkeit auffassen kann.
-Wichtig zu verstehen ist jedoch der Zusammenhang zwischen Kraft und Beschleunigung.
-Um Kräfte zu berechnen nimmt man das Produkt aus Beschleunigung und Masse.
-Also ist die Beschleunigung, wenn die Kraft bekannt ist, auch von dem Faktor Masse abhängig. ...
+Unser Spiel basiert auf einer zweidimensionalen Welt, in der sich der Spieler bewegen soll.
+Dabei benutzen wir ganz grundsätzliche Prinzipien der Physik.
+Da der Spieler seine Position laufend ändern kann, sprechen wir von Geschwindigkeit.
+Unter Geschwindigkeit können sich die meisten Menschen vieles vorstellen.
+Die rein physikalische Definition der Geschwindigkeit ist \[ \text{Geschwindigkeit }  \vec{v} = \frac{\text{Strecke } \vec{s}}{\text{Zeiteinheit t}}\] also zum Beispiel $\frac{\text{Meter}}{\text{Sekunde}}$.
+Wird nun diese Geschwindigkeit verändert, spricht man von einer Beschleunigung.
+Als Beispiel könnte man ein Auto nehmen.
+Wenn man Gas gibt, startet man bei einer kleinen Geschwindigkeit und endet bei einer Grossen. Man hat also beschleunigt.
+Auch in unserem Spiel haben wir dieses Prinzip berücksichtigt.
+Die Physikalische Definition der Beschleunigung ist \[\text{Beschleunigung }\vec{a} = \frac{\vec{v}}{\text{t}}\]
+
+Damit nun ein bestimmtes Objekt überhaupt beschleunigt wird, braucht es eine Kraft.
+Um zum Beispiel einen Wagen zu bewegen, muss man eine Kraft ausüben indem man ihn zieht.
+Die Kraft ist Physikalisch definiert als
+\[\text{Kraft } \vec{F} = \vec{a} \cdot \text{Masse m}\].
+
+Um die Physik unseres Spieles vollständig zu verstehen, müssen wir noch den Begriff der Energie klären.
+Die Energie eines Objektes kann auf verschiedenste Arten ermittelt werden.
+Die üblichste Definition der Energie ist
+\[\text{Energie } \vec{E} = \vec{F} \cdot \text{Weg s}\].
+In unserem Spiel nutzten wir jedoch die Definition der kinetischen Energie:
+\[ \vec{E} = \frac{1}{2} \cdot m \cdot v^2\]
+Nun ist wichtig, dass man den Begriff Kraft oder sonst ähnliche Zeichen nicht im Code finden wird.
+Denn mithilfe der Definition der kinetischen Energie, können wir die Umrechnung mittels Kraft umgehen und haben aus der Geschwindigkeit und der Masse des Objektes direkt die kinetische Energie.
 
 \subsection{Gravitation}
 Unter Gravitation versteht man in der Physik, die Anziehungskraft, mit der sich Masse anzieht.
