@@ -1,10 +1,13 @@
 /*
- * 17.02.2016
+ * Version: Milestone I
+ * Datum:   17.02.2016
+ * 
  * (c) Jonas Wahlen
  * (c) Gabriel Gavrilas
  * (c) Patrick Eigensatz
  * 
- * Verwendete Libraries: JSFML : http://jsfml.org
+ * Verwendete Libraries:
+ * 	  * JSFML : http://jsfml.org
  * 
  * Arbeitsteilung:
  * 	  * Gabriel: Kollisionserkennung
@@ -13,7 +16,8 @@
  * 
 */ 
 
-
+// Dies ist unser Haupt package. Wir erstellen selbst keine weiteren packages,
+// es hätte genausogut das anonyme package der JRE verwendet werden können. 
 package spacetraveler;
 
 import java.io.BufferedInputStream;
