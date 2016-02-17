@@ -50,6 +50,8 @@
 
 \clearpage
 
+\todo{Informationen / Beispielarbeit beachten!}
+
 \section{Projektbeschreibung}
 \subsection{Spielidee}
 Ziel unseres Spieles ist es, dass der Spieler sein Raumschiff von einer Startposition im Level
@@ -337,13 +339,7 @@ nur linear abzuschwächen lassen.
 
 
 \subsubsection{Spieler bewegen / Gravitationspunkt}
-Anders als bei anderen 2D-Spielen (SuperMario, Pacman, etc...) ist es in unserem Spiel nicht möglich
-den Spieler per Pfeiltasten zu steuern. Es ist nur möglich, einen Gravitationspunkt zu setzen, der den Spieler gegen sich zieht.
-Da der Spieler nicht durch die Wände fliegen kann, prallt er daran ab und kommt nicht unbedingt zum Ziel. Es gilt also
-die Gravitationspunkte so zu setzen, dass der Spieler damit bewusst in die richtige Richtung beschleunigt und gebremst werden kann.
-
-Die Schwierigkeit besteht also darin, dass gezielte Bremsmanöver (zum Beispiel vor einem Asteroiden) fast unmöglich sind
-und der Spieler trotzdem in der vorgesehenen Zeit durch das Level kommen soll.
+% hier spezifisch den punkt bei mausklick
 
 
 \subsubsection{Levels}
@@ -386,16 +382,22 @@ Erneut entspricht jede Zeile der Tabelle einer Zeile in der Level-Datei. Hierbei
 
 \textbf{Level-Klasse}\\
 Der Konstruktor der Level-Klasse hat die Aufgabe, eine Level-Datei zu lesen und dann anhand der TileType-Dateien ein Level-Objekt zu kreieren, welches alle für ein Level nötige Objekte enthält. So hat ein Level-Objekt jeweils einen Vektor mit allen spaceObjecs, gravityFields, blackHoles und zusätzlichen Sprites, die im Level erscheinen sollten. Auch weitere Variabeln, wie die verfügbare Zeit, Start-Koordinaten und Koordinaten des Ziels, sowie die Anzahl Tiles in der Breite und in der Höhe des Levels sind in einem Level-Objekt enthalten.\\
-Um all dies aus einer Level-Datei und aus den TileType-Dateien zu lesen wird ein Scanner kreiert, der die Level-Datei öffnet. Der Scanner Wert für Wert durch die Datei und Speichert die gelesenen Werte in den entsprechenden Variabeln.  Wenn er bei den Identifikationsnummern der tileTypes ankommt, ruft er die Methode \textit{loadTile} mit der Identifikationsnummer als tileType auf, welche dann mit einem eigenen Scanner die entsprechende TileType-Datei öffnet und anhand der daraus gelesenen Informationen die nötigen Objekte erstellt.
+Um all dies aus einer Level-Datei und aus den TileType-Dateien zu lesen wird ein Scanner kreiert, der die Level-Datei öffnet. Der Scanner Wert für Wert durch die Datei und Speichert die gelesenen Werte in den entsprechenden Variabeln.  Wenn er bei den Identifikationsnummern der tileTypes ankommt, ruft er die Methode \textit{loadTile} mit der Identifikationsnummer als tileType auf, welche dann mit einem eigenen Scanner die entsprechende TileType-Datei öffnet und anhand der daraus gelesenen Informationen die nötigen Objekte erstellt.\\
 
-
-\textbf{Start und Ziel}
+\textbf{Start und Ziel}\\
 Ziel des Spiel ist es vom Startpunkt an den Endpunkt zu kommen. Beim Erreichen des Ziels wird eine Siegesmeldung
 angezeigt. Start und Ziel sind über folgende Grafik symbolisiert:\\
 
 \includegraphics[scale=0.5]{img/goal.png}
 
-\textbf{Wände}
+Dem Start und dem Ziel haben wir eigene TileTypes zugeordnet.
+In der Klasse Level.java unterscheiden wir deshalb in der LoadTile-Methode falls der index 4 oder 5 ist.
+Das Start Tile darf nur einmal vorkommen und wird automatisch zur Startposition des Spielers.
+
+\textbf{Wände}\\
+Die Wände sind eine eigene Tiletype Art.
+Wenn nun der Spieler mit diesen Feldern kollidiert, wird er anhand des elastischen Stosses zurückgedrückt.
+Dies kann man in der Klasse Game.java ab Zeile 479 sehen.
 
 \subsubsection{- Gegner und Hindernisse}
 % Asteroiden und Schwarzes Loch
@@ -409,6 +411,9 @@ In der Hauptklasse Game.java beschreibt die Methode schneiden(Vector<SpaceObject
 Dabei wird jeweils ein Objekt gewählt, dann ein zweites noch nicht gewähltes genommen und sie werden um ihre Geschwindigkeitsvektoren mit der move() Methode bewegt. 
 Daraufhin wird auf Kollision überprüft.
 Falls eine Kollision stattgefunden hat, werden die Vektoren nach dem Prinzip des elastischen Stosses neu berechnet.
+Falls nichts passiert ist, werden sie SpaceObjects wieder zurückbewegt.
+
+Wenn nun das erste Element des Vectors spaceObjects mit einem anderen Kollidiert, geht das Spiel gameOver.
 
 \textbf{Schwarze Löcher}		\\
 Die Schwarzen Löcher werden intern durch eine Instanz der \textit{BlackHole}-Klasse repräsentiert und finden sich alle im Vector \textit{blackHoles}.
