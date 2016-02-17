@@ -106,7 +106,7 @@ Wenn sich ein Objekt einem anderen nähert gibt es drei Mögliche Auswirkungen.
 
 
 \subsection{Elastischer Stoss}
-Im Spiel brauchen wir bei der Kollision der einzelnen Asteroiden und der Kollision mit der Wand das Prinzip des vollkommen elastischen Stosses. \\
+Im Spiel brauchen wir das Prinzip des vollkommen elastischen Stosses. \\
 In der realen Welt kommt es ständig zu Kollisionen, sei es ein Fuss, der auf einen Ball trifft, Billardkugeln die Kollidieren, oder zwei Autos bei einer Frontalkollision. 
 Ständig stossen Objekte aufeinander. \\
 Die Physik kennt verschiedene Arten solcher Stösse.
@@ -119,12 +119,43 @@ Zum anderen ein Stoss, bei dem die Objekte keine Deformation oder Erwärmung erf
 Dies nennt man den vollkommen elastischen Stoss.\\
 Beide Fälle sind Idealfälle.
 Sie kommen in der realen Welt nicht vor.
-In unserem Spiel wollten wir einen beinahe vollkommen elastischen Stoss umsetzen.
-\todo{langet da? wo selli da wege vektorfällig schriibe im andere teil denne?}
-\ant{Jio, da wär gäbig...}
+In unserem Spiel wollten wir das Prinzip des vollkommen elastischen Stosses umsetzen.\\
+
+Da unser Spiel ja in einer zweidimensionalen Welt spielt spricht man speziell vom zweidimensionalen elastischen Stoss.
+Bei einem solchen Stoss gelten ganz bestimmte Regeln, was die Übergabe von Energie und Geschwindigkeit betrifft.
+Damit man das ganze einfacher versteht haben wir das hier anhand einiger Bilder erläutert.
+Zwei runde Objekte kollidieren miteinander und wechseln dann die Bewegungsrichtung und Geschwindigkeit:
 
 
 
+\begin{center}
+\includegraphics[scale=0.8]{img/Elastischer_stoss_1.png} \\
+Das Blaue und das Rote Objekt nähern sich mit \\den jeweiligen Geschwindigkeiten v1 und v2.
+\end{center}
+
+\begin{center}
+\includegraphics[scale=0.8]{img/Elastischer_stoss_2.png} \\
+Nun Kollidieren sie und die Vektorprojektion beginnt. Als Hilfe sind hier die Schnitttangente und die Gerade durch die Mittelpunkte der Objekte eingezeichnet.
+\end{center}
+
+\begin{center}
+\includegraphics[scale=0.8]{img/Elastischer_stoss_3.png} \\
+Die Geschwindigkeitsvektoren werden nun in zwei Komponenten aufgeteilt. Die eine Komponente ist parallel zur Schnitttangente. Die Vektoren in dieser Richtung haben hier den Zusatz b.
+die andere Komponente ist jeweils senkrecht dazu.
+Diese sind mit dem Zusatz a versehen.
+Beide Vektoren werden so in ihre Komponenten zerlegt.
+\end{center}
+
+\begin{center}
+\includegraphics[scale=0.8]{img/Elastischer_stoss_4.png} \\
+Als nächstes werden die a-Komponenten ausgetauscht.
+So entstehen durch Addition der vertauschten a-Komponenten mit den jeweiligen b Vekoren die neuen Vektoren v1' und v2'.
+\end{center}
+
+\begin{center}
+\includegraphics[scale=0.8]{img/Elastischer_stoss_5.png} \\
+Die neuen Vektoren v1' und v2' sind nun die neuen\\ Geschwindigkeitsvektoren der beiden Objekte.
+\end{center}
 
 \section{Problemdefinition}
 \subsection{Grundkriterien}
@@ -292,13 +323,7 @@ nur linear abzuschwächen lassen.
 
 
 \subsubsection{Spieler bewegen / Gravitationspunkt}
-Anders als bei anderen 2D-Spielen (SuperMario, Pacman, etc...) ist es in unserem Spiel nicht
-möglich den Spieler per Pfeiltasten zu steuern. Es ist nur möglich einen Gravitationspunkt zu setzen, der den Spieler gegen sich zieht.
-Da der Spieler nicht durch die Wände fliegen kann, prallt er daran ab und kommt nicht unbedingt zum Ziel. Es gilt also
-die Gravitationspunkte so zu setzen, dass der Spieler damit bewusst in die richtige Richtung beschleunigt und gebremst werden kann.\\
-
-Die Schwierigkeit besteht also darin, dass gezielte Bremsmanöver (zum Beispiel vor einem Asteroiden) fast nicht möglich sind und 
-der Spieler trotzdem in der vorgesehenen Zeit durch das Level kommen soll.
+% hier spezifisch den punkt bei mausklick
 
 
 \subsubsection{Levels}
@@ -346,7 +371,7 @@ Um all dies aus einer Level-Datei und aus den TileType-Dateien zu lesen wird ein
 
 \textbf{Start und Ziel}
 \\
-\todo{Hier vervollständigen}
+
 \textbf{Wände}
 
 \subsubsection{- Gegner und Hindernisse}
@@ -357,9 +382,6 @@ Zum einen sind das die Asteroiden, andererseits sind das die Schwarzen Löcher.	
 
 \textbf{Asteroiden}		\\
 Die Asteroiden sind wie der Spieler Objekte
-
-\textbf{Schwarze Löcher}		\\
-...
 
 
 \subsubsection{Gameover}
