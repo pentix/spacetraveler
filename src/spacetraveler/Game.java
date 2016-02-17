@@ -42,7 +42,7 @@ public class Game {
 	private static boolean gravLeft = false; 		/**< @brief Wird linke Maustaste gedrueckt?*/
 	private static boolean gravRight = false; 		/**< @brief Wird rechte Maustaste gedrueckt?*/
 	
-	private static Level l;							/**< @todo Die aktuelle Instanz der Levelklasse */
+	private static Level l;							/**< @brief Die aktuelle Instanz der Levelklasse */
 	
 	/**
 	 * @brief Hilfsfunktion zum Berechnen der Laenge des Vectors
