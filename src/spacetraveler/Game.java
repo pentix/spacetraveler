@@ -17,7 +17,7 @@
 */ 
 
 // Dies ist unser Haupt package. Wir erstellen selbst keine weiteren packages,
-// es hätte genausogut das anonyme package der JRE verwendet werden können. 
+// es haette genausogut das anonyme package der JRE verwendet werden koennen. 
 package spacetraveler;
 
 import java.io.BufferedInputStream;
