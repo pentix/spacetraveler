@@ -107,20 +107,19 @@ Nun ist wichtig, dass man den Begriff Kraft oder sonst ähnliche Zeichen nicht i
 Denn mithilfe der Definition der kinetischen Energie, können wir die Umrechnung mittels Kraft umgehen und haben aus der Geschwindigkeit und der Masse des Objektes direkt die kinetische Energie.
 
 \subsection{Gravitation}
-Unter Gravitation versteht man in der Physik, die Anziehungskraft, mit der sich Masse anzieht.
+Unter Gravitation versteht man in der Physik, die Anziehungskraft, mit der sich Masse gegenseitig anzieht.
 Bekannt ist uns die Gravitation von den Planeten und ihren Anziehungskräften.
 Die Sonne zieht mit ihrer enormen Masse die Planeten an und die Planeten ziehen die Monde an.
 Auf der Erde zeigt sich Gravitation als Schwerkraft, die uns am Boden hält.
-Dies kommt davon, dass die Erde sehr viel grösser als wir ist.
-Im Sonnensystem jedoch findet Gravitation zwischen Objekten ähnlicher Grösse statt.
-Wenn sich ein Objekt einem anderen nähert gibt es drei Mögliche Auswirkungen.
+Dies kommt davon, dass die Erde sehr viel grösser als wir ist und wir direkt darauf sind
+Im Sonnensystem jedoch findet Gravitation zwischen Objekten grossen Abständen statt.
+Wenn sich ein kleines Objekt einem Grossen nähert gibt es drei Mögliche Auswirkungen.
 \begin{enumerate}
-\item Sie ziehen sich gegenseitig so an, dass sie miteinander kollidieren.
-\item Sie sind schnell und lenken sich gegenseitig bei nahekommen einfach ab, entfernen sich danach jedoch zu weit um weiter Einfluss aufeinander zu bewirken.
-\item 
-
+\item Es wird angezogen, so dass es kollidiert.
+\item Das Objekt ist sehr schnell, so dass es zwar abgelenkt wird, jedoch genug schnell ist um dem Einfluss des Grossen zu entkommen.
+\item Das Objekt hat die genau richtige Geschwindigkeit um um das grosse Objekt zu orbitieren.
 \end{enumerate}
-
+Wenn man also unser Spiel spielt, sollte man eher Effekte dieser Dimension erwarten.
 
 \subsection{Elastischer Stoss}
 Im Spiel brauchen wir das Prinzip des vollkommen elastischen Stosses. \\
@@ -398,8 +397,11 @@ Nebem dem Spieler haben wir zwei weitere Objekte erschaffen.
 Zum einen sind das die Asteroiden, andererseits sind das die Schwarzen Löcher.		\\
 
 \textbf{Asteroiden}		\\
-Die Asteroiden sind wie der Spieler Objekte
-
+Die Asteroiden sind wie der Spieler SpaceObjects. Sie haben die spezielle Fähigkeit, dass sie miteinander Kollidieren können und dann nach dem Prinzip des elastischen Stosses abprallen.
+In der Hauptklasse Game.java beschreibt die Methode schneiden(Vector<SpaceObject> spaceObjects) den Vorgang zur Ermittlung und Durchführung des elastischen Stosses bei allen SpaceObjects untereinander. \\
+Dabei wird jeweils ein Objekt gewählt, dann ein zweites noch nicht gewähltes genommen und sie werden um ihre Geschwindigkeitsvektoren mit der move() Methode bewegt. 
+Daraufhin wird auf Kollision überprüft.
+Falls eine Kollision stattgefunden hat, werden die Vektoren nach dem Prinzip des elastischen Stosses neu berechnet.
 
 \subsubsection{Gameover}
 Wenn der Spieler mit einem Asteroiden kollidiert oder in ein schwarzes Loch
