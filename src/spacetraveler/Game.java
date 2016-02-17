@@ -16,7 +16,7 @@
  * 
 */ 
 
-// Dies ist unser Haupt package. Wir erstellen selbst keine weiteren packages,
+// Dies ist unser Hauptpackage. Wir erstellen selbst keine weiteren packages,
 // es haette genausogut das anonyme package der JRE verwendet werden koennen. 
 package spacetraveler;
 
