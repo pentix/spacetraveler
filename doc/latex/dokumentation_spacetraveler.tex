@@ -13,6 +13,7 @@
 \usepackage{scrpage2}
 \usepackage{csquotes}
 \usepackage{subcaption}
+\usepackage{url}
 
 %\usepackage{pdfpages}
 
@@ -65,6 +66,15 @@ Dabei musst du auf die herumfliegenden Asteroiden achtgeben.
 Vor allem solltest du dich jedoch vor den abnormal kleinen Schwarzen Löchern in Acht nehmen, die nur in diesem Teil des Universums vorkommen und dich sofort anziehen, wenn du ihnen zu nahe kommst. 
 Hilf dem hoffnungslosen Theoretiker nach Hause zu kommen!
 \end{quote}
+
+\subsection{Hauptquelle}
+Da wir nur die JSFML-Bibliothek benützen, und das Spiel komplett selbst und ohne Basiscode entwerfen, findet sich hier nur der Link 
+zu JSFML selbst: \url{http://www.jsfml.org/}
+
+\subsection{Eigenes Projekt}
+Da wir alle drei bereits Programmiererfahrungen in anderen Programmiersprachen vorweisen konnten, entschieden wir uns ein grösseres Projekt
+in Angriff zu nehmen. Es gefiel uns viel besser unsere eigene Spielidee zu entwickeln und ein erweiterbares Grundgerüst für ein Spiel \q{from scratch}
+zu entwickeln.
 
 \subsection{Physik}
 In unserem Spiel haben wir einige Elemente der Physik der realen Welt übernommen.
@@ -190,7 +200,7 @@ Als Zusatzkriterien setzen wir uns weiter:
 
 
 \section{Anforderungsanalyse}
-% maximal 2 sätze, in java realisierbar
+\subsection{Anforderungen gegenüber Computern}
 Das Programm lässt sich mitsamt seinen Anforderungen vollständig in Java implementieren.
 Es werden auf Soft-/Hardwareebene keine weiteren Anforderungen gestellt, als ein einfacher Computer mit
 Maus und funktionierender JRE.
@@ -216,7 +226,7 @@ Geschwindigkeitsvektor, der seine Richtung bestimmt und nachdem er immer (und au
 \begin{itemize}
 \item Mit der Maus soll das Setzen eines Gravitationspunktes - und damit die Steuerung der Spielfigur - möglich sein.
 \item Mit der Tastatur soll man aus dem Spiel zurück ins Menü gelangen. (Escape-Taste)
-\item Das Spiel soll in ein eigenes Fenster registrieren, in das wir zeichnen können. 
+\item Das Spiel soll ein eigenes Fenster registrieren, in das wir zeichnen können. 
 \item Java packages: \begin{itemize}
 	\item java.util.* \textit{(Native Java Datenstrukturen/Klassen, z. Bsp. Vector, Scanner)}
 	\item java.io.* \textit{(Um Daten aus der .jar-Datei direkt als Streams zu lesen)}
@@ -438,6 +448,9 @@ gesetzt und der Spieler gelangt vor dem nächsten Renderzyklus wieder in das Hau
 \vspace{0.3cm}
 \includegraphics[height=0.85\textwidth,angle=90]{img/uml.png}
 
+\subsection{Ablauf}
+\inmilestonetwo
+
 \section{Implementierung}
 % Quellcode
 \input{quellcode}
@@ -449,6 +462,10 @@ gesetzt und der Spieler gelangt vor dem nächsten Renderzyklus wieder in das Hau
 \inmilestonetwo
 
 
+\clearpage
+\newpage
+
+\addcontentsline{toc}{section}{Anhang: Codedokumentation}
 \section*{Anhang: Codedokumentation}
 In unserem Code haben wir Kommentare zu den einzelnen Klassen und Methoden hinzugefügt.
 Diese Kommentare werden vom Programm \textit{doxygen} automatisch extrahiert und es wird eine
@@ -457,7 +474,7 @@ Grafiken. Diese Dokumentation folgt hier im Anhang:\\
 
 %\includepdf[pages=-]{refman.pdf}
 
-\ 
+
 
 
 \end{document}

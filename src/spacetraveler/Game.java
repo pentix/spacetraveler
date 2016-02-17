@@ -1,10 +1,13 @@
 /*
- * 17.02.2016
+ * Version: Milestone I
+ * Datum:   17.02.2016
+ * 
  * (c) Jonas Wahlen
  * (c) Gabriel Gavrilas
  * (c) Patrick Eigensatz
  * 
- * Verwendete Libraries: JSFML : http://jsfml.org
+ * Verwendete Libraries:
+ * 	  * JSFML : http://jsfml.org
  * 
  * Arbeitsteilung:
  * 	  * Gabriel: Kollisionserkennung
@@ -13,7 +16,8 @@
  * 
 */ 
 
-
+// Dies ist unser Haupt package. Wir erstellen selbst keine weiteren packages,
+// es haette genausogut das anonyme package der JRE verwendet werden koennen. 
 package spacetraveler;
 
 import java.io.BufferedInputStream;
@@ -42,7 +46,7 @@ public class Game {
 	private static boolean gravLeft = false; 		/**< @brief Wird linke Maustaste gedrueckt?*/
 	private static boolean gravRight = false; 		/**< @brief Wird rechte Maustaste gedrueckt?*/
 	
-	private static Level l;							/**< @todo Die aktuelle Instanz der Levelklasse */
+	private static Level l;							/**< @brief Die aktuelle Instanz der Levelklasse */
 	
 	/**
 	 * @brief Hilfsfunktion zum Berechnen der Laenge des Vectors
