@@ -286,10 +286,10 @@ nur linear abzuschwÃ¤chen lassen.
 
 
 \subsection{Levels}
-Unser Ziel war es, ein System zu entwickeln, welches eine einfache Erstellung und Bearbeitung von Levels ermöglicht. Um dies zu erreichen, haben wir uns entschieden, die Levels in einem Tile-System aufzubauen. Damit ist gemeint, dass die Levels so aus \q{Tiles} (\textit{eng.} Kacheln, Fliesen) bestehen, wie ein Fliesenboden aus Fliesen besteht. So werden also vorerst einzelne Tiles erstellt und dann zu einem Level zusammen gefügt.\\
+Unser Ziel war es, ein System zu entwickeln, welches eine einfache Erstellung und Bearbeitung von Levels ermÃ¶glicht. Um dies zu erreichen, haben wir uns entschieden, die Levels in einem Tile-System aufzubauen. Damit ist gemeint, dass die Levels so aus \q{Tiles} (\textit{eng.} Kacheln, Fliesen) bestehen, wie ein Fliesenboden aus Fliesen besteht. So werden also vorerst einzelne Tiles erstellt und dann zu einem Level zusammengefÃ¼gt.\\
 
 \subsubsection{tileTypes}
-Die tileTypes sind die verschiedenen Tiles, aus welchen das Level aufgebaut werden kann. Sie entsprechen beim Fliesenlegen also dem Sortiment an verschiedenen Fliesen. tileTyoes können verschiedene Hintergrundtexturen, spaceObjects, gravityObjects und blackHoles haben. All diese Eigenschaften werden in TileType-Dateien gespeichert. TileType-Dateien sind normale Textdateien, die folgendermassen aufgebaut sind:\\
+Die tileTypes sind die verschiedenen Tiles, aus welchen das Level aufgebaut werden kann. Sie entsprechen beim Fliesenlegen also dem Sortiment an verschiedenen Fliesen. tileTypes kÃ¶nnen verschiedene Hintergrundtexturen, spaceObjects, gravityObjects und blackHoles haben. All diese Eigenschaften werden in TileType-Dateien gespeichert. TileType-Dateien sind normale Textdateien, die folgendermassen aufgebaut sind:\\
 \begin{tabular}{ | r | r | l | }
 	\hline
 	\multicolumn{2}{ | r | }{\textbf{Datentyp}} & \textbf{Inhalt}\\ \hline
@@ -306,7 +306,7 @@ Die tileTypes sind die verschiedenen Tiles, aus welchen das Level aufgebaut werd
 	\multicolumn{2}{ | r | }{int} & anzahlBlackHoles\\ \hline
 	 & float & m\\ \hline
 \end{tabular} \\
-Jede Zeile der Tabelle entspricht einer Zeile in einer TileType-Datei, wobei die eingezogenen Zeilen pro spaceObject bzw. gravityField oder blackHole einmal vorkommen. Jeder tileType hat eine Identifikationsnummer. Diese wird im Namen der TileType-Datei angegeben. So hat also der tileType, dessen TileType-Datei den Namen \q{tile1} trägt die Identifikationsnummer 1.
+Jede Zeile der Tabelle entspricht einer Zeile in einer TileType-Datei, wobei die eingezogenen Zeilen pro spaceObject bzw. gravityField oder blackHole einmal vorkommen. Jeder tileType hat eine Identifikationsnummer. Diese wird im Namen der TileType-Datei angegeben. So hat also der tileType, dessen TileType-Datei den Namen \q{tile1} trÃ¤gt die Identifikationsnummer 1.
 
 \subsubsection{Levels}
 Die einzelnen Tiles werden dann in der Level-Datei \q{zusammengesetzt}. Eine Level-Datei ist wie folgt aufgebaut:\\
@@ -324,8 +324,8 @@ Die einzelnen Tiles werden dann in der Level-Datei \q{zusammengesetzt}. Eine Lev
 Erneut entspricht jede Zeile der Tabelle einer Zeile in der Level-Datei. Hierbei entspricht die Anzahl Zeilen im Format der eingezogenen Zeilen in der Level-Datei dem Wert \textit{height} und die Anzahl Ganzzahlen pro Zeile dem Wert \textit{width}. Die Ganzzahlen \textit{id1, id2, id3, id4,\dots} sind die Identifikationsnummern der tileTypes, welche an jener Stelle als Tile 
 
 \subsubsection{Level-Klasse}
-Der Konstruktor der Level-Klasse hat die Aufgabe, eine Level-Datei zu lesen und dann anhand der TileType-Dateien ein Level-Objekt zu kreieren, welches alle für ein Level nötige Objekte enthält. So hat ein Level-Objekt jeweils einen Vektor mit allen spaceObjecs, gravityFields, blackHoles und zusätzlichen Sprites, die im Level erscheinen sollten. Auch weitere Variabeln, wie die verfügbare Zeit, Start-Koordinaten und Koordinaten des Ziels, sowie die Anzahl Tiles in der Breite und in der Höhe des Levels sind in einem Level-Objekt enthalten.\\
-Um all dies aus einer Level-Datei und aus den TileType-Dateien zu lesen wird ein Scanner kreiert, der die Level-Datei öffnet. Der Scanner Wert für Wert durch die Datei und Speichert die gelesenen Werte in den entsprechenden Variabeln.  Wenn er bei den Identifikationsnummern der tileTypes ankommt, ruft er die Methode \textit{loadTile} mit der Identifikationsnummer als tileType auf, welche dann mit einem eigenen Scanner die entsprechende TileType-Datei öffnet und anhand der daraus gelesenen Informationen die nötigen Objekte erstellt.
+Der Konstruktor der Level-Klasse hat die Aufgabe, eine Level-Datei zu lesen und dann anhand der TileType-Dateien ein Level-Objekt zu kreieren, welches alle fÃ¼r ein Level nÃ¶tige Objekte enthÃ¤lt. So hat ein Level-Objekt jeweils einen Vektor mit allen spaceObjecs, gravityFields, blackHoles und zusÃ¤tzlichen Sprites, die im Level erscheinen sollten. Auch weitere Variabeln, wie die verfÃ¼gbare Zeit, Start-Koordinaten und Koordinaten des Ziels, sowie die Anzahl Tiles in der Breite und in der HÃ¶he des Levels sind in einem Level-Objekt enthalten.\\
+Um all dies aus einer Level-Datei und aus den TileType-Dateien zu lesen wird ein Scanner kreiert, der die Level-Datei Ã¶ffnet. Der Scanner Wert fÃ¼r Wert durch die Datei und Speichert die gelesenen Werte in den entsprechenden Variabeln.  Wenn er bei den Identifikationsnummern der tileTypes ankommt, ruft er die Methode \textit{loadTile} mit der Identifikationsnummer als tileType auf, welche dann mit einem eigenen Scanner die entsprechende TileType-Datei Ã¶ffnet und anhand der daraus gelesenen Informationen die nÃ¶tigen Objekte erstellt.
 
 
 \textbf{Start und Ziel}
