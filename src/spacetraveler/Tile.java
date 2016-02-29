@@ -24,6 +24,7 @@ public class Tile {
 	public Vector2f position;	/**< @brief Position des Tiles */
 	public boolean solid;
 	public int index;
+	public Vector2f center;
 	public Vector2f coord;
 	
 	/**
@@ -32,15 +33,18 @@ public class Tile {
 	 * @param index Hintergrundbild des Tiles ( = Dateiname /spacetraveler/rsc/tiles/tile_bg***.png)
 	 * @throws IOException Dateizugriffsfehler
 	 */
-	public Tile(Vector2f p, int index) throws IOException 
+	public Tile(Vector2f p, int index, boolean Dark) throws IOException 
 	{
 		this.index = index;
 		
 		texture = new Texture();
-		texture.loadFromStream(Game.class.getResourceAsStream("/spacetraveler/rsc/tiles/tile_bg" + index + ".png"));
+		if(Dark){ texture.loadFromStream(Game.class.getResourceAsStream("/spacetraveler/rsc/tiles/tile_bgW" + index + ".png")); }
+		else{ texture.loadFromStream(Game.class.getResourceAsStream("/spacetraveler/rsc/tiles/tile_bg" + index + ".png")); }
 		sprite = new Sprite(texture);
 		this.position = new Vector2f(p.x*512, p.y*512);
 		sprite.setPosition(position);
+		
+		center = new Vector2f(position.x+512/2, position.y +512/2);
 		
 		if(index == 1)
 		{

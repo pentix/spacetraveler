@@ -182,6 +182,8 @@ public class Game {
 				{
 					
 					SpaceObject B = spaceObjects.elementAt(j);
+					Vector2f v1b = Vector2f.mul(B.model.getVelocity(),-1);
+					Vector2f v1a = Vector2f.mul(A.model.getVelocity(),-1);					
 					Vector2f P1 = A.getCenter();	//Zentrum 1
 					Vector2f P2 = B.getCenter();	//Zentrum 2
 					
@@ -220,6 +222,9 @@ public class Game {
 						//Addieren der Geschwindigkeitsvektoren
 						A.model.setVelocity(Vector2f.add(Bxv,Ayv));
 						B.model.setVelocity(Vector2f.add(Axv,Byv));
+						
+						A.sprite.move(v1a);
+						B.sprite.move(v1b);
 						
 						A.move();
 						B.move();
@@ -260,6 +265,7 @@ public class Game {
 
 		//Create a new view by copying the window's default view
 		View view = new View(defaultView.getCenter(), defaultView.getSize());
+		
 		
 		// Load font
 		Font font = new Font();
@@ -318,6 +324,7 @@ public class Game {
 		timeText.setPosition(25, 25);
 		
 		hauptfenster.setView(view);
+
 	
 	
 		
@@ -329,6 +336,10 @@ public class Game {
 		// Level erstellen (Laden, um l zu initialisieren!)
 		l = new Level("level2");
 		
+		Tile aktTile2 = l.Feld[(int) l.spaceObjects.get(0).Bereich[0].x][(int) l.spaceObjects.get(0).Bereich[0].y];
+		boolean moving = false;
+
+		l.Dark = false;
 		
 		while(hauptfenster.isOpen()){
 			// Events verarbeiten
@@ -479,7 +490,8 @@ public class Game {
 				if(l.spaceObjects.size()!= 0){				// es muss mindestens ein Objekt haben
 					for(SpaceObject s : l.spaceObjects)		
 					{
-						s.sprite.move(s.model.getVelocity());;
+						Vector2f v1s = s.model.getVelocity();
+						s.sprite.move(v1s);
 						
 							for(int f = 1; f < s.Bereich.length; f++)
 							{
@@ -524,7 +536,7 @@ public class Game {
 								
 							}
 							
-							s.sprite.move(-s.model.getVelocity().x, -s.model.getVelocity().y);
+							s.sprite.move(-v1s.x, -v1s.y);
 						}
 				}
 				
@@ -558,8 +570,20 @@ public class Game {
 				}
 				
 				// Hintergrund / View gut positionieren!
-				view.setCenter(l.spaceObjects.get(0).getSprite().getPosition());
+				if(moving){
+					if(aktTile2 != l.Feld[(int) l.spaceObjects.get(0).Bereich[0].x][(int) l.spaceObjects.get(0).Bereich[0].y])
+					{
+						view.move(l.spaceObjects.get(0).model.getVelocity());
+					}
+				}
+				else
+				{
+					view.setCenter(l.Feld[(int) l.spaceObjects.get(0).Bereich[0].x][(int) l.spaceObjects.get(0).Bereich[0].y].center);
+				}
 				hauptfenster.setView(view);
+				aktTile2 = l.Feld[(int) l.spaceObjects.get(0).Bereich[0].x][(int) l.spaceObjects.get(0).Bereich[0].y];
+				
+				
 	
 
 				

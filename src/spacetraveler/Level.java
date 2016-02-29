@@ -25,11 +25,9 @@ public class Level {
 	public Clock levelTimer;					/**< @brief Timer, der Zeit seit Beginn hochzaehlt */
 	public float levelTimeAvailable;			/**< @brief Zeit, die fuer das Level zur Verfuegung steht */
 	
-	public Vector2f levelStart; 				/**< @brief Level Startpunkt */
-	public Vector2f levelZiel;					/**< @brief Level Zielpunkt */
-	
 	public int levelWidth;						/**< @brief Breite des Levels */
 	public int levelHeight;						/**< @brief Hoehe des Levels */
+	boolean Dark;								/**< @brief Grafikmodus */
 	
 	
 	/**
@@ -57,14 +55,14 @@ public class Level {
 		gravityFields = new Vector<>();
 		blackHoles = new Vector<>();
 		sprites = new Sprite[2];
+		Dark = false;
+
 	
 		// Leveldatei oeffnen
 		Scanner parser = new Scanner(Game.class.getResourceAsStream("/spacetraveler/rsc/levels/" + levelId));
 		
 		// Levelinformationen laden
 		levelTimeAvailable = parser.nextInt();									parser.nextLine();
-		levelStart = new Vector2f(parser.nextFloat(), parser.nextFloat());		parser.nextLine();
-		levelZiel = new Vector2f(parser.nextFloat(), parser.nextFloat());		parser.nextLine();
 		
 		levelWidth = parser.nextInt();
 		levelHeight = parser.nextInt();
@@ -86,6 +84,7 @@ public class Level {
 		
 		// Zeitmessung starten!
 		levelTimer = new Clock();
+		
 	}
 	
 	
@@ -128,7 +127,7 @@ public class Level {
 		int hintergrundId = parser.nextInt(); 				parser.nextLine();
 		
 		// Tile laden!
-		Feld[(int)(pos.x)][(int)(pos.y)] = new Tile(pos, hintergrundId);
+		Feld[(int)(pos.x)][(int)(pos.y)] = new Tile(pos, hintergrundId, Dark);
 		
 		Vector2f coord = pos;
 		pos = Vector2f.mul(pos, 512);
@@ -141,6 +140,10 @@ public class Level {
 		// spaceObjects
 		for(int n=0; n<anzahlSpaceObjects; n++){
 			String texturePath = parser.nextLine();
+			if(Dark)
+			{
+				texturePath = "/spacetraveler/rsc/asteroidW.png";
+			}
 			float m = parser.nextFloat();											parser.nextLine();
 			Vector2f E = new Vector2f(parser.nextFloat(), parser.nextFloat());		parser.nextLine();
 			Vector2f P = new Vector2f(parser.nextFloat(), parser.nextFloat());		parser.nextLine();
@@ -178,20 +181,23 @@ public class Level {
 
 			//laden und positionieren der Starttextur
 			Texture startTex = new Texture(); 
-			startTex.loadFromStream(Game.class.getResourceAsStream("/spacetraveler/rsc/goal.png"));
+			
+			if(Dark){ startTex.loadFromStream(Game.class.getResourceAsStream("/spacetraveler/rsc/goalW.png")); }
+			else{ startTex.loadFromStream(Game.class.getResourceAsStream("/spacetraveler/rsc/goal.png")); }
+			
 			Sprite start = new Sprite(startTex);
 			start.setPosition(mitte);
 			sprites[0] = start;
 			
 			//Erstellen des Spielers
-			spaceObjects.add(0,new SpaceObject("/spacetraveler/rsc/spieler.png", 5.0f, new Vector2f(50, 0), coord, mitte, true));
-
-			
+			if(Dark){ spaceObjects.add(0,new SpaceObject("/spacetraveler/rsc/spielerW.png", 5.0f, new Vector2f(50, 0), coord, mitte, true)); }
+			else{ spaceObjects.add(0,new SpaceObject("/spacetraveler/rsc/spieler.png", 5.0f, new Vector2f(50, 0), coord, mitte, true)); }
 		}
 		if(tileType == 5) //zielfeld
 		{
 			Texture zielTex = new Texture(); 
-			zielTex.loadFromStream(Game.class.getResourceAsStream("/spacetraveler/rsc/goal.png"));
+			if(Dark){ zielTex.loadFromStream(Game.class.getResourceAsStream("/spacetraveler/rsc/goalW.png")); }
+			else{ zielTex.loadFromStream(Game.class.getResourceAsStream("/spacetraveler/rsc/goal.png")); }
 			Sprite ziel = new Sprite(zielTex);
 			ziel.setPosition(mitte);
 			sprites[1] = (ziel);
