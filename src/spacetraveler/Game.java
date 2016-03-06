@@ -324,7 +324,6 @@ public class Game {
 		timeText.setPosition(25, 25);
 		
 		hauptfenster.setView(view);
-
 	
 	
 		
@@ -496,9 +495,9 @@ public class Game {
 							for(int f = 1; f < s.Bereich.length; f++)
 							{
 								Tile tile = l.Feld[(int)s.Bereich[f].x][(int)s.Bereich[f].y];
-								FloatRect FR = tile.sprite.getGlobalBounds();
 								if(tile.index == 1)
 								{
+									FloatRect FR = tile.sprite.getGlobalBounds();
 									if(intersection(s.sprite.getGlobalBounds(), FR)) //kollisionsueberpruefung
 									{										
 										// umdrehen der einen komponente der Geschwindigkeits- und Energievektoren
@@ -508,13 +507,35 @@ public class Game {
 										float c = s.model.getEnergy().x;
 										float d = s.model.getEnergy().y;
 										
-										if(f == 1 || f == 3)
+										boolean Richtung = false; // true oben-unten | false links-rechts
+										
+										if(f == 1 || f == 5)
+										{
+											Richtung = false;
+										}
+										if(f == 3 || f == 7)
+										{
+											Richtung = true;
+										}
+										double Winkel = Math.atan(s.model.getVelocity().y/s.model.getVelocity().x);
+										//System.out.println(Winkel);
+										if(f == 2 || f == 6)
+										{
+											if(Winkel <= Math.PI/4){Richtung = true;}
+											else{Richtung = false;}
+										}
+										if(f == 4 || f == 8)
+										{
+											if(Winkel <= -Math.PI/4){Richtung = false;}
+											else{Richtung = true;}
+										}
+										if(Richtung == false)
 										{
 											s.model.setVelocity(new Vector2f(-a,b)); 
 											s.model.setEnergy(new Vector2f(-c,d));
 											s.collided = true;
 										}
-										if(f == 2 || f == 4)
+										if(Richtung == true)
 										{
 											s.model.setEnergy(new Vector2f(c,-d));
 											s.model.setVelocity(new Vector2f(a,-b));
