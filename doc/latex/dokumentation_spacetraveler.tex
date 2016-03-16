@@ -15,7 +15,7 @@
 \usepackage{subcaption}
 \usepackage{url}
 
-\usepackage{pdfpages}
+%\usepackage{pdfpages}
 
 
 \DeclareUnicodeCharacter{00A0}{ }
@@ -106,7 +106,7 @@ In unserem Spiel nutzten wir jedoch die Definition der kinetischen Energie:
 Nun ist wichtig, dass man den Begriff Kraft oder sonst ähnliche Zeichen nicht im Code finden wird.
 Denn mithilfe der Definition der kinetischen Energie, können wir die Umrechnung mittels Kraft umgehen und haben aus der Geschwindigkeit und der Masse des Objektes direkt die kinetische Energie.
 
-\subsection{Gravitation}
+\subsubsection{Gravitation}
 Unter Gravitation versteht man in der Physik, die Anziehungskraft, mit der sich Masse gegenseitig anzieht.
 Bekannt ist uns die Gravitation von den Planeten und ihren Anziehungskräften.
 Die Sonne zieht mit ihrer enormen Masse die Planeten an und die Planeten ziehen die Monde an.
@@ -121,7 +121,7 @@ Wenn sich ein kleines Objekt einem Grossen nähert gibt es drei Mögliche Auswir
 \end{enumerate}
 Wenn man also unser Spiel spielt, sollte man eher Effekte dieser Dimension erwarten.
 
-\subsection{Elastischer Stoss}
+\subsubsection{Elastischer Stoss}
 Im Spiel brauchen wir das Prinzip des vollkommen elastischen Stosses. \\
 In der realen Welt kommt es ständig zu Kollisionen, sei es ein Fuss, der auf einen Ball trifft, Billardkugeln die Kollidieren, oder zwei Autos bei einer Frontalkollision. 
 Ständig stossen Objekte aufeinander. \\
@@ -177,9 +177,9 @@ Die neuen Vektoren v1' und v2' sind nun die neuen\\ Geschwindigkeitsvektoren der
 \subsection{Grundkriterien}
 Wir haben uns folgende Grundkriterien gesetzt:
 \begin{itemize}
-\item Gravitation: Punkte, die den Spieler unterschiedlich stark gegen sich ziehen.
 \item Der Spieler ist ein Raumschiff.
 \item Der Spieler befindet sich in einem Raum fernab von jeder anderen Kraftquelle ausserhalb des Levels.
+\item Gravitation: Punkte, die den Spieler unterschiedlich stark gegen sich ziehen.
 \item Der Spieler bewegt sich durch dieses Level mithilfe von  einem Gravitationspunkt, den er platzieren und entfernen kann; Er kann sich also \q{in eine Richtung ziehen lassen}
 \item Das Level ist beschränkt, hat also einen Start und ein Ziel
 \item Es gibt Wände, die den Raum beschränken.
@@ -188,11 +188,12 @@ Wir haben uns folgende Grundkriterien gesetzt:
 \subsection{Zusatzkriterien}
 Als Zusatzkriterien setzen wir uns weiter:
 \begin{itemize}
-\item Gegner und/oder Hindernisse (= Objekte bei deren Kollision der Spieler stirbt) z.B: Asteroiden die sich frei bewegen, oder sehr starke Gravitationszentren, die den Spieler gegen ein Objekt ziehen und so eine Kollision auslösen.
+\item Gegner und/oder Hindernisse (= Objekte bei deren Kollision der Spieler stirbt) z.B: Asteroiden die sich frei bewegen, oder sehr starke Gravitationszentren, die den Spieler gegen sich ziehen und dort eine Kollision auslösen.
 \item Gameover-Grafik, die angezeigt wird, wenn der Spieler stirbt oder die Zeit abläuft.
 \item Es besteht eine kleine Reibung, die den Spieler leicht abbremst.
 \item Zeitliche Beschränkung (z.B: 2min, wenn Zeit = 0, ist das Spiel zu Ende)
-\item Startmenu und Spielanleitung
+\item Startmenu
+\item Spielanleitung
 \end{itemize}
 
 
@@ -220,12 +221,12 @@ Der Spieler kann, genau wie ein spaceObject von einem Gravitationspunkt angezoge
 Geschwindigkeitsvektor, der seine Richtung bestimmt und nachdem er immer (und auch ohne Actor) fliegt.
 
 
-\subsection{Anforderungen} 
+\subsection{Anforderungen der Spezifikation} 
 \subsubsection{Technische Ausführung}
 \begin{itemize}
-\item Mit der Maus soll das Setzen eines Gravitationspunktes - und damit die Steuerung der Spielfigur - möglich sein.
-\item Mit der Tastatur soll man aus dem Spiel zurück ins Menü gelangen. (Escape-Taste)
-\item Das Spiel soll ein eigenes Fenster registrieren, in das wir zeichnen können. 
+%\item Mit der Maus soll das Setzen eines Gravitationspunktes - und damit die Steuerung der Spielfigur - möglich sein.
+%\item Mit der Tastatur soll man aus dem Spiel zurück ins Menü gelangen. (Escape-Taste)
+%\item Das Spiel soll ein eigenes Fenster registrieren, in das wir zeichnen können. 
 \item Java packages: \begin{itemize}
 	\item java.util.* \textit{(Native Java Datenstrukturen/Klassen, z. Bsp. Vector, Scanner)}
 	\item java.io.* \textit{(Um Daten aus der .jar-Datei direkt als Streams zu lesen)}
@@ -237,7 +238,6 @@ Geschwindigkeitsvektor, der seine Richtung bestimmt und nachdem er immer (und au
 \end{itemize}
 \end{itemize}
 
-\subsection{Dokumentation}
 Diese Dokumentation wurde in \LaTeX \,\, erstellt. Da die Rohdateien in LaTeX im Textformat und nicht
 binär vorliegen konnten wir sie ebenfalls in unser Revisionskontrollsystem einbinden und parallel
 an ihr schreiben.\\
@@ -247,6 +247,8 @@ konnten wir eine detaillierte Codedokumentation mit dem Programm \textit{doxygen
 Die PDF-Datei, die dabei herauskam liess sich leicht an unsere Dokumentation anhängen.\\
 
 Der Quellcode wurde über das \textit{listings}-Paket direkt von LaTeX selbst eingelesen und formatiert.
+
+\subsection{Grundkriterien}
 
 \subsubsection{Technischer Ablauf des Spiels / spaceObjects}
 Wie man in der Story zu unserem Spiel lesen kann, dreht sich unser Spiel vollständig um den Wissenschaftler im Raumschiff. Eigentlich geht es nur um das Raumschiff, denn dieses muss man sicher ans Ziel bringen.
@@ -373,7 +375,7 @@ Die einzelnen Tiles werden dann in der Level-Datei \q{zusammengesetzt}. Eine Lev
 	\multicolumn{2}{ | r | }{int} & levelTimeAvailable\\ \hline
 	\multicolumn{2}{ | r | }{floats} & startX, startY\\ \hline
 	\multicolumn{2}{ | r | }{floats} & zielX, zielY\\ \hline
-	\multicolumn{2}{ | r | }{ints} & width, height\\ \hline
+	\multicolumn{2}{ | r | }{ints} & width, height\\ \cline{2-3}
 	 & ints & id1, id2, id3, id4,\dots\\ \cline{2-3}
 	 & ints & id1, id2, id3, id4,\dots\\ \cline{2-3}
 	 & \dots & \dots\\ \hline
@@ -394,12 +396,14 @@ Dem Start und dem Ziel haben wir eigene TileTypes zugeordnet.
 In der Klasse Level.java unterscheiden wir deshalb in der LoadTile-Methode falls der index 4 oder 5 ist.
 Das Start Tile darf nur einmal vorkommen und wird automatisch zur Startposition des Spielers.
 
-\textbf{Wände}\\
+\subsubsection{Wände}
 Die Wände sind eine eigene Tiletype Art.
 Wenn nun der Spieler mit diesen Feldern kollidiert, wird er anhand des elastischen Stosses zurückgedrückt.
 Dies kann man in der Klasse Game.java ab Zeile 479 sehen.
 
-\subsubsection{- Gegner und Hindernisse}
+\subsection{Zusatzkriterien}
+
+\subsubsection{Gegner und/oder Hindernisse}
 % Asteroiden und Schwarzes Loch
 
 Nebem dem Spieler haben wir zwei weitere Objekte erschaffen.
@@ -493,7 +497,7 @@ Diese Kommentare werden vom Programm \textit{doxygen} automatisch extrahiert und
 Dokumentation aller Klassen und Methoden erstellt. In der Dokumentation finden sich auch
 Grafiken. Diese Dokumentation folgt hier im Anhang:\\
 
-\includepdf[pages=-]{refman.pdf}
+%\includepdf[pages=-]{refman.pdf}
 
 
 
