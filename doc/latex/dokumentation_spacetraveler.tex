@@ -336,9 +336,17 @@ nur linear abzuschwächen lassen.
 
 
 \subsubsection{Spieler bewegen / Gravitationspunkt}
-% hier spezifisch den punkt bei mausklick
-
-
+Diese Gravitationspunkte kann der Spieler nun für sich nutzen um sich fortzubewegen.
+Per Mausklick kann man solch einen Gravitationspunkt setzen.
+Mit der if-Abfrage: 
+$if(ev.type == Type.MOUSE\_BUTTON\_PRESSED$
+wird überprüft, ob in einem Durchgang eine Maustaste gedrückt wurde. Sollte dies der Fall sein gibt es drei mögliche Folgen:
+\begin{enumerate}
+\item Die Liste GravityFields enthält keine Elemente und die linke Maustaste wird gedrückt: Ein neues Gravity wird mit den aktuellen Koordinaten der Mausposition erzeugt. Dieses ist grün.
+\item Die Liste GravityFields entählt keine Elemente und die rechte  Maustaste wird gedrückt: Ein neues Gravity wird mit den aktuellen Koordinaten der Mausposition erzeugt, welches jedoch eine negative Masse hat und dadurch abstossend wirkt. Dieses ist rot.
+\item Die Liste GravityFields entählt irgendein Element:
+Das eine enthaltene Element wird wieder gelöscht.
+\end{enumerate}
 \subsubsection{Levels}
 Unser Ziel war es, ein System zu entwickeln, welches eine einfache Erstellung und Bearbeitung von Levels ermöglicht. Um dies zu erreichen, haben wir uns entschieden, die Levels in einem Tile-System aufzubauen. Damit ist gemeint, dass die Levels so aus \q{Tiles} (\textit{eng.} Kacheln, Fliesen) bestehen, wie ein Fliesenboden aus Fliesen besteht. So werden also vorerst einzelne Tiles erstellt und dann zu einem Level zusammengefügt.\\
 

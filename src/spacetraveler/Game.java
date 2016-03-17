@@ -396,8 +396,6 @@ public class Game {
         			
         			gravLeft = false;
         			gravRight = false;
-        			gameOver = false;
-        			youWon = false;
         			
         			break;
         		}
