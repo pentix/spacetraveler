@@ -348,16 +348,16 @@ Die tileTypes sind die verschiedenen Tiles, aus welchen das Level aufgebaut werd
 	\hline
 	\multicolumn{2}{ | r | }{\textbf{Datentyp}} & \textbf{Inhalt}\\ \hline
 	\multicolumn{2}{ | r | }{int} & hintergrundId\\ \hline
-	\multicolumn{2}{ | r | }{int} & anzahlSpaceObjects\\ \hline
+	\multicolumn{2}{ | r | }{int} & anzahlSpaceObjects\\ \cline{2-3}
 	 & string & texturePfad\\ \cline{2-3}
 	 & float &	m\\ \cline{2-3}
 	 & floats & EX, EY\\ \cline{2-3}
 	 & floats & posX, posY\\ \cline{2-3}
 	 & boolean	& gravityOn\\ \hline
-	\multicolumn{2}{ | r | }{int} & anzahlGravityFields\\ \hline
+	\multicolumn{2}{ | r | }{int} & anzahlGravityFields\\ \cline{2-3}
 	 & floats & posX, posX\\ \cline{2-3}
 	 & float & m\\ \hline
-	\multicolumn{2}{ | r | }{int} & anzahlBlackHoles\\ \hline
+	\multicolumn{2}{ | r | }{int} & anzahlBlackHoles\\ \cline{2-3}
 	 & float & m\\ \hline
 \end{tabular} \\
 Jede Zeile der Tabelle entspricht einer Zeile in einer TileType-Datei, wobei die eingezogenen Zeilen pro spaceObject bzw. gravityField oder blackHole einmal vorkommen. Jeder tileType hat eine Identifikationsnummer. Diese wird im Namen der TileType-Datei angegeben. So hat also der tileType, dessen TileType-Datei den Namen \q{tile1} trägt die Identifikationsnummer 1.\\
