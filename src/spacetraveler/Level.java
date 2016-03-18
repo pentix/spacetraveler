@@ -49,7 +49,6 @@ public class Level {
 	 * 
 	 */
 	public Level(String levelId) throws IOException{
-	
 		// Class Members initialisieren
 		spaceObjects = new Vector<>();
 		gravityFields = new Vector<>();
@@ -83,8 +82,7 @@ public class Level {
 		parser.close();
 		
 		// Zeitmessung starten!
-		levelTimer = new Clock();
-		
+		levelTimer = new Clock();		
 	}
 	
 	
