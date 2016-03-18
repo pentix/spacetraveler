@@ -483,8 +483,19 @@ gesetzt und der Spieler gelangt vor dem nächsten Renderzyklus wieder in das Hau
 \vspace{0.3cm}
 \includegraphics[height=0.85\textwidth,angle=90]{img/uml.png}
 
+Das UML-Diagramm wurde halbautomatisch durch das Programm \textit{Umbrello} erstellt. Die Klassen
+wurden automatisch aus dem Quellcode eingelesen und mussten nur noch angeordnet und miteinandner verbunden
+werden.\\
+
+Der Aufbau unserer Klassenstruktur ist recht einfach: Unsere Hauptfunktion befindet sich in der Klasse
+\textit{Game}. In dieser Funktion wird ein Level geladen. Die Levelklasse selbst enthält dann
+Instanzen aller anderen Klassen. Wichtig zu erwähnen ist, dass, da sich die Klassen \textit{Gravity}
+und \textit{BlackHole} im Code nur geringfügig unterscheiden, Methoden und Attribute jedoch dieselben sind,
+die \textit{BlackHole}-Klasse von der \textit{Gravity}-Klasse geerbt hat.
+
 \subsection{Ablauf}
 \inmilestonetwo
+\todo{Was chonnd do genau??}
 
 \section{Implementierung}
 % Quellcode
