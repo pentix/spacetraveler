@@ -217,11 +217,7 @@ stirbt oder einfach abprallt.
 
 
 \subsection{Anforderungen der Spezifikation} 
-\subsubsection{Technische Ausführung}
 \begin{itemize}
-%\item Mit der Maus soll das Setzen eines Gravitationspunktes - und damit die Steuerung der Spielfigur - möglich sein.
-%\item Mit der Tastatur soll man aus dem Spiel zurück ins Menü gelangen. (Escape-Taste)
-%\item Das Spiel soll ein eigenes Fenster registrieren, in das wir zeichnen können. 
 \item Java packages: \begin{itemize}
 	\item java.util.* \textit{(Native Java Datenstrukturen/Klassen, z. Bsp. Vector, Scanner)}
 	\item java.io.* \textit{(Um Daten aus der .jar-Datei direkt als Streams zu lesen)}
@@ -256,20 +252,9 @@ Der Quellcode wurde über das \textit{listings}-Paket direkt von LaTeX selbst ei
 Wie man in der Story zu unserem Spiel lesen kann, dreht sich unser Spiel vollständig um den Wissenschaftler im Raumschiff. Eigentlich geht es nur um das Raumschiff, denn dieses muss man sicher ans Ziel bringen.
 Um dieses Raumschiff zu erstellen, nutzten wir die JSFML Bibliotheken.	\\
 
-Zuerst erstellen, skalieren und positionieren wir das Fenster auf den Zeilen 234-236 der Klasse Game.java.
-Danach erstellen wir eine View.
-Solch eine View kann man sich als eine Kamera vorstellen, die mobil ist und nur das anzeigt, was sie sieht.
-Zuerst ist diese View eine Standard-View und hat die Dimensionen des Fensters.
-In Zeile 541 setzen wir jedoch diese Kamera auf den Spieler.
-Damit überhaupt etwas angezeigt werden kann, muss es gezeichnet werden. 
-
-Die Klasse \textit{RenderWindow} besitzt deshalb eine Methode \textit{draw(Drawable)}, die wir vor allem am Ende der Game-Klasse aufrufen.
-Mit dieser Methode wird das bestimmte Objekt des Typs Drawable auf das Fenster gezeichnet.
-Es gibt viele Klassen in den JSFML-Bibliotheken, die von dieser Klasse erben, sich also auf im Spielfenster zeichnen lassen.
-Eine dieser Klassen nutzten wir jedoch am Häufigsten: Die Klasse \textit{jsfml.Graphics.Sprite}.		\\
 Die JSFML-Klasse Sprite ist sehr nützlich für Objekte, die sich bewegen und laufend neu gezeichnet werden sollten.
 Ein solches Sprite besteht einfach gesagt aus einer Texture (das Anzeigebild, bei unserem Spieler zum Beispiel das Bild des Raumschiffs) mit einem Rechteck,
-welches oftmals die Dimensionen des Bides besitzt und die Positionsdaten dieser Figur speichert.
+welches oftmals die Dimensionen des Bildes besitzt und die Positionsdaten dieser Figur speichert.
 
 Unser Spieler besteht und wird ebenfalls durch ein solches Sprite visualisiert.
 Da wir für unser Spiel noch mehr Informationen brauchen, als nur die Positionsdaten, die in einem
@@ -277,16 +262,11 @@ Sprite gespeichert werden (zum Beispiel die Geschwindigkeit, etc.), haben wir ei
 in unserem Spiel im Weltraum bewegen, haben wir die Klasse \textit{SpaceObject} benannt. Unser Spieler ist also ebenfalls ein spaceObject.
 
 Die Sprite-Klasse wurde von den JSFML-Entwicklern \q{finalisiert}. Es war uns also nicht
-möglich aus dieser Klasse eine neue Klasse zu be-erben.
+möglich aus dieser Klasse eine neue Klasse zu beerben.
 
 
 Die Klasse SpaceObject brauchen wir sowohl für das Raumschiff wie auch für die Asteroiden.
 
-
-Das ganze Spiel basiert auf einer while-Schleife, die in Game.java in Zeile 313 beginnt.
-Diese Schleife läuft solange das Fenster offen bleibt weiter; dadurch realisieren wir ein ständiges Fortlaufen des Spieles.
-Zum Beispiel wird die vorher beschriebene Methode draw(Drawable) innerhalb dieser Schleife ausgeführt.
-So werden die Texturen ständig aktualisiert und sichergestellt, dass keine Veränderungen stattfinden, die nicht dargestellt werden.
 Um nun den Spieler anzeigen zu lassen, rufen wir den Konstruktor der SpaceObjects auf und laden das Bild: 	\\
 
 \begin{center}
