@@ -50,8 +50,6 @@
 
 \clearpage
 
-\todo{Informationen / Beispielarbeit beachten!}
-
 \section{Projektbeschreibung}
 \subsection{Spielidee}
 Ziel unseres Spieles ist es, dass der Spieler sein Raumschiff von einer Startposition im Level
@@ -196,8 +194,44 @@ Als Zusatzkriterien setzen wir uns weiter:
 \item Spielanleitung
 \end{itemize}
 
+Gewisse Kriterien lassen sich relativ gut in einem Screenshot darstellen:\\
+\begin{itemize}
+\item Zeit
+\item Start und Ziel
+\item Gravitationspunkte
+\item Spieler ist ein Raumschiff
+\item Schwarze Löcher
+\item Asteroiden
+\end{itemize}
+\includegraphics[width=13cm]{img/kriterien.png}\\
 
+\begin{itemize}
+\item Wände, die den Raum beschränken
+\end{itemize}
+\includegraphics[width=13cm]{img/waende.png}\\
 
+\begin{itemize}
+\item Spielmenü
+\end{itemize}
+\includegraphics[width=13cm]{img/menu.png}\\
+
+\begin{itemize}
+\item Tutorial (bzw. Spielanleitung, als Level)
+\end{itemize}
+\includegraphics[width=13cm]{img/tut.png}\\
+
+\begin{itemize}
+\item Gameover-Grafik, die am Spielende angezeigt wird
+\end{itemize}
+\includegraphics[width=13cm]{img/gameover.png}\\
+
+Zu gewissen Kriterien lassen sich keine Screenshots erstellen, da sie nicht,
+oder nur im Bewegtbild sichtbar sind:
+\begin{itemize}
+\item Die kleine Reibung, die den Spieler bremst
+\item Die Gravitation, die den Spieler gegen sich zieht
+\item Es gibt keine Kraftquellen in der Nähe des Spielers
+\end{itemize}
 
 \section{Anforderungsanalyse}
 \subsection{Anforderungen gegenüber Computern}
@@ -217,11 +251,7 @@ stirbt oder einfach abprallt.
 
 
 \subsection{Anforderungen der Spezifikation} 
-\subsubsection{Technische Ausführung}
 \begin{itemize}
-%\item Mit der Maus soll das Setzen eines Gravitationspunktes - und damit die Steuerung der Spielfigur - möglich sein.
-%\item Mit der Tastatur soll man aus dem Spiel zurück ins Menü gelangen. (Escape-Taste)
-%\item Das Spiel soll ein eigenes Fenster registrieren, in das wir zeichnen können. 
 \item Java packages: \begin{itemize}
 	\item java.util.* \textit{(Native Java Datenstrukturen/Klassen, z. Bsp. Vector, Scanner)}
 	\item java.io.* \textit{(Um Daten aus der .jar-Datei direkt als Streams zu lesen)}
@@ -256,20 +286,9 @@ Der Quellcode wurde über das \textit{listings}-Paket direkt von LaTeX selbst ei
 Wie man in der Story zu unserem Spiel lesen kann, dreht sich unser Spiel vollständig um den Wissenschaftler im Raumschiff. Eigentlich geht es nur um das Raumschiff, denn dieses muss man sicher ans Ziel bringen.
 Um dieses Raumschiff zu erstellen, nutzten wir die JSFML Bibliotheken.	\\
 
-Zuerst erstellen, skalieren und positionieren wir das Fenster auf den Zeilen 234-236 der Klasse Game.java.
-Danach erstellen wir eine View.
-Solch eine View kann man sich als eine Kamera vorstellen, die mobil ist und nur das anzeigt, was sie sieht.
-Zuerst ist diese View eine Standard-View und hat die Dimensionen des Fensters.
-In Zeile 541 setzen wir jedoch diese Kamera auf den Spieler.
-Damit überhaupt etwas angezeigt werden kann, muss es gezeichnet werden. 
-
-Die Klasse \textit{RenderWindow} besitzt deshalb eine Methode \textit{draw(Drawable)}, die wir vor allem am Ende der Game-Klasse aufrufen.
-Mit dieser Methode wird das bestimmte Objekt des Typs Drawable auf das Fenster gezeichnet.
-Es gibt viele Klassen in den JSFML-Bibliotheken, die von dieser Klasse erben, sich also auf im Spielfenster zeichnen lassen.
-Eine dieser Klassen nutzten wir jedoch am Häufigsten: Die Klasse \textit{jsfml.Graphics.Sprite}.		\\
 Die JSFML-Klasse Sprite ist sehr nützlich für Objekte, die sich bewegen und laufend neu gezeichnet werden sollten.
 Ein solches Sprite besteht einfach gesagt aus einer Texture (das Anzeigebild, bei unserem Spieler zum Beispiel das Bild des Raumschiffs) mit einem Rechteck,
-welches oftmals die Dimensionen des Bides besitzt und die Positionsdaten dieser Figur speichert.
+welches oftmals die Dimensionen des Bildes besitzt und die Positionsdaten dieser Figur speichert.
 
 Unser Spieler besteht und wird ebenfalls durch ein solches Sprite visualisiert.
 Da wir für unser Spiel noch mehr Informationen brauchen, als nur die Positionsdaten, die in einem
@@ -277,16 +296,11 @@ Sprite gespeichert werden (zum Beispiel die Geschwindigkeit, etc.), haben wir ei
 in unserem Spiel im Weltraum bewegen, haben wir die Klasse \textit{SpaceObject} benannt. Unser Spieler ist also ebenfalls ein spaceObject.
 
 Die Sprite-Klasse wurde von den JSFML-Entwicklern \q{finalisiert}. Es war uns also nicht
-möglich aus dieser Klasse eine neue Klasse zu be-erben.
+möglich aus dieser Klasse eine neue Klasse zu beerben.
 
 
 Die Klasse SpaceObject brauchen wir sowohl für das Raumschiff wie auch für die Asteroiden.
 
-
-Das ganze Spiel basiert auf einer while-Schleife, die in Game.java in Zeile 313 beginnt.
-Diese Schleife läuft solange das Fenster offen bleibt weiter; dadurch realisieren wir ein ständiges Fortlaufen des Spieles.
-Zum Beispiel wird die vorher beschriebene Methode draw(Drawable) innerhalb dieser Schleife ausgeführt.
-So werden die Texturen ständig aktualisiert und sichergestellt, dass keine Veränderungen stattfinden, die nicht dargestellt werden.
 Um nun den Spieler anzeigen zu lassen, rufen wir den Konstruktor der SpaceObjects auf und laden das Bild: 	\\
 
 \begin{center}
@@ -417,22 +431,23 @@ Dies kann man in der Klasse Game.java ab Zeile 479 sehen.
 % Asteroiden und Schwarzes Loch
 
 Nebem dem Spieler haben wir zwei weitere Objekte erschaffen.
-Zum einen sind das die Asteroiden, andererseits sind das die Schwarzen Löcher.		\\
+Zum einen sind das die Gegner, die Asteroiden, andererseits sind das die Hindernisse, die Schwarzen Löcher.		\\
 
 \textbf{Asteroiden}		\\
-Die Asteroiden sind wie der Spieler SpaceObjects. Sie haben die spezielle Fähigkeit, dass sie miteinander Kollidieren können und dann nach dem Prinzip des elastischen Stosses abprallen.
+Die Asteroiden sind die Hauptgegner des Spielers und sind wie er SpaceObjects. Sie haben die spezielle Fähigkeit, dass sie miteinander Kollidieren können und dann nach dem Prinzip des elastischen Stosses abprallen.
 In der Hauptklasse Game.java beschreibt die Methode schneiden(Vector<SpaceObject> spaceObjects) den Vorgang zur Ermittlung und Durchführung des elastischen Stosses bei allen SpaceObjects untereinander. \\
 Dabei wird jeweils ein Objekt gewählt, dann ein zweites noch nicht gewähltes genommen und sie werden um ihre Geschwindigkeitsvektoren mit der move() Methode bewegt. 
 Daraufhin wird auf Kollision überprüft.
 Falls eine Kollision stattgefunden hat, werden die Vektoren nach dem Prinzip des elastischen Stosses neu berechnet.
-Falls nichts passiert ist, werden sie SpaceObjects wieder zurückbewegt.
+Falls nichts passiert ist, werden die SpaceObjects wieder zurückbewegt.
 
-Wenn nun das erste Element des Vectors spaceObjects mit einem anderen Kollidiert, geht das Spiel gameOver.
+Wenn nun das erste Element des Vectors spaceObjects, also der Spieler, mit einem anderen kollidiert, geht das Spiel gameOver.
 
 \textbf{Schwarze Löcher}		\\
-Die Schwarzen Löcher werden intern durch eine Instanz der \textit{BlackHole}-Klasse repräsentiert und finden sich alle im Vector \textit{blackHoles}.
+Die Schwarzen Löcher sind Hindernisse, an denen der Spieler vorbeikommen muss.
+Diese werden intern durch eine Instanz der \textit{BlackHole}-Klasse repräsentiert und finden sich alle im Vector \textit{blackHoles}.
 Die Klasse BlackHole erbt ihre Attribute und Methoden von der \textit{Gravity}-Klasse, da schwarze Löcher den Spieler ebenfalls gegen sich ziehen.
-Der Code wäre somit der selbe, nur die verwendete Textur anders. Der Spieler darf nicht zu nah an die schwarzen Löcher herankommen, da er sonst
+Der Code wäre somit der selbe, nur die verwendete Textur anders. Jedoch wirkt die Gravitation erst, wenn der Spieler genug nah ist. Der Spieler darf also nicht zu nah an die schwarzen Löcher herankommen, da er sonst
 von ihnen angezogen wird und bei einer Kollision das Spiel verliert. 
 
 
