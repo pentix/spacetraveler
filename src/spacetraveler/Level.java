@@ -63,13 +63,11 @@ public class Level {
 		
 		// Levelinformationen laden
 		levelTimeAvailable = parser.nextInt();									parser.nextLine();
-		levelStart = new Vector2f(parser.nextFloat(), parser.nextFloat());		parser.nextLine();
-		levelZiel = new Vector2f(parser.nextFloat(), parser.nextFloat());		parser.nextLine();
 		
 		levelWidth = parser.nextInt();
 		levelHeight = parser.nextInt();
 				
-		Feld = new Tile[levelHeight][levelWidth]; // erstellen des Koordinatenfeldes
+		Feld = new Tile[levelWidth][levelHeight]; // erstellen des Koordinatenfeldes
 		
 		
 		// Tiles laden und erstellen
@@ -128,7 +126,7 @@ public class Level {
 		int hintergrundId = parser.nextInt(); 				parser.nextLine();
 		
 		// Tile laden!
-		Feld[(int)(pos.x)][(int)(pos.y)] = new Tile(pos, hintergrundId);
+		Feld[(int)(pos.x)][(int)(pos.y) ] = new Tile(pos, hintergrundId);
 		
 		Vector2f coord = pos;
 		pos = Vector2f.mul(pos, 512);
