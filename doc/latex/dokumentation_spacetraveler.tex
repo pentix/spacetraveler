@@ -397,22 +397,23 @@ Dies kann man in der Klasse Game.java ab Zeile 479 sehen.
 % Asteroiden und Schwarzes Loch
 
 Nebem dem Spieler haben wir zwei weitere Objekte erschaffen.
-Zum einen sind das die Asteroiden, andererseits sind das die Schwarzen Löcher.		\\
+Zum einen sind das die Gegner, die Asteroiden, andererseits sind das die Hindernisse, die Schwarzen Löcher.		\\
 
 \textbf{Asteroiden}		\\
-Die Asteroiden sind wie der Spieler SpaceObjects. Sie haben die spezielle Fähigkeit, dass sie miteinander Kollidieren können und dann nach dem Prinzip des elastischen Stosses abprallen.
+Die Asteroiden sind die Hauptgegner des Spielers und sind wie er SpaceObjects. Sie haben die spezielle Fähigkeit, dass sie miteinander Kollidieren können und dann nach dem Prinzip des elastischen Stosses abprallen.
 In der Hauptklasse Game.java beschreibt die Methode schneiden(Vector<SpaceObject> spaceObjects) den Vorgang zur Ermittlung und Durchführung des elastischen Stosses bei allen SpaceObjects untereinander. \\
 Dabei wird jeweils ein Objekt gewählt, dann ein zweites noch nicht gewähltes genommen und sie werden um ihre Geschwindigkeitsvektoren mit der move() Methode bewegt. 
 Daraufhin wird auf Kollision überprüft.
 Falls eine Kollision stattgefunden hat, werden die Vektoren nach dem Prinzip des elastischen Stosses neu berechnet.
-Falls nichts passiert ist, werden sie SpaceObjects wieder zurückbewegt.
+Falls nichts passiert ist, werden die SpaceObjects wieder zurückbewegt.
 
-Wenn nun das erste Element des Vectors spaceObjects mit einem anderen Kollidiert, geht das Spiel gameOver.
+Wenn nun das erste Element des Vectors spaceObjects, also der Spieler, mit einem anderen kollidiert, geht das Spiel gameOver.
 
 \textbf{Schwarze Löcher}		\\
-Die Schwarzen Löcher werden intern durch eine Instanz der \textit{BlackHole}-Klasse repräsentiert und finden sich alle im Vector \textit{blackHoles}.
+Die Schwarzen Löcher sind Hindernisse, an denen der Spieler vorbeikommen muss.
+Diese werden intern durch eine Instanz der \textit{BlackHole}-Klasse repräsentiert und finden sich alle im Vector \textit{blackHoles}.
 Die Klasse BlackHole erbt ihre Attribute und Methoden von der \textit{Gravity}-Klasse, da schwarze Löcher den Spieler ebenfalls gegen sich ziehen.
-Der Code wäre somit der selbe, nur die verwendete Textur anders. Der Spieler darf nicht zu nah an die schwarzen Löcher herankommen, da er sonst
+Der Code wäre somit der selbe, nur die verwendete Textur anders. Jedoch wirkt die Gravitation erst, wenn der Spieler genug nah ist. Der Spieler darf also nicht zu nah an die schwarzen Löcher herankommen, da er sonst
 von ihnen angezogen wird und bei einer Kollision das Spiel verliert. 
 
 
