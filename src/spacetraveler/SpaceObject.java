@@ -48,7 +48,7 @@ public class SpaceObject {
 		model = new SpaceObjectModel(m, energy, gravityOn, texture.getSize().x);
 		
 		angularMomentum = 0;
-		Bereich = new Vector2f[5];
+		Bereich = new Vector2f[9];
 		bereichVerschieben(coord);
 
 	}
@@ -70,7 +70,11 @@ public class SpaceObject {
 		Bereich[2] = new Vector2f(center.x,center.y-1); //oben
 		Bereich[3] = new Vector2f(center.x+1,center.y); //rechts
 		Bereich[4] = new Vector2f(center.x,center.y+1); //unten
-	}
+		Bereich[5] = new Vector2f(center.x-1,center.y-1); //links oben
+		Bereich[6] = new Vector2f(center.x+1,center.y-1); //rechts oben
+		Bereich[7] = new Vector2f(center.x+1,center.y-1); //rechts unten
+		Bereich[8] = new Vector2f(center.x-1,center.y+1); //links unten
+		}
 	
 	/**
 	 * @brief Bewegt das Objekt aufgrund seiner aktuellen Geschwindigkeit

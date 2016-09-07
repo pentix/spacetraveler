@@ -96,7 +96,7 @@ public class Game {
 	 * @param b Das groessere Floatrect
 	 * @return true wenn sie sich ueberschneiden, ansonnsten false
 	 */
-	public static boolean intersection(FloatRect a, FloatRect b)
+	public static Vector2f intersection(FloatRect a, FloatRect b)
 	{
 		// ansatz: b ist erheblich groesser als a
 		// dadurch muss bei einer Ueberschneidung immer min. ein Eckpunkt im anderen Rechteck liegen
@@ -105,14 +105,26 @@ public class Game {
 		Vector2f a_LU = Vector2f.add(a_LO, new Vector2f(0, a.height));
 		Vector2f a_RO = Vector2f.add(a_LO, new Vector2f(a.width, 0));
 		Vector2f a_RU = Vector2f.add(a_LO, new Vector2f(a.width, a.height));
-
-		if(contains(b,a_LO)||contains(b,a_LU)||contains(b,a_RO)||contains(b, a_RU))
+		
+		if(contains(b,a_LO))
 		{
-			return true;
+			return a_LO;
+		}
+		if(contains(b,a_LU))
+		{
+			return a_LU;
+		}
+		if(contains(b,a_RO))
+		{
+			return a_RO;
+		}
+		if(contains(b,a_RU))
+		{
+			return a_RU;
 		}
 		else
 		{
-			return false;
+			return null;
 		}
 	}
 	
@@ -261,6 +273,7 @@ public class Game {
 		//Create a new view by copying the window's default view
 		View view = new View(defaultView.getCenter(), defaultView.getSize());
 		
+		
 		// Load font
 		Font font = new Font();
 		font.loadFromStream(Game.class.getResourceAsStream("/spacetraveler/rsc/DejaVuSans.ttf"));
@@ -329,6 +342,10 @@ public class Game {
 		// Level erstellen (Laden, um l zu initialisieren!)
 		l = new Level("level2");
 		
+		Texture MarkierungTex = new Texture();
+		MarkierungTex.loadFromStream(Game.class.getResourceAsStream("/spacetraveler/rsc/antigravity.png"));
+		Sprite Markierung = new Sprite(MarkierungTex);
+		Markierung.setOrigin(MarkierungTex.getSize().x/2,MarkierungTex.getSize().y/2);
 		
 		while(hauptfenster.isOpen()){
 			// Events verarbeiten
@@ -420,7 +437,19 @@ public class Game {
 	        			
 	        			continue;
 	        		}
-        		}	
+        		}
+        		
+        		if(ev.type == Type.MOUSE_WHEEL_MOVED)
+        		{
+        			if(ev.asMouseWheelEvent().delta > 0)
+        				{
+        					view.zoom(1.5f);
+        				}
+        			else
+        			{
+        				view.zoom(0.5f);
+        			}
+        		}
 			}
 
 			
@@ -477,16 +506,18 @@ public class Game {
 				if(l.spaceObjects.size()!= 0){				// es muss mindestens ein Objekt haben
 					for(SpaceObject s : l.spaceObjects)		
 					{
-						s.sprite.move(s.model.getVelocity());;
+						s.sprite.move(s.model.getVelocity());
 						
 							for(int f = 1; f < s.Bereich.length; f++)
 							{
+								System.out.println(f);
 								Tile tile = l.Feld[(int)s.Bereich[f].x][(int)s.Bereich[f].y];
 								FloatRect FR = tile.sprite.getGlobalBounds();
 								if(tile.index == 1)
 								{
-									if(intersection(s.sprite.getGlobalBounds(), FR)) //kollisionsueberpruefung
-									{										
+									Vector2f Punkt = intersection(s.sprite.getGlobalBounds(), FR);
+									if(Punkt != null) //kollisionsueberpruefung
+									{							
 										// umdrehen der einen komponente der Geschwindigkeits- und Energievektoren
 										float a = s.model.getVelocity().x;
 										float b = s.model.getVelocity().y;
@@ -500,12 +531,22 @@ public class Game {
 											s.model.setEnergy(new Vector2f(-c,d));
 											s.collided = true;
 										}
-										if(f == 2 || f == 4)
+										else if(f == 2 || f == 4)
 										{
 											s.model.setEnergy(new Vector2f(c,-d));
 											s.model.setVelocity(new Vector2f(a,-b));
 											s.collided = true;
+											
 										}
+										else
+										{
+											s.model.setEnergy(new Vector2f(-c,-d));
+											s.model.setVelocity(new Vector2f(-a,-b));
+											s.collided = true;
+										}
+										
+										s.sprite.move(s.model.getVelocity());
+										break;
 									}
 									
 									else
@@ -544,7 +585,7 @@ public class Game {
 					}
 				}
 				
-				if(intersection(l.sprites[1].getGlobalBounds(),l.spaceObjects.elementAt(0).sprite.getGlobalBounds()))
+				if(intersection(l.sprites[1].getGlobalBounds(),l.spaceObjects.elementAt(0).sprite.getGlobalBounds())!= null)
 				{
 					youWon = true;
 				}

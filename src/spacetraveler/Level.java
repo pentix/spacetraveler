@@ -183,7 +183,7 @@ public class Level {
 			
 			//Erstellen des Spielers
 			spaceObjects.add(0,new SpaceObject("/spacetraveler/rsc/spieler.png", 5.0f, new Vector2f(50, 0), coord, mitte, true));
-
+			
 			
 		}
 		if(tileType == 5) //zielfeld
