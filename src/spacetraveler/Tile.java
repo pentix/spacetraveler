@@ -40,7 +40,7 @@ public class Tile {
 		texture.loadFromStream(Game.class.getResourceAsStream("/spacetraveler/rsc/tiles/tile_bg" + index + ".png"));
 		sprite = new Sprite(texture);
 		this.coord = p;
-		this.position = new Vector2f(p.x*512, p.y*512);
+		this.position = new Vector2f(p.x*texture.getSize().x, p.y*texture.getSize().y);
 		sprite.setPosition(position);
 		
 		if(index == 1)

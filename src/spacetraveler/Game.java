@@ -263,9 +263,11 @@ public class Game {
 	 * @param args Konsolenargumente, die dem Programm uebergeben werden. (Werden nicht ausgewertet)
 	 */
 	public static void main(String args[]) throws InterruptedException, IOException{
-		RenderWindow hauptfenster = new RenderWindow(new VideoMode(1200, 800), "SpaceTraveler", Window.TITLEBAR | Window.CLOSE);
+		//RenderWindow hauptfenster = new RenderWindow(new VideoMode(1200, 800), "SpaceTraveler", Window.TITLEBAR | Window.CLOSE);
 		//hauptfenster.clear();
-		hauptfenster.setPosition(new Vector2i(-10,0));
+		RenderWindow hauptfenster = new RenderWindow(VideoMode.getDesktopMode(), "SpaceTraveler", Window.FULLSCREEN);
+		
+		hauptfenster.setPosition(new Vector2i(0,0));
 
 		//Get the window's default view
 		ConstView defaultView = hauptfenster.getView();
@@ -346,6 +348,7 @@ public class Game {
 		MarkierungTex.loadFromStream(Game.class.getResourceAsStream("/spacetraveler/rsc/antigravity.png"));
 		Sprite Markierung = new Sprite(MarkierungTex);
 		Markierung.setOrigin(MarkierungTex.getSize().x/2,MarkierungTex.getSize().y/2);
+		
 		
 		while(hauptfenster.isOpen()){
 			// Events verarbeiten
@@ -604,13 +607,21 @@ public class Game {
 				
 				// Rendering
 				
+				int faktor = 50;
+				Vector2i V1 = new Vector2i(-faktor, -faktor);
+				Vector2i V2 = new Vector2i(VideoMode.getDesktopMode().width + faktor, VideoMode.getDesktopMode().height + faktor);
+				
+				FloatRect Rechteck = new FloatRect(hauptfenster.mapPixelToCoords(V1), hauptfenster.mapPixelToCoords(V2));
+				
 				// Alle Background Tiles zeichnen
 				for(int x = 0; x < l.Feld.length; x++)
 				{
 					for(int y = 0; y < l.Feld[0].length; y++)
 					{
-						hauptfenster.draw(l.Feld[x][y].sprite);
-
+						if(Rechteck.intersection(l.Feld[x][y].sprite.getGlobalBounds()) != null)
+						{
+							hauptfenster.draw(l.Feld[x][y].sprite);
+						}
 					}
 				}
 				
