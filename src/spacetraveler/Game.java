@@ -627,23 +627,35 @@ public class Game {
 				
 				// Alle Gravitys zeichnen
 				for(Gravity g : l.gravityFields){
-					hauptfenster.draw(g.getSprite());
+					if(Rechteck.intersection(g.getSprite().getGlobalBounds()) != null)
+					{
+						hauptfenster.draw(g.getSprite());
+					}
 				}
 				
 				// Alle blackHoles zeichnen
 				for(BlackHole b : l.blackHoles){
-					hauptfenster.draw(b.getSprite());
+					if(Rechteck.intersection(b.getSprite().getGlobalBounds()) != null)
+					{
+						hauptfenster.draw(b.getSprite());
+					}
 				}
 				
 				// Alle zusaetzlichen Sprites zeichnen
-				for(int x = 0; x < l.sprites.length; x++)
+				for(Sprite s : l.sprites)
 				{
-					hauptfenster.draw(l.sprites[x]);
+					if(Rechteck.intersection(s.getGlobalBounds()) != null)
+					{
+						hauptfenster.draw(s);
+					}
 				}
 			
 				// Alle SpaceObjects zeichnen!
 				for(SpaceObject s : l.spaceObjects){	
-					hauptfenster.draw(s.getSprite());
+					if(Rechteck.intersection(s.getSprite().getGlobalBounds()) != null)
+					{
+						hauptfenster.draw(s.getSprite());
+					}
 				}
 				
 
